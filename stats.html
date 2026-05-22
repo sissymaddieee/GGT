@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Girl Stats 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --hot-pink: #FF69B4;
+            --soft-pink: #FFB6D9;
+            --baby-pink: #FFC9E3;
+            --gold: #FFD700;
+            --white: #FFFFFF;
+            --cream: #FFF5F7;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFE5F0 0%, #FFB6D9 50%, #FF94C8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.4) 0%, transparent 2%),
+                radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.6) 0%, transparent 2%),
+                radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.3) 0%, transparent 2%),
+                radial-gradient(circle at 30% 80%, rgba(255, 215, 0, 0.5) 0%, transparent 2%);
+            background-size: 200% 200%;
+            animation: sparkleMove 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleMove {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        .title {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: var(--hot-pink);
+            text-shadow: 
+                2px 2px 0px rgba(255, 255, 255, 0.8),
+                4px 4px 10px rgba(255, 105, 180, 0.4);
+            margin-bottom: 0.3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .title::before {
+            content: '✨';
+            position: absolute;
+            left: -40px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .title::after {
+            content: '✨';
+            position: absolute;
+            right: -40px;
+            animation: sparkle 2s ease-in-out infinite 1s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            50% { 
+                opacity: 0.5;
+                transform: scale(1.3) rotate(180deg);
+            }
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--hot-pink);
+            font-weight: 500;
+            letter-spacing: 0.05rem;
+        }
+
+        .hearts-divider {
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: var(--soft-pink);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .stats-grid.five-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .stats-grid.five-stats .stat-card:last-child {
+            grid-column: 1 / -1;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid var(--hot-pink);
+            border-radius: 20px;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.5);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .stat-card:nth-child(1) .stat-icon { animation-delay: 0s; }
+        .stat-card:nth-child(2) .stat-icon { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) .stat-icon { animation-delay: 0.4s; }
+        .stat-card:nth-child(4) .stat-icon { animation-delay: 0.6s; }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FF1493;
+            margin-bottom: 0.3rem;
+            line-height: 1;
+        }
+
+        .stat-subtext {
+            font-size: 0.75rem;
+            color: var(--hot-pink);
+            opacity: 0.8;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--hot-pink);
+            font-size: 1.2rem;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 105, 180, 0.3);
+            border-top: 3px solid var(--hot-pink);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.75rem;
+            color: var(--hot-pink);
+            opacity: 0.7;
+        }
+
+        .bow {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 1rem;
+            animation: swayBow 3s ease-in-out infinite;
+        }
+
+        @keyframes swayBow {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .title::before,
+            .title::after {
+                left: -30px;
+                right: -30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Good Girl Stats</h1>
+            <p class="subtitle">Madison's Progress 💖</p>
+        </div>
+
+        <div class="hearts-divider">💕 💕 💕</div>
+
+        <div id="statsContainer" class="loading">
+            <div class="spinner"></div>
+            <p>Loading your stats...</p>
+        </div>
+
+        <div class="last-updated" id="lastUpdated"></div>
+
+        <div class="bow">🎀</div>
+    </div>
+
+    <script>
+        // Google Sheets CSV configuration
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT_U4ZElEgkBkgv6jP20hJICA3lCqlWli4EezWccqE7F3JksP5F0qg9_OClPU6MaW1fawjHX5Gr7ZXs/pub?output=csv';
+
+        async function loadStats() {
+            try {
+                const response = await fetch(CSV_URL);
+                const csvText = await response.text();
+                
+                // Parse CSV
+                const lines = csvText.trim().split('\n');
+                const stats = {};
+                
+                lines.forEach(line => {
+                    const [key, value] = line.split(',');
+                    if (key && value) {
+                        stats[key.trim()] = value.trim();
+                    }
+                });
+
+                displayStats(stats);
+            } catch (error) {
+                console.error('Error loading stats:', error);
+                document.getElementById('statsContainer').innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <p style="color: var(--hot-pink); margin-bottom: 1rem;">Oops! Couldn't load stats.</p>
+                        <p style="font-size: 0.85rem; opacity: 0.8;">Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function displayStats(stats) {
+            const statsContainer = document.getElementById('statsContainer');
+            
+            // Parse values
+            const followers = stats['Followers'] || 0;
+            const ranking = stats['Ranking'] || 'N/A';
+            const chastityPR = stats['Chastity PR'] || 0;
+            const loadsConsumed = stats['Cum Consumed'] || 0;
+
+            // Calculate days owned since October 4th, 2025
+            const startDate = new Date('2025-10-04');
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const daysOwned = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+            statsContainer.className = 'stats-grid five-stats';
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-icon">📱</div>
+                    <div class="stat-label">Chaturbate Followers</div>
+                    <div class="stat-value">${followers.toLocaleString()}</div>
+                    <div class="stat-subtext">sissy cam girl 💕</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-label">Trans Ranking</div>
+                    <div class="stat-value">${ranking}</div>
+                    <div class="stat-subtext">in America ✨</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🔒</div>
+                    <div class="stat-label">Chastity PR</div>
+                    <div class="stat-value">${chastityPR}</div>
+                    <div class="stat-subtext">locked for Goddess</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💦</div>
+                    <div class="stat-label">Cum Consumed</div>
+                    <div class="stat-value">${loadsConsumed}</div>
+                    <div class="stat-subtext">good girl treats</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">👑</div>
+                    <div class="stat-label">Days Owned</div>
+                    <div class="stat-value">${daysOwned}</div>
+                    <div class="stat-subtext">Goddess Aria's pet since Oct 4, 2025 💖</div>
+                </div>
+            `;
+
+            // Update last updated time
+            const now = new Date();
+            document.getElementById('lastUpdated').textContent = 
+                `Last updated: ${now.toLocaleTimeString()}`;
+        }
+
+        // Load stats on page load
+        loadStats();
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadStats, 30000);
+    </script>
+</body>
+</html>
