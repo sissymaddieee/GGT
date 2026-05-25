@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cam Girl Budget 💰</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --hot-pink: #FF69B4;
+            --soft-pink: #FFB6D9;
+            --baby-pink: #FFC9E3;
+            --gold: #FFD700;
+            --green: #4CAF50;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFE5F0 0%, #FFB6D9 50%, #FF94C8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.4) 0%, transparent 2%),
+                radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.6) 0%, transparent 2%),
+                radial-gradient(circle at 80% 20%, rgba(255, 105, 180, 0.3) 0%, transparent 2%);
+            background-size: 200% 200%;
+            animation: sparkleMove 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleMove {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        .title {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.2rem;
+            color: var(--hot-pink);
+            text-shadow: 
+                2px 2px 0px rgba(255, 255, 255, 0.8),
+                4px 4px 10px rgba(255, 105, 180, 0.4);
+            margin-bottom: 0.3rem;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--hot-pink);
+            font-weight: 500;
+        }
+
+        .hearts-divider {
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            color: var(--soft-pink);
+        }
+
+        .budget-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid var(--hot-pink);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.3);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-mini {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 182, 217, 0.2);
+            border-radius: 15px;
+        }
+
+        .stat-mini-label {
+            font-size: 0.75rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-mini-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FF1493;
+        }
+
+        .pot-display {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .pot-display:last-child {
+            margin-bottom: 0;
+        }
+
+        .pot-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .pot-display:nth-child(1) .pot-icon {
+            animation-delay: 0s;
+        }
+
+        .pot-display:nth-child(2) .pot-icon {
+            animation-delay: 1.5s;
+        }
+
+        .pot-label {
+            font-size: 0.9rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pot-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--green);
+            text-shadow: 2px 2px 4px rgba(76, 175, 80, 0.2);
+            margin-bottom: 0.3rem;
+        }
+
+        .pot-subtext {
+            font-size: 0.75rem;
+            color: var(--hot-pink);
+            opacity: 0.8;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--soft-pink), transparent);
+            margin: 1.5rem 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--hot-pink);
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 105, 180, 0.3);
+            border-top: 3px solid var(--hot-pink);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: var(--hot-pink);
+            opacity: 0.7;
+        }
+
+        .bow {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 1rem;
+            animation: swayBow 3s ease-in-out infinite;
+        }
+
+        @keyframes swayBow {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @media (max-width: 500px) {
+            .title {
+                font-size: 1.8rem;
+            }
+
+            .pot-amount {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Cam Girl Budget</h1>
+            <p class="subtitle">sissymaddieee's earnings 💕</p>
+        </div>
+
+        <div class="hearts-divider">💕 💕 💕</div>
+
+        <div class="budget-card" id="budgetCard">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading budget...</p>
+            </div>
+        </div>
+
+        <div class="last-updated" id="lastUpdated"></div>
+
+        <div class="bow">🎀</div>
+    </div>
+
+    <script>
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRWo2gLi9EBpyIWOSgCWHYDT6TN8zLNEd8ApjOFWfPSh3uYhSJ1yktTluLcKWipNw/pub?gid=59899658&single=true&output=csv';
+
+        async function loadBudget() {
+            try {
+                const response = await fetch(CSV_URL);
+                const csvText = await response.text();
+                
+                // Parse CSV
+                const lines = csvText.trim().split('\n');
+                
+                let investment = 0;
+                let goddess = 0;
+                let totalTokens = 0;
+                let totalSpent = 0;
+                let goddessRoses = 0;
+
+                // Get Investment and Goddess pots from row 101
+                if (lines.length >= 101) {
+                    const row101 = lines[100].split(',');
+                    
+                    if (row101[6]) {
+                        investment = parseFloat(row101[6].replace(/[^0-9.-]/g, '')) || 0;
+                    }
+                    if (row101[7]) {
+                        goddess = parseFloat(row101[7].replace(/[^0-9.-]/g, '')) || 0;
+                    }
+                }
+
+                // Calculate totals from rows 5-100
+                for (let i = 4; i < Math.min(100, lines.length); i++) {
+                    const line = lines[i];
+                    if (!line.trim()) continue; // Skip empty lines
+                    
+                    // Split by comma but respect quotes
+                    const cells = [];
+                    let current = '';
+                    let inQuotes = false;
+                    
+                    for (let char of line) {
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            cells.push(current.trim());
+                            current = '';
+                        } else {
+                            current += char;
+                        }
+                    }
+                    cells.push(current.trim()); // Add last cell
+                    
+                    // Column C (index 2) - Tokens Earned
+                    if (cells[2]) {
+                        const tokens = parseFloat(cells[2].replace(/[^0-9.-]/g, '')) || 0;
+                        if (tokens > 0) {
+                            totalTokens += tokens;
+                        }
+                    }
+                    
+                    // Column D (index 3) - Dollar values
+                    if (cells[3]) {
+                        const dollars = parseFloat(cells[3].replace(/[^0-9.-]/g, '')) || 0;
+                        if (dollars < 0) {
+                            totalSpent += Math.abs(dollars);
+                        }
+                    }
+                    
+                    // Column F (index 5) - Notes - check for "Roses"
+                    const notes = (cells[5] || '').toLowerCase();
+                    if (notes.includes('roses')) {
+                        const amount = parseFloat(cells[3].replace(/[^0-9.-]/g, '')) || 0;
+                        console.log(`Row ${i+1}: Found "Roses" in notes="${cells[5]}", amount=$${amount}`);
+                        goddessRoses += Math.abs(amount);
+                    }
+                }
+                
+                console.log('Final totals:', {
+                    totalTokens,
+                    totalSpent,
+                    goddessRoses,
+                    investment,
+                    goddess
+                });
+
+                displayBudget(investment, goddess, totalTokens, totalSpent, goddessRoses);
+            } catch (error) {
+                console.error('Error loading budget:', error);
+                document.getElementById('budgetCard').innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <p style="color: var(--hot-pink); margin-bottom: 1rem;">Oops! Couldn't load budget.</p>
+                        <p style="font-size: 0.85rem; opacity: 0.8;">Error: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function displayBudget(investment, goddess, totalTokens, totalSpent, goddessRoses) {
+            const budgetCard = document.getElementById('budgetCard');
+            
+            budgetCard.innerHTML = `
+                <div class="stats-grid">
+                    <div class="stat-mini">
+                        <div class="stat-mini-label">Total Earned</div>
+                        <div class="stat-mini-value">${totalTokens.toLocaleString()} 🪙</div>
+                    </div>
+                    <div class="stat-mini">
+                        <div class="stat-mini-label">Goddess's Earnings</div>
+                        <div class="stat-mini-value">$${goddessRoses.toFixed(2)}</div>
+                    </div>
+                </div>
+
+                <div class="pot-display">
+                    <div class="pot-icon">💰</div>
+                    <div class="pot-label">Investment Pot</div>
+                    <div class="pot-amount">$${investment.toFixed(2)}</div>
+                    <div class="pot-subtext">growing the business</div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="pot-display">
+                    <div class="pot-icon">👑</div>
+                    <div class="pot-label">Goddess Pot</div>
+                    <div class="pot-amount">$${goddess.toFixed(2)}</div>
+                    <div class="pot-subtext">for Goddess Aria 💕</div>
+                </div>
+            `;
+
+            // Update last updated time
+            const now = new Date();
+            document.getElementById('lastUpdated').textContent = 
+                `Last updated: ${now.toLocaleTimeString()}`;
+        }
+
+        // Load budget on page load
+        loadBudget();
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadBudget, 30000);
+    </script>
+</body>
+</html>
