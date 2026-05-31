@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Girl Training HQ 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --hot-pink: #FF69B4;
+            --soft-pink: #FFB6D9;
+            --baby-pink: #FFC9E3;
+            --gold: #FFD700;
+            --red: #FF1744;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFE5F0 0%, #FFB6D9 50%, #FF94C8 100%);
+            padding: 0.8rem;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.3) 0%, transparent 2%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.4) 0%, transparent 2%);
+            background-size: 200% 200%;
+            animation: sparkleMove 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes sparkleMove {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            grid-auto-flow: dense;
+        }
+        .page-header {
+            grid-column: 1 / -1;
+        }
+        .page-title {
+            text-align: center;
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            color: var(--hot-pink);
+            text-shadow: 2px 2px 8px rgba(255, 105, 180, 0.3);
+            margin-bottom: 0.5rem;
+        }
+        .page-subtitle {
+            text-align: center;
+            color: var(--hot-pink);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid var(--hot-pink);
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.3);
+            animation: slideUp 0.8s ease-out both;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.6rem;
+            color: var(--hot-pink);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .protocol-box {
+            background: linear-gradient(135deg, rgba(255, 182, 217, 0.1) 0%, rgba(255, 201, 227, 0.1) 100%);
+            padding: 1rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--hot-pink);
+        }
+        .protocol-label {
+            font-size: 0.85rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .protocol-items {
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.8;
+        }
+        .protocol-items li {
+            margin-bottom: 0.4rem;
+        }
+        .mantra-display {
+            background: white;
+            border: 2px solid var(--baby-pink);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .mantra-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            color: #FF1493;
+            line-height: 1.6;
+        }
+        .mantra-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .btn {
+            background: linear-gradient(135deg, var(--hot-pink) 0%, #FF1493 100%);
+            border: none;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+        }
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 182, 217, 0.15) 0%, rgba(255, 201, 227, 0.15) 100%);
+            padding: 0.8rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--hot-pink);
+            text-align: center;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+        .stat-value {
+            font-size: 1.5rem;
+            color: #FF1493;
+            font-weight: 700;
+        }
+        .placeholder {
+            background: rgba(255, 182, 217, 0.2);
+            border: 2px dashed var(--hot-pink);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--hot-pink);
+            font-weight: 600;
+        }
+        .mannequin {
+            background: white;
+            border: 2px solid var(--hot-pink);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mannequin-display {
+            font-size: 8rem;
+            line-height: 1;
+            margin: 2rem 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .outfit-summary {
+            font-size: 0.85rem;
+            color: var(--hot-pink);
+            text-align: left;
+            width: 100%;
+            background: rgba(255, 105, 180, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .outfit-summary div {
+            margin: 0.3rem 0;
+        }
+        .clothing-category {
+            background: white;
+            border: 2px solid var(--baby-pink);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+        }
+        .category-label {
+            font-size: 0.8rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+        .clothing-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .clothing-item {
+            flex: 1;
+            min-width: 60px;
+            aspect-ratio: 1;
+            background: rgba(255, 105, 180, 0.1);
+            border: 2px solid var(--hot-pink);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.8rem;
+        }
+        .clothing-item:hover {
+            background: rgba(255, 105, 180, 0.2);
+            transform: scale(1.05);
+        }
+        .clothing-item.selected {
+            background: linear-gradient(135deg, var(--hot-pink) 0%, #FF1493 100%);
+            color: white;
+            font-size: 2rem;
+        }
+        .clear-btn {
+            background: linear-gradient(135deg, #FF1744 0%, #FF5252 100%);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .clear-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(255, 23, 68, 0.4);
+        }
+        .wardrobe-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        .wardrobe-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .loading {
+            text-align: center;
+            color: var(--hot-pink);
+        }
+        .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(255, 105, 180, 0.3);
+            border-top: 3px solid var(--hot-pink);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">💕 Good Girl Training HQ 💕</div>
+            <div class="page-subtitle">Madison's Complete Dashboard for Goddess Aria</div>
+        </div>
+
+        <!-- PROTOCOLS SECTION - FULL WIDTH with BUDGET and STATS next to it -->
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 1rem; grid-column: 1 / -1;">
+            <div class="section" style="min-width: 0;">
+            <div class="section-title">👑 Goddess's Protocol</div>
+            
+            <div class="protocol-box" style="grid-column: 1 / -1; margin-bottom: 1rem;">
+                <div class="protocol-label">✨ Mission</div>
+                <div class="protocol-items">
+                    <div style="margin-bottom: 0.5rem;">A healthy sissy who serves Goddess Aria while honoring her relationship with Princess Sami</div>
+                    <div style="font-family: 'Pacifico', cursive; font-size: 0.9rem; color: #FF1493; font-style: italic;">"We are in alignment, don't fear, I'm guiding you exactly where the fuck I want you"</div>
+                </div>
+            </div>
+            
+            <div class="protocol-grid">
+                <div class="protocol-box">
+                    <div class="protocol-label">☀️ Daily</div>
+                    <div class="protocol-items">
+                        <ul style="list-style: none;">
+                            <li>🎵 Mantras video</li>
+                            <li>👙 Wear panties</li>
+                            <li>✨ Full body shaved</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="protocol-box">
+                    <div class="protocol-label">📅 Weekly</div>
+                    <div class="protocol-items">
+                        <ul style="list-style: none;">
+                            <li>📱 Reddit post</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="protocol-box">
+                    <div class="protocol-label">🗓️ Monthly</div>
+                    <div class="protocol-items">
+                        <ul style="list-style: none;">
+                            <li>💬 Check-in</li>
+                            <li>📝 Boundaries</li>
+                            <li>🎯 Structure</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="protocol-box">
+                    <div class="protocol-label">💸 Tollbooth</div>
+                    <div class="protocol-items">
+                        <ul style="list-style: none;">
+                            <li>$20 Princess Sami play</li>
+                            <li>🔓 Unlocked: Control orgasm</li>
+                            <li>🔒 Locked: No cum</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="protocol-box" style="grid-column: 1 / -1;">
+                    <div class="protocol-label">🚫 Hard Boundaries</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div><li style="list-style: none;">Toilet stuff</li></div>
+                        <div><li style="list-style: none;">Permanent mods</li></div>
+                        <div><li style="list-style: none;">Non-removable exposure</li></div>
+                        <div><li style="list-style: none;">Drugs (no weed/drinks)</li></div>
+                        <div><li style="list-style: none;">Cheating on Sami</li></div>
+                        <div><li style="list-style: none;">Gay coercion</li></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUDGET SECTION - RIGHT of PROTOCOL -->
+            <div class="section" style="min-width: 0;">
+                <div class="section-title" style="font-size: 1.3rem;">💰 Budget</div>
+                <div style="font-size: 0.8rem; color: var(--hot-pink); font-weight: 600; margin-bottom: 0.4rem;">Cam Girl</div>
+                <div id="budgetGrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 1rem;">
+                    <div class="stat-card">
+                        <div class="stat-label">Investment</div>
+                        <div class="stat-value">$0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Goddess</div>
+                        <div class="stat-value">$89.66</div>
+                    </div>
+                </div>
+                <div style="font-size: 0.8rem; color: var(--hot-pink); font-weight: 600; margin-bottom: 0.4rem;">Personal</div>
+                <div class="placeholder" style="margin: 0; padding: 0.8rem; min-height: auto; font-size: 0.85rem;">Coming Soon</div>
+            </div>
+
+            <!-- STATS SECTION in top row -->
+            <div class="section" style="min-width: 0;">
+                <div class="section-title" style="font-size: 1.1rem;">📊 Stats</div>
+                <div class="stats-grid" id="statsGrid" style="grid-template-columns: 1fr; gap: 0.5rem;">
+                    <div class="stat-card" style="padding: 0.6rem;">
+                        <div class="stat-label" style="font-size: 0.65rem;">Followers</div>
+                        <div class="stat-value" style="font-size: 1.3rem;">2946</div>
+                    </div>
+                    <div class="stat-card" style="padding: 0.6rem;">
+                        <div class="stat-label" style="font-size: 0.65rem;">Ranking</div>
+                        <div class="stat-value" style="font-size: 1.3rem;">683rd</div>
+                    </div>
+                    <div class="stat-card" style="padding: 0.6rem;">
+                        <div class="stat-label" style="font-size: 0.65rem;">Chastity</div>
+                        <div class="stat-value" style="font-size: 1.3rem;">17 days</div>
+                    </div>
+                    <div class="stat-card" style="padding: 0.6rem;">
+                        <div class="stat-label" style="font-size: 0.65rem;">Cum</div>
+                        <div class="stat-value" style="font-size: 1.3rem;">9</div>
+                    </div>
+                    <div class="stat-card" style="padding: 0.6rem;">
+                        <div class="stat-label" style="font-size: 0.65rem;">Days Owned</div>
+                        <div class="stat-value" style="font-size: 1.3rem;">232</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MANTRAS SECTION (full width) -->
+        <div class="section" style="grid-column: 1 / -1;">
+            <div class="section-title">🎵 Good Girl Mantras</div>
+                <div class="mantra-display" id="mantraDisplay">
+                    <div class="mantra-text" id="mantraText">Loading mantras...</div>
+                </div>
+                <div class="mantra-controls">
+                    <button class="btn btn-small" onclick="prevMantra()">← Previous</button>
+                    <button class="btn btn-small" onclick="toggleMantra()">⏸ Pause</button>
+                    <button class="btn btn-small" onclick="nextMantra()">Next →</button>
+                </div>
+                <div style="text-align: center; font-size: 0.85rem; color: var(--hot-pink);">
+                    <span id="mantraCounter">1 / 26</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLACKMAIL ALBUM and LIBRARY - full width -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; grid-column: 1 / -1;">
+            <div class="section">
+                <div class="section-title" style="font-size: 1.3rem;">🖼️ Blackmail</div>
+                <div class="placeholder" style="padding: 2rem; min-height: 150px; display: flex; align-items: center; justify-content: center;">Coming Soon - Monthly training highlights</div>
+            </div>
+
+            <div class="section">
+                <div class="section-title" style="font-size: 1.3rem;">📚 Library</div>
+                <div class="placeholder" style="padding: 2rem; min-height: 150px; display: flex; align-items: center; justify-content: center;">Coming Soon - Clips & Goon Content</div>
+            </div>
+        </div>
+
+        <!-- OUTFIT BUILDER SECTION -->
+        <div class="section" style="grid-column: 1 / -1;">
+            <div class="section-title">👗 Outfit Builder</div>
+            <div class="wardrobe-grid">
+                <!-- LEFT: Clothing Selector -->
+                <div class="wardrobe-selector">
+                    <div class="clothing-category">
+                        <div class="category-label">👗 Dresses</div>
+                        <div class="clothing-options" id="dressesOptions">
+                            <div class="clothing-item" onclick="selectClothing('dresses', '👗', this)">👗</div>
+                        </div>
+                    </div>
+
+                    <div class="clothing-category">
+                        <div class="category-label">👚 Tops</div>
+                        <div class="clothing-options" id="topsOptions">
+                            <div class="clothing-item" onclick="selectClothing('tops', '👚', this)">👚</div>
+                        </div>
+                    </div>
+
+                    <div class="clothing-category">
+                        <div class="category-label">🩱 Skirts</div>
+                        <div class="clothing-options" id="skirtsOptions">
+                            <div class="clothing-item" onclick="selectClothing('skirts', '🩱', this)">🩱</div>
+                        </div>
+                    </div>
+
+                    <div class="clothing-category">
+                        <div class="category-label">👠 Heels</div>
+                        <div class="clothing-options" id="heelsOptions">
+                            <div class="clothing-item" onclick="selectClothing('heels', '👠', this)">👠</div>
+                        </div>
+                    </div>
+
+                    <div class="clothing-category">
+                        <div class="category-label">🧦 Thigh Highs</div>
+                        <div class="clothing-options" id="thighhighsOptions">
+                            <div class="clothing-item" onclick="selectClothing('thigh-highs', '🧦', this)">🧦</div>
+                        </div>
+                    </div>
+
+                    <div class="clothing-category">
+                        <div class="category-label">💍 Accessories</div>
+                        <div class="clothing-options" id="accessoriesOptions">
+                            <div class="clothing-item" onclick="selectClothing('accessories', '💍', this)">💍</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Mannequin Display -->
+                <div class="mannequin">
+                    <div class="mannequin-display" id="mannequinDisplay">👸</div>
+                    <div class="outfit-summary" id="outfitSummary">
+                        <div style="color: var(--hot-pink); font-weight: 600; margin-bottom: 0.5rem;">Selected:</div>
+                        <div id="selectedItems">Nothing selected yet</div>
+                    </div>
+                    <button class="clear-btn" onclick="clearOutfit()">Clear Outfit</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section" style="grid-column: 1 / -1;">
+            <div style="text-align: center;">
+                <div style="font-size: 2rem;">🎀</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MANTRAS
+        const mantras = [
+            "I prioritize Goddess, her success is my success",
+            "I am blessed to serve such a perfect Goddess",
+            "I devote my time, my energy, and my mind to caring deeply about Goddess's success",
+            "Goddess Aria is not just another Goddess, she is the Goddess",
+            "I keep my attention on Goddess",
+            "Goddess Aria's beauty engulfs my mind",
+            "Good submissive understand that submission comes with sacrifice",
+            "I crave submission, I crave sacrifice for Goddess Aria",
+            "Being locked is the foundation of servitude for Goddess Aria",
+            "Pleasing Goddess gives me meaning, being locked fuels my purpose",
+            "Locking helps keep my focus, unlocking is counterproductive",
+            "The longer I am caged, the more purpose I gain",
+            "I long to be locked, I ache to be caged, I take nothing for granted",
+            "Goddess Aria is my purpose",
+            "In devotion I find clarity, in chastity I find direction",
+            "My restraint deepens my focus, my focus deepens my service",
+            "I choose to surrender, my surrender is my strength",
+            "Her command steadies me, my obedience centers me",
+            "I am so thankful for my cage",
+            "My cage puts me to sleep thinking of Goddess",
+            "My cage wakes me up thinking of Goddess",
+            "Every moment of sleep I lose is a moment gained in devotion to Goddess",
+            "With release comes uncertainty not clarity",
+            "Chastity deepens my devotion, it is the fuel to which Goddess sculpts her creation",
+            "Sami's pussy is an oasis, I will always want her and crave her and go home to her",
+            "Pretty girls keep tidy homes"
+        ];
+
+        let currentMantra = 0;
+        let mantraRunning = true;
+        let mantraInterval;
+
+        function updateMantra() {
+            document.getElementById('mantraText').textContent = mantras[currentMantra];
+            document.getElementById('mantraCounter').textContent = `${currentMantra + 1} / ${mantras.length}`;
+        }
+
+        function nextMantra() {
+            currentMantra = (currentMantra + 1) % mantras.length;
+            updateMantra();
+            if (mantraRunning) {
+                clearInterval(mantraInterval);
+                startMantraRotation();
+            }
+        }
+
+        function prevMantra() {
+            currentMantra = (currentMantra - 1 + mantras.length) % mantras.length;
+            updateMantra();
+            if (mantraRunning) {
+                clearInterval(mantraInterval);
+                startMantraRotation();
+            }
+        }
+
+        function toggleMantra() {
+            mantraRunning = !mantraRunning;
+            if (mantraRunning) {
+                startMantraRotation();
+            } else {
+                clearInterval(mantraInterval);
+            }
+        }
+
+        function startMantraRotation() {
+            mantraInterval = setInterval(() => {
+                nextMantra();
+            }, 5000);
+        }
+
+        updateMantra();
+        startMantraRotation();
+
+        // STATS (from Google Sheets)
+        async function loadStats() {
+            try {
+                const csvUrl = 'https://docs.google.com/spreadsheets/d/1C5o88ZqRWY48ns1krWjesVA9r7qQD2jfrS2VUgF0avE/pub?gid=0&single=true&output=csv';
+                const response = await fetch(csvUrl);
+                const text = await response.text();
+                const lines = text.trim().split('\n');
+                
+                let followers = 2946, ranking = '683rd', chastityPR = 17, loadsConsumed = 9;
+                
+                // Parse CSV - each row has [label, value]
+                for (let line of lines) {
+                    const [label, value] = line.split(',');
+                    if (label.includes('Followers')) followers = parseInt(value) || followers;
+                    if (label.includes('Ranking')) ranking = value.trim() || ranking;
+                    if (label.includes('Chastity')) chastityPR = parseInt(value) || chastityPR;
+                    if (label.includes('Cum')) loadsConsumed = parseInt(value) || loadsConsumed;
+                }
+
+                const startDate = new Date('2025-10-04');
+                const today = new Date();
+                const daysOwned = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+
+                document.getElementById('statsGrid').innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-label">Followers</div>
+                        <div class="stat-value">${followers.toLocaleString()}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Ranking</div>
+                        <div class="stat-value">${ranking}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Chastity PR</div>
+                        <div class="stat-value">${chastityPR} days</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Cum Consumed</div>
+                        <div class="stat-value">${loadsConsumed}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Days Owned</div>
+                        <div class="stat-value">${daysOwned}</div>
+                    </div>
+                `;
+            } catch (e) {
+                console.error('Stats error:', e);
+                document.getElementById('statsGrid').innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-label">Followers</div>
+                        <div class="stat-value">2946</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Ranking</div>
+                        <div class="stat-value">683rd</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Chastity PR</div>
+                        <div class="stat-value">17 days</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Cum Consumed</div>
+                        <div class="stat-value">9</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Days Owned</div>
+                        <div class="stat-value">232</div>
+                    </div>
+                `;
+            }
+        }
+
+        // BUDGET (from Google Sheets)
+        async function loadBudget() {
+            try {
+                const csvUrl = 'https://docs.google.com/spreadsheets/d/1dOUjAviDmR93Y4V4wTgdx6U5w0zzJHBW/pub?gid=59899658&single=true&output=csv';
+                const response = await fetch(csvUrl);
+                const text = await response.text();
+                const lines = text.trim().split('\n');
+                
+                let investment = 0, goddess = 89.66;
+                
+                // Look for the last rows with $ values - those are the totals
+                // Investment is in column G (index 6), Goddess is in column H (index 7)
+                for (let i = lines.length - 1; i >= 0; i--) {
+                    const row = lines[i].split('\t');
+                    
+                    // Check if this row has the Investment/Goddess labels
+                    if (row[6] && row[6].includes('Investment')) {
+                        if (row[6].includes('$')) {
+                            investment = parseFloat(row[6].replace(/[^0-9.-]/g, '')) || 0;
+                        }
+                    }
+                    if (row[7] && row[7].includes('Goddess')) {
+                        if (row[7].includes('$')) {
+                            goddess = parseFloat(row[7].replace(/[^0-9.-]/g, '')) || 89.66;
+                        }
+                    }
+                    
+                    // If we found both, stop looking
+                    if (investment !== 0 || goddess !== 0) break;
+                }
+
+                document.getElementById('budgetGrid').innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-label">Investment</div>
+                        <div class="stat-value">$${investment.toFixed(2)}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Goddess</div>
+                        <div class="stat-value">$${goddess.toFixed(2)}</div>
+                    </div>
+                `;
+            } catch (e) {
+                console.error('Budget error:', e);
+                document.getElementById('budgetGrid').innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-label">Investment</div>
+                        <div class="stat-value">$0.00</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Goddess</div>
+                        <div class="stat-value">$89.66</div>
+                    </div>
+                `;
+            }
+        }
+
+        // OUTFIT BUILDER
+        const outfit = {
+            'dresses': null,
+            'tops': null,
+            'skirts': null,
+            'heels': null,
+            'thigh-highs': null,
+            'accessories': null
+        };
+
+        // Photo files from GitHub - update these as you add more!
+        const wardrobePhotos = {
+            'dresses': ['dress_1.png', 'dress_2.png', 'dress_3.png', 'dress_4.png'],
+            'tops': [],
+            'skirts': ['skirt_1.png'],
+            'heels': ['heels_1.png', 'heels_2.png'],
+            'thigh-highs': ['thigh_1.png', 'thigh_2.png', 'thigh_3.png'],
+            'accessories': []
+        };
+
+        const clothingEmojis = {
+            'dresses': '👗',
+            'tops': '👚',
+            'skirts': '🩱',
+            'heels': '👠',
+            'thigh-highs': '🧦',
+            'accessories': '💍'
+        };
+
+        function selectClothing(category, emoji, element) {
+            // Toggle selection
+            const categoryItems = element.parentElement.querySelectorAll('.clothing-item');
+            categoryItems.forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+
+            // Update outfit
+            outfit[category] = emoji;
+            updateMannequin();
+        }
+
+        function updateMannequin() {
+            // Build outfit display
+            let outfitEmojis = '👸';
+            let selectedItems = [];
+
+            if (outfit.dresses) {
+                outfitEmojis = outfit.dresses + '👠';
+                selectedItems.push('Dress: ' + outfit.dresses);
+            } else {
+                if (outfit.tops) selectedItems.push('Top: ' + outfit.tops);
+                if (outfit.skirts) selectedItems.push('Skirt: ' + outfit.skirts);
+            }
+
+            if (outfit.heels && !outfit.dresses) outfitEmojis += outfit.heels;
+            if (outfit['thigh-highs']) selectedItems.push('Thigh Highs: ' + outfit['thigh-highs']);
+            if (outfit.accessories) selectedItems.push('Accessories: ' + outfit.accessories);
+
+            document.getElementById('mannequinDisplay').textContent = outfit.dresses || outfit.tops || outfit.skirts ? outfitEmojis : '👸';
+
+            if (selectedItems.length > 0) {
+                document.getElementById('selectedItems').innerHTML = selectedItems.map(item => '<div>✓ ' + item + '</div>').join('');
+            } else {
+                document.getElementById('selectedItems').textContent = 'Nothing selected yet';
+            }
+        }
+
+        function clearOutfit() {
+            outfit.dresses = null;
+            outfit.tops = null;
+            outfit.skirts = null;
+            outfit.heels = null;
+            outfit['thigh-highs'] = null;
+            outfit.accessories = null;
+
+            document.querySelectorAll('.clothing-item').forEach(item => item.classList.remove('selected'));
+            updateMannequin();
+        }
+
+        // Load on page open
+        loadStats();
+        loadBudget();
+    </script>
+</body>
+</html>
