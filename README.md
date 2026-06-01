@@ -1,1 +1,1 @@
-# GGT
+# Good Girl Training
