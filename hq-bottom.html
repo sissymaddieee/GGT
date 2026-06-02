@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Girl Training HQ 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --hot-pink: #FF69B4;
+            --soft-pink: #FFB6D9;
+            --baby-pink: #FFC9E3;
+            --red: #FF1744;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFE5F0 0%, #FFB6D9 50%, #FF94C8 100%);
+            padding: 1rem;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '✨';
+            position: fixed;
+            top: 10%;
+            left: 5%;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: '💖';
+            position: fixed;
+            top: 20%;
+            right: 8%;
+            font-size: 2.5rem;
+            opacity: 0.3;
+            animation: float 7s ease-in-out infinite 1s;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: var(--hot-pink);
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.2);
+            animation: headerBounce 2.5s ease-in-out infinite;
+        }
+        @keyframes headerBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+        }
+        .quote {
+            font-family: 'Pacifico', cursive;
+            font-size: 1rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .section {
+            background: white;
+            border: 3px solid var(--hot-pink);
+            border-radius: 15px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.3rem;
+            color: var(--hot-pink);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        .section-title::first-letter {
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .divider {
+            height: 3px;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+        .row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .row-full {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .row-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .protocol-box {
+            background: rgba(255, 182, 217, 0.1);
+            padding: 0.8rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--hot-pink);
+            margin-bottom: 0.6rem;
+        }
+        .protocol-label {
+            font-size: 0.8rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+        .protocol-items {
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+        .protocol-items li {
+            margin-bottom: 0.4rem;
+        }
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 182, 217, 0.15) 0%, rgba(255, 201, 227, 0.15) 100%);
+            padding: 0.8rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--hot-pink);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+        .stat-value {
+            font-size: 1.3rem;
+            color: var(--hot-pink);
+            font-weight: 700;
+        }
+        .mantra-display {
+            background: white;
+            border: 2px solid var(--baby-pink);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .mantra-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.3rem;
+            color: #FF1493;
+            line-height: 1.5;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn {
+            background: linear-gradient(135deg, var(--hot-pink) 0%, #FF1493 100%);
+            border: none;
+            color: white;
+            padding: 0.7rem 1.3rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 0 0.4rem;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+        .quiz-input {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border: 2px solid var(--hot-pink);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--hot-pink);
+            background: rgba(255, 182, 217, 0.1);
+            width: 100%;
+        }
+        .quiz-input::placeholder {
+            color: rgba(255, 105, 180, 0.5);
+        }
+        .quiz-input:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            background: white;
+        }
+        .quiz-feedback {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        .correct {
+            color: #4CAF50;
+        }
+        .incorrect {
+            color: #FF1744;
+        }
+        .outfit-builder {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+        .clothing-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .clothing-category {
+            background: rgba(255, 182, 217, 0.1);
+            border: 2px solid var(--hot-pink);
+            border-radius: 10px;
+            padding: 0.8rem;
+        }
+        .category-label {
+            font-size: 0.8rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .clothing-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .clothing-item {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border: 2px solid var(--hot-pink);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        .clothing-item:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+        }
+        .clothing-item.selected {
+            background: linear-gradient(135deg, var(--hot-pink) 0%, #FF1493 100%);
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+        }
+        .mannequin {
+            background: white;
+            border: 3px solid var(--hot-pink);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+        .mannequin-display {
+            font-size: 6rem;
+            line-height: 1;
+            margin: 1rem 0;
+        }
+        .outfit-summary {
+            font-size: 0.9rem;
+            color: var(--hot-pink);
+            text-align: left;
+            width: 100%;
+            background: rgba(255, 105, 180, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        .placeholder {
+            background: rgba(255, 182, 217, 0.2);
+            border: 2px dashed var(--hot-pink);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--hot-pink);
+            font-weight: 600;
+            font-size: 1rem;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bow {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- WHITE DIVIDER -->
+        <div class="divider"></div>
+        <div class="row-2col">
+            <div class="section">
+                <div class="section-title">🖼️ Blackmail</div>
+                <div class="placeholder">Coming Soon</div>
+            </div>
+            <div class="section">
+                <div class="section-title">📚 Library</div>
+                <div class="placeholder">Coming Soon</div>
+            </div>
+        </div>
+
+        <!-- WHITE DIVIDER -->
+        <div class="divider"></div>
+
+        <!-- WARDROBE -->
+        <div class="section">
+            <div class="section-title">👗 Outfit Builder</div>
+            <div class="outfit-builder">
+                <!-- CLOTHING SELECTOR -->
+                <div class="clothing-selector">
+                    <div class="clothing-category">
+                        <div class="category-label">👗 Dresses</div>
+                        <div class="clothing-options" data-category="dresses">
+                            <div class="clothing-item">👗</div>
+                        </div>
+                    </div>
+                    <div class="clothing-category">
+                        <div class="category-label">👚 Tops</div>
+                        <div class="clothing-options" data-category="tops">
+                            <div class="clothing-item">👚</div>
+                        </div>
+                    </div>
+                    <div class="clothing-category">
+                        <div class="category-label">🩱 Skirts/Shorts</div>
+                        <div class="clothing-options" data-category="skirts">
+                            <div class="clothing-item">🩱</div>
+                        </div>
+                    </div>
+                    <div class="clothing-category">
+                        <div class="category-label">👠 Heels</div>
+                        <div class="clothing-options" data-category="heels">
+                            <div class="clothing-item">👠</div>
+                        </div>
+                    </div>
+                    <div class="clothing-category">
+                        <div class="category-label">🧦 Thigh Highs</div>
+                        <div class="clothing-options" data-category="thigh-highs">
+                            <div class="clothing-item">🧦</div>
+                        </div>
+                    </div>
+                    <div class="clothing-category">
+                        <div class="category-label">🩶 Bras</div>
+                        <div class="clothing-options" data-category="bras">
+                            <div class="clothing-item">🩶</div>
+                        </div>
+                    </div>
+                    <div class="clothing-category">
+                        <div class="category-label">🩲 Panties</div>
+                        <div class="clothing-options" data-category="panties">
+                            <div class="clothing-item">🩲</div>
+                        </div>
+                    </div>
+                    <div class="clothing-category">
+                        <div class="category-label">💍 Accessories</div>
+                        <div class="clothing-options" data-category="accessories">
+                            <div class="clothing-item">💍</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MANNEQUIN -->
+                <div class="mannequin">
+                    <div class="mannequin-display" id="mannequinDisplay">👸</div>
+                    <div class="outfit-summary" id="outfitSummary">
+                        <div style="color: var(--hot-pink); font-weight: 600; margin-bottom: 0.5rem;">Selected:</div>
+                        <div id="selectedItems">Nothing selected yet</div>
+                    </div>
+                    <button class="btn" onclick="clearOutfit()" style="width: 100%;">Clear Outfit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOW -->
+        <div class="bow">🎀</div>
+    </div>
+
+    <script>
+        // OUTFIT OBJECT - Define FIRST before HTML uses it
+        const outfit = {
+            'dresses': null,
+            'tops': null,
+            'skirts': null,
+            'heels': null,
+            'thigh-highs': null,
+            'bras': null,
+            'panties': null,
+            'accessories': null
+        };
+
+        // Populate wardrobe UI with images from GitHub
+        function populateWardrobeUI() {
+            const baseUrl = 'https://raw.githubusercontent.com/sissymaddieee/GGT/main/wardrobe';
+            const categories = ['dresses', 'tops', 'skirts', 'heels', 'thigh-highs', 'bras', 'panties', 'accessories'];
+
+            categories.forEach(category => {
+                const container = document.querySelector(`[data-category="${category}"]`);
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                for (let i = 1; i <= 10; i++) {
+                    const photoUrl = `${baseUrl}/${category}/${category.replace('-', '_')}_${i}.png`;
+                    
+                    const item = document.createElement('div');
+                    item.className = 'clothing-item';
+                    item.style.backgroundImage = `url('${photoUrl}')`;
+                    item.style.backgroundSize = 'cover';
+                    item.style.backgroundPosition = 'center';
+                    item.title = `${category} ${i}`;
+                    item.onclick = () => selectClothing(category, photoUrl, item);
+                    
+                    container.appendChild(item);
+                }
+            });
+        }
+
+        function selectClothing(category, photoUrl, element) {
+            const categoryItems = element.parentElement.querySelectorAll('.clothing-item');
+            categoryItems.forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            outfit[category] = photoUrl;
+            updateMannequin();
+        }
+
+        function updateMannequin() {
+            let selectedItems = [];
+            let hasOutfit = false;
+            
+            // Build HTML with layered images
+            let outfitHTML = '<div style="position: relative; width: 200px; height: 300px; margin: 0 auto;">';
+            
+            if (outfit.dresses) {
+                outfitHTML += `<img src="${outfit.dresses}" style="position: absolute; width: 100%; height: 100%; object-fit: contain;">`;
+                selectedItems.push('✓ Dress');
+                hasOutfit = true;
+            } else {
+                if (outfit.tops) {
+                    outfitHTML += `<img src="${outfit.tops}" style="position: absolute; width: 100%; top: 0; object-fit: contain;">`;
+                    selectedItems.push('✓ Top');
+                    hasOutfit = true;
+                }
+                if (outfit.bras) {
+                    outfitHTML += `<img src="${outfit.bras}" style="position: absolute; width: 100%; top: 0; object-fit: contain;">`;
+                    selectedItems.push('✓ Bra');
+                    hasOutfit = true;
+                }
+                if (outfit.skirts) {
+                    outfitHTML += `<img src="${outfit.skirts}" style="position: absolute; width: 100%; bottom: 0; object-fit: contain;">`;
+                    selectedItems.push('✓ Skirt');
+                    hasOutfit = true;
+                }
+                if (outfit.panties) {
+                    outfitHTML += `<img src="${outfit.panties}" style="position: absolute; width: 100%; bottom: 0; object-fit: contain;">`;
+                    selectedItems.push('✓ Panties');
+                    hasOutfit = true;
+                }
+            }
+
+            if (outfit['thigh-highs']) {
+                outfitHTML += `<img src="${outfit['thigh-highs']}" style="position: absolute; width: 100%; object-fit: contain;">`;
+                selectedItems.push('✓ Thigh Highs');
+                hasOutfit = true;
+            }
+            if (outfit.heels) {
+                outfitHTML += `<img src="${outfit.heels}" style="position: absolute; width: 100%; bottom: 0; object-fit: contain;">`;
+                selectedItems.push('✓ Heels');
+                hasOutfit = true;
+            }
+            if (outfit.accessories) {
+                outfitHTML += `<img src="${outfit.accessories}" style="position: absolute; width: 100%; object-fit: contain;">`;
+                selectedItems.push('✓ Accessories');
+                hasOutfit = true;
+            }
+            
+            outfitHTML += '</div>';
+
+            if (!hasOutfit) {
+                document.getElementById('mannequinDisplay').innerHTML = '<div style="font-size: 4rem; text-align: center; padding: 2rem;">👸</div>';
+                document.getElementById('selectedItems').textContent = 'Nothing selected yet';
+            } else {
+                document.getElementById('mannequinDisplay').innerHTML = outfitHTML;
+                document.getElementById('selectedItems').innerHTML = selectedItems.join('<br>');
+            }
+        }
+
+        function clearOutfit() {
+            outfit.dresses = null;
+            outfit.tops = null;
+            outfit.skirts = null;
+            outfit.heels = null;
+            outfit['thigh-highs'] = null;
+            outfit.bras = null;
+            outfit.panties = null;
+            outfit.accessories = null;
+            
+            document.querySelectorAll('.clothing-item').forEach(item => item.classList.remove('selected'));
+            updateMannequin();
+        }
+
+        // Load wardrobe images when page loads
+        window.addEventListener('load', populateWardrobeUI);
+    </script>
+</body>
+</html>
