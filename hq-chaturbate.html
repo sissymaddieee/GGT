@@ -395,13 +395,12 @@
                             }
                             parts.push(current.replace(/"/g, '').trim());
                             
-                            if (parts.length >= 5) {
+                            if (parts.length >= 4) {
                                 journalEntries.push({
                                     timestamp: parts[0],
-                                    date: parts[1],
-                                    time: parts[2],
-                                    title: parts[3],
-                                    text: parts[4]
+                                    date: parts[0],
+                                    title: parts[1],
+                                    text: parts[2]
                                 });
                             }
                         });
@@ -434,7 +433,7 @@
             
             display.innerHTML = `
                 <div style="text-align: left; width: 100%;">
-                    <div class="journal-date" style="margin-bottom: 0.8rem;">${entry.date} at ${entry.time}</div>
+                    <div class="journal-date" style="margin-bottom: 0.8rem;">${entry.date}</div>
                     <div style="font-weight: 600; color: var(--hot-pink); margin-bottom: 0.8rem; font-size: 1.1rem;">${entry.title}</div>
                     <div class="journal-text">${entry.text.replace(/\n/g, '<br>')}</div>
                 </div>
