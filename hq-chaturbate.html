@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Girl Training HQ - Chaturbate & Journal 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --hot-pink: #FF69B4;
+            --soft-pink: #FFB6D9;
+            --baby-pink: #FFC9E3;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFE5F0 0%, #FFB6D9 50%, #FF94C8 100%);
+            padding: 1rem;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .section {
+            background: white;
+            border: 3px solid var(--hot-pink);
+            border-radius: 15px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.3rem;
+            color: var(--hot-pink);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        .divider {
+            height: 3px;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        /* JOURNAL SECTION */
+        .journal-entry {
+            background: rgba(255, 182, 217, 0.1);
+            border-left: 3px solid var(--hot-pink);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .journal-date {
+            font-size: 0.75rem;
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+        .journal-text {
+            color: #333;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .journal-input-section {
+            margin-bottom: 1.5rem;
+        }
+        .journal-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--hot-pink);
+            border-radius: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 0.5rem;
+        }
+        .journal-textarea:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            background: white;
+        }
+        .journal-btn {
+            background: linear-gradient(135deg, var(--hot-pink) 0%, #FF1493 100%);
+            border: none;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .journal-btn:hover {
+            transform: scale(1.05);
+        }
+        #journalList {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 0.5rem;
+        }
+
+        /* CHATURBATE BIO SECTION */
+        .bio-container {
+            background: rgba(255, 182, 217, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .bio-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.1rem;
+            color: var(--hot-pink);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        .bio-text {
+            color: #333;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .tip-menu {
+            background: white;
+            border: 2px solid var(--hot-pink);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        .tip-category {
+            margin-bottom: 1.5rem;
+        }
+        .tip-category-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 0.95rem;
+            color: var(--hot-pink);
+            text-align: center;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .tip-items {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.5rem 1rem;
+            font-size: 0.85rem;
+        }
+        .tip-item {
+            display: contents;
+        }
+        .tip-name {
+            color: #333;
+            font-weight: 500;
+        }
+        .tip-price {
+            color: var(--hot-pink);
+            font-weight: 600;
+            text-align: right;
+        }
+        .divider-section {
+            height: 1px;
+            background: rgba(255, 105, 180, 0.2);
+            margin: 1rem 0;
+        }
+        .daddy-list {
+            background: rgba(255, 182, 217, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        .daddy-list-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1rem;
+            color: var(--hot-pink);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .daddy-item {
+            background: white;
+            border: 2px solid var(--soft-pink);
+            border-radius: 8px;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+        .daddy-name {
+            font-family: 'Pacifico', cursive;
+            font-size: 0.95rem;
+            color: var(--hot-pink);
+            margin-bottom: 0.3rem;
+        }
+        .daddy-note {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .bow {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- JOURNAL SECTION -->
+        <div class="section">
+            <div class="section-title">📔 Journal</div>
+            
+            <div style="border-top: 2px solid var(--hot-pink); padding-top: 1.5rem; margin-top: 1.5rem;">
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <div style="font-size: 0.8rem; color: var(--hot-pink); font-weight: 600; margin-bottom: 0.5rem;" id="entryCounter">No entries yet</div>
+                </div>
+
+                <div id="journalDisplay" class="journal-entry" style="min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #999;">
+                    <div>No entries yet ✨</div>
+                </div>
+
+                <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem;">
+                    <button class="journal-btn" onclick="previousEntry()" style="flex: 1;">← Previous</button>
+                    <button class="journal-btn" onclick="nextEntry()" style="flex: 1;">Next →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- WHITE DIVIDER -->
+        <div class="divider"></div>
+
+        <!-- CHATURBATE BIO SECTION -->
+        <div class="section">
+            <div class="section-title">💋 Chaturbate Bio</div>
+            
+            <div style="background: rgba(255, 182, 217, 0.05); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0;">
+                <div style="font-family: 'Pacifico', cursive; font-size: 1.1rem; color: var(--hot-pink); margin-bottom: 0.8rem; text-align: center;">Goddess Aria Zahara's Token Activated Sissy Doll</div>
+                <div style="color: #333; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; text-align: center;">
+                    OWNED & STREAMED UNDER THE COMMAND OF 👑<br>
+                    <strong style="color: var(--hot-pink);">Goddess Aria Zahara</strong>
+                </div>
+                <div style="color: #333; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; text-align: center;">
+                    i'm Sissy Madison — Goddess Aria Zahara's owned and caged sissy doll. She controls everything: my cage, my stream, my menu, and my training. She whores me out here for Her entertainment and financial benefit. every single token goes directly to Her — i keep nothing.
+                </div>
+                <div style="color: #333; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; text-align: center;">
+                    my favorite thing is when you insert tokens and vibrate my pussy 🌸 it's the only pleasure Goddess lets me feel — and I'll start dripping precum fast. whether you tip from the menu or just send tokens, you're playing with my pussy and i love every second of it 😊
+                </div>
+                <div style="color: #333; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; text-align: center;">
+                    want to be my Daddy? join my Daddy list and get direct access to Goddess Aria 👑
+                </div>
+                <div style="color: #333; line-height: 1.8; font-size: 0.95rem; margin-bottom: 1rem; text-align: center;">
+                    💋 follow me for a kiss & shoutout<br>
+                    🔒 1 PVT cage unlock per day — first come first serve<br>
+                    🎮 endless toys available upon request in private<br>
+                    💦 cum show is extra — 10,000 tokens (only thing not included in private)
+                </div>
+                <div style="font-size: 0.85rem; color: #666; text-align: center; font-style: italic;">
+                    all prices are non-negotiable and set by Goddess Aria Zahara.<br>
+                    i have no control over my menu, my stream, or my cage 🔒
+                </div>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="https://x.com/sissy4aria" target="_blank" style="display: inline-block; background: var(--hot-pink); color: white; padding: 0.6rem 1.2rem; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 0.85rem;">● x.com/sissy4aria</a>
+                </div>
+            </div>
+
+            <!-- TIP MENU -->
+            <div style="background: white; border: 2px solid var(--hot-pink); border-radius: 10px; padding: 1rem; margin: 1.5rem 0;">
+                <div style="font-family: 'Pacifico', cursive; font-size: 1.1rem; color: var(--hot-pink); text-align: center; margin-bottom: 1rem;">♡ Tip Menu ♡</div>
+                <div style="text-align: center; font-size: 0.8rem; color: var(--hot-pink); font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px;">ALL TOKENS GO TO GODDESS ARIA ZAHARA</div>
+
+                <!-- ACTIVATE MADDIE -->
+                <div style="text-align: center; font-size: 0.9rem; color: var(--hot-pink); font-weight: 600; margin: 1rem 0 0.8rem; text-transform: uppercase; letter-spacing: 1px;">🎀 Activate Maddie</div>
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; font-size: 0.85rem; margin-bottom: 1.5rem;">
+                    <div style="text-align: left; color: #333;">Follow my Twitter 🐦</div><div style="text-align: right; color: #4CAF50; font-weight: 600;">FREE</div>
+                    <div style="text-align: left; color: #333;">Slide in my DMs 📩</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">18</div>
+                    <div style="text-align: left; color: #333;">Tell me I'm Pretty 🥺</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">22</div>
+                    <div style="text-align: left; color: #333;">Play with my hair 🎀</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">28</div>
+                    <div style="text-align: left; color: #333;">Don't stop 😊</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">30</div>
+                    <div style="text-align: left; color: #333;">Lock eyes with me 👀</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">33</div>
+                    <div style="text-align: left; color: #333;">Ahegao 😵</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">38</div>
+                    <div style="text-align: left; color: #333;">C2C 📹 — seeing cocks activates my clitty 😈</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">60</div>
+                    <div style="text-align: left; color: #333;">Obsessed with Maddie 😍</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">99</div>
+                    <div style="text-align: left; color: var(--hot-pink); font-weight: 600;">💋 Good Girl 💋</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">100</div>
+                </div>
+
+                <!-- BODY & SHOW -->
+                <div style="text-align: center; font-size: 0.9rem; color: var(--hot-pink); font-weight: 600; margin: 1rem 0 0.8rem; text-transform: uppercase; letter-spacing: 1px;">🍑 Body & Show</div>
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; font-size: 0.85rem; margin-bottom: 1.5rem;">
+                    <div style="text-align: left; color: #333;">Spank me x5 🍑</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">35</div>
+                    <div style="text-align: left; color: #333;">Sloppy finger suck 🤤</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">49</div>
+                    <div style="text-align: left; color: #333;">Rub my cage 🔒</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">55</div>
+                    <div style="text-align: left; color: #333;">Nipple clamps (5 min) 🔒</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">63</div>
+                    <div style="text-align: left; color: #333;">Slap my balls x5 🥜</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">66</div>
+                    <div style="text-align: left; color: #333;">Take my panties off 🩷</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">77</div>
+                    <div style="text-align: left; color: #333;">Cage/balls close up 🔍</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">88</div>
+                    <div style="text-align: left; color: #333;">Ass show 🍑</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">91</div>
+                    <div style="text-align: left; color: #333;">Put my heels on 👠</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">59</div>
+                    <div style="text-align: left; color: #333;">Outfit check — strip to bra 👗</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">155</div>
+                </div>
+
+                <!-- USE MY HOLES -->
+                <div style="text-align: center; font-size: 0.9rem; color: var(--hot-pink); font-weight: 600; margin: 1rem 0 0.8rem; text-transform: uppercase; letter-spacing: 1px;">👄 Use My Holes</div>
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; font-size: 0.85rem; margin-bottom: 1.5rem;">
+                    <div style="text-align: left; color: #333;">Deepthroat / suck dildo 👄</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">133</div>
+                    <div style="text-align: left; color: #333;">Ball gag (5 min) 😮</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">200</div>
+                    <div style="text-align: left; color: #333;">Fuck my ass with dildo 🍑</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">222</div>
+                </div>
+
+                <!-- TOYS & PREMIUM -->
+                <div style="text-align: center; font-size: 0.9rem; color: var(--hot-pink); font-weight: 600; margin: 1rem 0 0.8rem; text-transform: uppercase; letter-spacing: 1px;">📳 Toys & Premium</div>
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1rem; font-size: 0.85rem; margin-bottom: 1.5rem;">
+                    <div style="text-align: left; color: #333;">Control my lovense (5 min) 📳</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">250</div>
+                    <div style="text-align: left; color: #333;">Want to be feminized next? 🎀</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">333</div>
+                    <div style="text-align: left; color: #333;">Add my Snapchat 📸</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">444</div>
+                    <div style="text-align: left; color: var(--hot-pink); font-weight: 600;">💦 Cum show</div><div style="text-align: right; color: var(--hot-pink); font-weight: 600;">10,000</div>
+                </div>
+            </div>
+
+            <!-- DADDY JOIN -->
+            <div style="background: rgba(255, 182, 217, 0.1); border-radius: 10px; padding: 1.5rem; text-align: center; margin: 1.5rem 0;">
+                <div style="font-family: 'Pacifico', cursive; font-size: 1.1rem; color: var(--hot-pink); margin-bottom: 0.5rem;">Join My Daddy List 👑</div>
+                <div style="font-size: 1.5rem; color: var(--hot-pink); font-weight: 600; margin-bottom: 0.3rem;">555 tokens</div>
+                <div style="font-size: 0.8rem; color: #666; margin-bottom: 1rem;">Your name in my bio forever + lifetime perks</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; font-size: 0.85rem;">
+                    <div style="background: white; border: 1px solid var(--hot-pink); border-radius: 20px; padding: 0.5rem 1rem; color: #333;">💋 Free C2C for life</div>
+                    <div style="background: white; border: 1px solid var(--hot-pink); border-radius: 20px; padding: 0.5rem 1rem; color: #333;">📸 Free Snapchat access</div>
+                    <div style="background: white; border: 1px solid var(--hot-pink); border-radius: 20px; padding: 0.5rem 1rem; color: #333;">🍑 5 free spanks (ass or balls) per day</div>
+                    <div style="background: white; border: 1px solid var(--hot-pink); border-radius: 20px; padding: 0.5rem 1rem; color: #333;">📩 Access to my DMs 24/7</div>
+                    <div style="background: white; border: 1px solid var(--hot-pink); border-radius: 20px; padding: 0.5rem 1rem; color: #333;">👑 Direct pipeline to Goddess Aria — shape my training</div>
+                </div>
+            </div>
+
+            <!-- DADDY LIST -->
+            <div style="text-align: center; padding-top: 1.5rem; border-top: 2px solid var(--hot-pink);">
+                <div style="font-family: 'Pacifico', cursive; font-size: 1.3rem; color: var(--hot-pink); margin-bottom: 0.5rem;">Official Daddy List</div>
+                <div style="font-size: 0.8rem; color: #666; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px;">Those who claimed their good girl</div>
+                
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                    <div style="background: rgba(255, 182, 217, 0.1); border: 2px solid var(--soft-pink); border-radius: 10px; padding: 1rem;">
+                        <div style="font-weight: 600; color: var(--hot-pink); margin-bottom: 0.5rem;">👑 Daddy Pantyhose</div>
+                        <div style="font-size: 0.75rem; color: #666;">loveallthingspantyhose<br>May 2026</div>
+                    </div>
+                    <div style="background: rgba(255, 182, 217, 0.1); border: 2px solid var(--soft-pink); border-radius: 10px; padding: 1rem;">
+                        <div style="font-weight: 600; color: var(--hot-pink); margin-bottom: 0.5rem;">👑 Daddy Larry</div>
+                        <div style="font-size: 0.75rem; color: #666;">larrygotback<br>May 2026</div>
+                    </div>
+                    <div style="background: rgba(255, 182, 217, 0.1); border: 2px solid var(--soft-pink); border-radius: 10px; padding: 1rem;">
+                        <div style="font-weight: 600; color: var(--hot-pink); margin-bottom: 0.5rem;">👑 Daddy Flexy</div>
+                        <div style="font-size: 0.75rem; color: #666;">flex468<br>June 2026</div>
+                    </div>
+                    <div style="background: rgba(255, 182, 217, 0.1); border: 2px solid var(--soft-pink); border-radius: 10px; padding: 1rem;">
+                        <div style="font-weight: 600; color: var(--hot-pink); margin-bottom: 0.5rem;">👑 Daddy Arlo</div>
+                        <div style="font-size: 0.75rem; color: #666;">arlo_dog<br>June 2026</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOW -->
+        <div class="bow">🎀</div>
+    </div>
+
+    <script>
+        // JOURNAL FUNCTIONALITY
+        let journalEntries = [];
+        let currentEntryIndex = 0;
+
+        function loadJournal() {
+            try {
+                const csvUrl = 'https://docs.google.com/spreadsheets/d/1C5o88ZqRWY48ns1krWjesVA9r7qQD2jfrS2VUgF0avE/export?format=csv&gid=0';
+                fetch(csvUrl)
+                    .then(response => response.text())
+                    .then(csv => {
+                        journalEntries = [];
+                        const lines = csv.trim().split('\n');
+                        lines.forEach((line, idx) => {
+                            if (idx === 0 || !line.trim()) return;
+                            
+                            let parts = [], current = '', inQuotes = false;
+                            for (let i = 0; i < line.length; i++) {
+                                const char = line[i];
+                                if (char === '"') inQuotes = !inQuotes;
+                                else if (char === ',' && !inQuotes) { 
+                                    parts.push(current.replace(/"/g, '').trim()); 
+                                    current = ''; 
+                                    continue; 
+                                }
+                                current += char;
+                            }
+                            parts.push(current.replace(/"/g, '').trim());
+                            
+                            if (parts.length >= 5) {
+                                journalEntries.push({
+                                    timestamp: parts[0],
+                                    date: parts[1],
+                                    title: parts[2],
+                                    text: parts[3]
+                                });
+                            }
+                        });
+                        // Sort by most recent first
+                        journalEntries.reverse();
+                        currentEntryIndex = 0;
+                        displayCurrentEntry();
+                    })
+                    .catch(e => console.log('Journal load error:', e));
+            } catch (e) {
+                console.log('Journal error:', e);
+            }
+        }
+
+        function displayCurrentEntry() {
+            const display = document.getElementById('journalDisplay');
+            const counter = document.getElementById('entryCounter');
+            
+            if (journalEntries.length === 0) {
+                display.innerHTML = '<div style="color: #999;">Write and save your first entry to get started ✨</div>';
+                counter.textContent = 'No entries yet';
+                return;
+            }
+            
+            if (currentEntryIndex < 0) currentEntryIndex = journalEntries.length - 1;
+            if (currentEntryIndex >= journalEntries.length) currentEntryIndex = 0;
+            
+            const entry = journalEntries[currentEntryIndex];
+            counter.textContent = `Entry ${currentEntryIndex + 1} of ${journalEntries.length}`;
+            
+            display.innerHTML = `
+                <div style="text-align: left; width: 100%;">
+                    <div class="journal-date" style="margin-bottom: 1rem;">${entry.date}</div>
+                    <div style="font-weight: 600; color: var(--hot-pink); margin-bottom: 1.2rem; font-size: 1.2rem;">${entry.title}</div>
+                    <div class="journal-text" style="color: #333; line-height: 1.8; font-size: 0.95rem;">${entry.text.replace(/\n/g, '<br>')}</div>
+                </div>
+            `;
+        }
+
+        function nextEntry() {
+            currentEntryIndex++;
+            displayCurrentEntry();
+        }
+
+        function previousEntry() {
+            currentEntryIndex--;
+            displayCurrentEntry();
+        }
+
+        window.addEventListener('load', loadJournal);
+    </script>
+</body>
+</html>
