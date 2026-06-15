@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Girl Training HQ - Wardrobe 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --hot-pink: #FF69B4;
+            --soft-pink: #FFB6D9;
+            --baby-pink: #FFC9E3;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFE5F0 0%, #FFB6D9 50%, #FF94C8 100%);
+            padding: 1rem;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '✨';
+            position: fixed;
+            top: 10%;
+            left: 5%;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: '💖';
+            position: fixed;
+            top: 20%;
+            right: 8%;
+            font-size: 2.5rem;
+            opacity: 0.3;
+            animation: float 7s ease-in-out infinite 1s;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .section {
+            background: white;
+            border: 3px solid var(--hot-pink);
+            border-radius: 15px;
+            padding: 0.8rem;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+            margin-bottom: 0.6rem;
+        }
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.3rem;
+            color: var(--hot-pink);
+            margin-bottom: 0.4rem;
+            text-align: center;
+        }
+        .row-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+        }
+        .clothing-item {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 2px solid var(--hot-pink);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-size: cover;
+            background-position: center;
+        }
+        .clothing-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        }
+        .clothing-item.selected {
+            border: 3px solid var(--hot-pink);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+        }
+        .outfit-display {
+            background: rgba(255, 182, 217, 0.1);
+            border: 2px solid var(--hot-pink);
+            border-radius: 10px;
+            padding: 0.6rem;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #333;
+        }
+        .outfit-display div {
+            margin-bottom: 0.3rem;
+            word-break: break-word;
+        }
+        .divider {
+            height: 3px;
+            background: white;
+            margin: 1rem 0;
+            border-radius: 10px;
+        }
+        .bow {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 1rem;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- WHITE DIVIDER -->
+        <div class="divider"></div>
+
+        <!-- WARDROBE BUILDER -->
+        <div class="row-2col">
+            <div class="section">
+                <div class="section-title">👗 Wardrobe Builder</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.85rem;">
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.3rem; font-size: 0.8rem;">Dresses</div>
+                        <div data-category="dresses" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.2rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.3rem; font-size: 0.8rem;">Tops</div>
+                        <div data-category="tops" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.2rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.3rem; font-size: 0.8rem;">Skirts</div>
+                        <div data-category="skirts" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.2rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.3rem; font-size: 0.8rem;">Heels</div>
+                        <div data-category="heels" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.2rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.3rem; font-size: 0.8rem;">Thigh-Highs</div>
+                        <div data-category="thigh-highs" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.2rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.3rem; font-size: 0.8rem;">Bras</div>
+                        <div data-category="bras" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.2rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.3rem; font-size: 0.8rem;">Panties</div>
+                        <div data-category="panties" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.2rem;"></div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.3rem; font-size: 0.8rem;">Accessories</div>
+                        <div data-category="accessories" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.2rem;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🎀 Current Outfit</div>
+                <div id="mannequin" class="outfit-display">
+                    <div style="color: #999; text-align: center;">Click items to build your outfit</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOW -->
+        <div class="bow">🎀</div>
+    </div>
+
+    <script>
+        // OUTFIT OBJECT
+        const outfit = {
+            'dresses': null,
+            'tops': null,
+            'skirts': null,
+            'heels': null,
+            'thigh-highs': null,
+            'bras': null,
+            'panties': null,
+            'accessories': null
+        };
+
+        // Populate wardrobe UI with images from GitHub
+        function populateWardrobeUI() {
+            const baseUrl = 'https://sissymaddieee.github.io/GGT/wardrobe';
+            const categories = ['dresses', 'tops', 'skirts', 'heels', 'thigh-highs', 'bras', 'panties', 'accessories'];
+
+            categories.forEach(category => {
+                const container = document.querySelector(`[data-category="${category}"]`);
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                for (let i = 1; i <= 9; i++) {
+                    const photoUrl = `${baseUrl}/${category}/${category.replace('-', '_')}_${i}.png`;
+                    
+                    const item = document.createElement('div');
+                    item.className = 'clothing-item';
+                    item.style.backgroundImage = `url('${photoUrl}')`;
+                    item.style.backgroundSize = 'cover';
+                    item.style.backgroundPosition = 'center';
+                    item.title = `${category} ${i}`;
+                    item.onclick = () => selectClothing(category, photoUrl, item);
+                    
+                    container.appendChild(item);
+                }
+            });
+        }
+
+        function selectClothing(category, photoUrl, element) {
+            // Make dress and tops mutually exclusive
+            if (category === 'dresses') {
+                const topsContainer = document.querySelector(`[data-category="tops"]`);
+                const topsItems = topsContainer.querySelectorAll('.clothing-item');
+                topsItems.forEach(item => item.classList.remove('selected'));
+                outfit.tops = null;
+            } else if (category === 'tops') {
+                const dressesContainer = document.querySelector(`[data-category="dresses"]`);
+                const dressesItems = dressesContainer.querySelectorAll('.clothing-item');
+                dressesItems.forEach(item => item.classList.remove('selected'));
+                outfit.dresses = null;
+            }
+            
+            const categoryItems = element.parentElement.querySelectorAll('.clothing-item');
+            categoryItems.forEach(item => item.classList.remove('selected'));
+            element.classList.add('selected');
+            outfit[category] = photoUrl;
+            updateMannequin();
+        }
+
+        function updateMannequin() {
+            const mannequin = document.getElementById('mannequin');
+            const visibleCategories = ['dresses', 'tops', 'skirts', 'heels', 'thigh-highs'];
+            
+            // Build items in specific order: dress/top, skirts, thigh-highs, heels
+            let html = '';
+            
+            if (outfit.dresses) {
+                html += `
+                    <div style="text-align: center; margin-bottom: 0.4rem;">
+                        <div style="font-size: 0.75rem; font-weight: 600; color: #FF69B4; margin-bottom: 0.2rem;">dress</div>
+                        <img src="${outfit.dresses}" style="width: 100%; height: auto; border-radius: 8px; border: 2px solid #FF69B4; max-height: 120px; object-fit: contain;">
+                    </div>
+                `;
+            } else if (outfit.tops) {
+                html += `
+                    <div style="text-align: center; margin-bottom: 0.4rem;">
+                        <div style="font-size: 0.75rem; font-weight: 600; color: #FF69B4; margin-bottom: 0.2rem;">tops</div>
+                        <img src="${outfit.tops}" style="width: 100%; height: auto; border-radius: 8px; border: 2px solid #FF69B4; max-height: 120px; object-fit: contain;">
+                    </div>
+                `;
+            }
+            
+            if (outfit.skirts) {
+                html += `
+                    <div style="text-align: center; margin-bottom: 0.4rem;">
+                        <div style="font-size: 0.75rem; font-weight: 600; color: #FF69B4; margin-bottom: 0.2rem;">skirts</div>
+                        <img src="${outfit.skirts}" style="width: 100%; height: auto; border-radius: 8px; border: 2px solid #FF69B4; max-height: 120px; object-fit: contain;">
+                    </div>
+                `;
+            }
+            
+            if (outfit['thigh-highs']) {
+                html += `
+                    <div style="text-align: center; margin-bottom: 0.4rem;">
+                        <div style="font-size: 0.75rem; font-weight: 600; color: #FF69B4; margin-bottom: 0.2rem;">thigh-highs</div>
+                        <img src="${outfit['thigh-highs']}" style="width: 100%; height: auto; border-radius: 8px; border: 2px solid #FF69B4; max-height: 120px; object-fit: contain;">
+                    </div>
+                `;
+            }
+            
+            if (outfit.heels) {
+                html += `
+                    <div style="text-align: center; margin-bottom: 0.4rem;">
+                        <div style="font-size: 0.75rem; font-weight: 600; color: #FF69B4; margin-bottom: 0.2rem;">heels</div>
+                        <img src="${outfit.heels}" style="width: 100%; height: auto; border-radius: 8px; border: 2px solid #FF69B4; max-height: 120px; object-fit: contain;">
+                    </div>
+                `;
+            }
+            
+            mannequin.innerHTML = html || '<div style="color: #999; text-align: center; padding: 2rem 0;">Click items to build outfit</div>';
+        }
+
+        window.addEventListener('load', populateWardrobeUI);
+    </script>
+</body>
+</html>
