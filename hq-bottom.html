@@ -507,18 +507,18 @@
             <div class="section">
                 <div class="section-title">🖼️ Blackmail</div>
                 <div id="blackmailSection" style="display: none;">
-                    <div id="blackmailList" style="display: flex; flex-direction: column; gap: 1rem;"></div>
+                    <div id="blackmailList" style="display: flex; flex-direction: column; gap: 0.5rem;"></div>
                 </div>
                 <div id="blackmailLoading" style="text-align: center; color: #FF69B4;">Loading...</div>
             </div>
             <div class="section">
                 <div class="section-title">📚 Library</div>
                 <div id="librarySection" style="display: none;">
-                    <div style="margin-bottom: 1rem; font-size: 0.85rem; color: #FF69B4; font-weight: 600;">
+                    <div style="margin-bottom: 0.6rem; font-size: 0.85rem; color: #FF69B4; font-weight: 600;">
                         <span id="clipCount">0</span> total clips | <span id="categoryCount">0</span> categories
                     </div>
                     
-                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 0.6rem; flex-wrap: wrap;">
                         <input type="text" id="clipSearch" placeholder="Search clips..." style="flex: 1; min-width: 200px; padding: 0.5rem; border: 2px solid #FF69B4; border-radius: 8px; font-family: 'Quicksand'; font-size: 0.9rem;">
                         <select id="sortBy" style="padding: 0.5rem; border: 2px solid #FF69B4; border-radius: 8px; font-family: 'Quicksand'; font-size: 0.9rem;">
                             <option value="title">Sort: A-Z</option>
@@ -526,7 +526,7 @@
                         </select>
                     </div>
 
-                    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                    <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem;">
                         <button class="tag-filter-btn active" data-filter="favorites">❤️ Favorited</button>
                         <button class="tag-filter-btn" data-filter="incomplete">📌 Incomplete Tasks</button>
                         <button class="tag-filter-btn" data-filter="encouragedbi">EncouragedBi</button>
@@ -540,80 +540,54 @@
                         <button class="tag-filter-btn" data-filter="obedience">Obedience Training</button>
                     </div>
                     
-                    <div id="clipsList" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
+                    <div id="clipsList" style="display: flex; flex-direction: column; gap: 0.5rem;"></div>
                 </div>
                 <div id="libraryLoading" style="text-align: center; color: #FF69B4;">Loading library...</div>
             </div>
         </div>
 
-        <!-- WHITE DIVIDER -->
-        <div class="divider"></div>
-
-        <!-- WARDROBE -->
-        <div class="section">
-            <div class="section-title">👗 Outfit Builder</div>
-            <div class="outfit-builder">
-                <!-- CLOTHING SELECTOR -->
-                <div class="clothing-selector">
-                    <div class="clothing-category">
-                        <div class="category-label">👗 Dresses</div>
-                        <div class="clothing-options" data-category="dresses">
-                            <div class="clothing-item">👗</div>
-                        </div>
+        <!-- WARDROBE BUILDER SECTION -->
+        <div class="row-2col">
+            <div class="section">
+                <div class="section-title">👗 Wardrobe Builder</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.9rem;">
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.4rem;">Dresses</div>
+                        <div data-category="dresses" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem;"></div>
                     </div>
-                    <div class="clothing-category">
-                        <div class="category-label">👚 Tops</div>
-                        <div class="clothing-options" data-category="tops">
-                            <div class="clothing-item">👚</div>
-                        </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.4rem;">Tops</div>
+                        <div data-category="tops" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem;"></div>
                     </div>
-                    <div class="clothing-category">
-                        <div class="category-label">🩱 Skirts/Shorts</div>
-                        <div class="clothing-options" data-category="skirts">
-                            <div class="clothing-item">🩱</div>
-                        </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.4rem;">Skirts</div>
+                        <div data-category="skirts" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem;"></div>
                     </div>
-                    <div class="clothing-category">
-                        <div class="category-label">👠 Heels</div>
-                        <div class="clothing-options" data-category="heels">
-                            <div class="clothing-item">👠</div>
-                        </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.4rem;">Heels</div>
+                        <div data-category="heels" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem;"></div>
                     </div>
-                    <div class="clothing-category">
-                        <div class="category-label">🧦 Thigh Highs</div>
-                        <div class="clothing-options" data-category="thigh-highs">
-                            <div class="clothing-item">🧦</div>
-                        </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.4rem;">Thigh-Highs</div>
+                        <div data-category="thigh-highs" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem;"></div>
                     </div>
-                    <div class="clothing-category">
-                        <div class="category-label">🩶 Bras</div>
-                        <div class="clothing-options" data-category="bras">
-                            <div class="clothing-item">🩶</div>
-                        </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.4rem;">Bras</div>
+                        <div data-category="bras" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem;"></div>
                     </div>
-                    <div class="clothing-category">
-                        <div class="category-label">🩲 Panties</div>
-                        <div class="clothing-options" data-category="panties">
-                            <div class="clothing-item">🩲</div>
-                        </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.4rem;">Panties</div>
+                        <div data-category="panties" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem;"></div>
                     </div>
-                    <div class="clothing-category">
-                        <div class="category-label">💍 Accessories</div>
-                        <div class="clothing-options" data-category="accessories">
-                            <div class="clothing-item">💍</div>
-                        </div>
+                    <div>
+                        <div style="font-weight: 600; color: #FF69B4; margin-bottom: 0.4rem;">Accessories</div>
+                        <div data-category="accessories" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.3rem;"></div>
                     </div>
                 </div>
-
-                <!-- MANNEQUIN -->
-                <div class="mannequin">
-                    <div class="mannequin-display" id="mannequinDisplay">👸</div>
-                    <div class="outfit-summary" id="outfitSummary">
-                        <div style="color: var(--hot-pink); font-weight: 600; margin-bottom: 0.5rem;">Selected:</div>
-                        <div id="selectedItems">Nothing selected yet</div>
-                    </div>
-                    <button class="btn" onclick="clearOutfit()" style="width: 100%;">Clear Outfit</button>
-                </div>
+            </div>
+            <div class="section">
+                <div class="section-title">🎀 Current Outfit</div>
+                <div id="mannequin" style="display: grid; grid-template-columns: 1fr; gap: 0.4rem; font-size: 0.9rem;"></div>
             </div>
         </div>
 
