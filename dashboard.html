@@ -44,7 +44,9 @@ tr:hover td { background: #1f1f1f; }
 .kw.good { border-color: #2a4a2a; color: #5a9a5a; background: #111a11; }
 .kw.bad { border-color: #4a2a2a; color: #9a5a5a; background: #1a1111; }
 .empty { color: #444; font-size: 13px; padding: 1.5rem 0; text-align: center; }
-.outlier-note { font-size: 11px; color: #666; margin-top: 6px; }
+.type-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.type-item { font-size: 12px; color: #888; }
+.type-item strong { color: #e8e8e8; font-weight: 500; }
 @media (max-width: 700px) {
   .metrics { grid-template-columns: repeat(2, 1fr); }
   .grid { grid-template-columns: 1fr; }
@@ -62,10 +64,9 @@ tr:hover td { background: #1f1f1f; }
   <div class="metrics">
     <div class="metric"><div class="label">Posts this week</div><div class="val" id="m-week">—</div></div>
     <div class="metric"><div class="label">Total posts</div><div class="val" id="m-total">—</div></div>
-    <div class="metric"><div class="label">Avg upvotes <span style="color:#333;font-size:14px">(last 5)</span></div><div class="val" id="m-upvotes">—</div><div class="sub" id="m-upvotes-sub"></div></div>
-    <div class="metric"><div class="label">Avg views <span style="color:#333;font-size:14px">(last 5)</span></div><div class="val" id="m-views">—</div><div class="sub" id="m-views-sub"></div></div>
+    <div class="metric"><div class="label">Avg upvotes <span style="color:#333;font-size:12px">(last 5 w/ data)</span></div><div class="val" id="m-upvotes">—</div><div class="sub" id="m-upvotes-sub"></div></div>
+    <div class="metric"><div class="label">Avg views <span style="color:#333;font-size:12px">(last 5 w/ data)</span></div><div class="val" id="m-views">—</div><div class="sub" id="m-views-sub"></div></div>
   </div>
-
   <div class="grid">
     <div class="card">
       <h2>This week by subreddit</h2>
@@ -76,53 +77,50 @@ tr:hover td { background: #1f1f1f; }
       <div id="best-time"><div class="empty">Log more posts to see patterns.</div></div>
     </div>
     <div class="card">
-      <h2>Top subreddits by avg upvotes</h2>
-      <div id="top-subs"><div class="empty">Log upvotes to see this.</div></div>
+      <h2>Top subreddits by avg upvotes <span style="color:#333;font-size:10px;font-weight:400">3+ posts</span></h2>
+      <div id="top-subs"><div class="empty">Need 3+ posts per sub to show.</div></div>
     </div>
-    <div class="card">
-      <h2>Content type breakdown</h2>
-      <div id="by-type"><div class="empty">No data yet.</div></div>
+    <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+      <div>
+        <h2 style="margin-bottom:8px">Content type</h2>
+        <div id="by-type"><div class="empty" style="padding:0.5rem 0">No data yet.</div></div>
+      </div>
+      <div>
+        <h2 style="margin-bottom:8px">Caption length vs upvotes</h2>
+        <div id="cap-length"><div class="empty" style="padding:0.5rem 0">Log captions and upvotes to see this.</div></div>
+      </div>
     </div>
   </div>
-
   <div class="grid">
     <div class="card">
-      <h2>Caption length vs upvotes</h2>
-      <div style="font-size:11px;color:#555;margin-bottom:10px">Avg upvotes by character count bucket</div>
-      <div id="cap-length"><div class="empty">Log captions and upvotes to see this.</div></div>
-    </div>
-    <div class="card">
       <h2>Emoji performance</h2>
-      <div style="font-size:11px;color:#555;margin-bottom:10px">Avg upvotes for posts containing each emoji</div>
+      <div style="font-size:11px;color:#555;margin-bottom:10px">Avg upvotes for posts containing each emoji · 2+ posts</div>
       <div id="emoji-perf"><div class="empty">Log captions with emojis to see this.</div></div>
     </div>
+    <div class="full-card" style="margin-bottom:0">
+      <h2>Caption keywords <span style="color:#333;font-size:10px;font-weight:400">3+ uses</span></h2>
+      <div style="margin-bottom:10px;font-size:11px;color:#555">Words in higher vs lower performing captions. Capped at 50 upvotes per post.</div>
+      <div id="keywords"><div class="empty">Log captions and upvotes to see keyword patterns.</div></div>
+    </div>
   </div>
-
-  <div class="full-card">
-    <h2>Caption keywords — effect on upvotes</h2>
-    <div style="margin-bottom:10px;font-size:12px;color:#555">Words that appear in higher-performing captions vs lower. Capped at 100 per post to avoid outlier skew.</div>
-    <div id="keywords"><div class="empty">Log captions and upvotes to see keyword performance.</div></div>
-  </div>
-
   <div class="full-card" id="outlier-section" style="display:none">
-    <h2>Standout posts <span class="badge badge-outlier">100+ upvotes</span></h2>
-    <div class="outlier-note" style="margin-bottom:1rem">These posts are excluded from averages — study them to find what's replicable.</div>
+    <h2>Standout posts <span class="badge badge-outlier">50+ upvotes</span></h2>
+    <div style="font-size:11px;color:#666;margin-bottom:1rem">Excluded from averages — study these to find what's replicable.</div>
     <table>
       <thead><tr>
         <th style="width:10%">Date</th>
-        <th style="width:18%">Subreddit</th>
-        <th style="width:8%">Type</th>
+        <th style="width:17%">Subreddit</th>
+        <th style="width:7%">Type</th>
         <th style="width:7%">Upvotes</th>
         <th style="width:7%">Views</th>
-        <th style="width:8%">Hour</th>
-        <th style="width:18%">Caption</th>
-        <th style="width:16%">Title / Description</th>
+        <th style="width:6%">Hour</th>
+        <th style="width:20%">Caption</th>
+        <th style="width:20%">Title / Description</th>
         <th style="width:6%">Link</th>
       </tr></thead>
       <tbody id="outlier-body"></tbody>
     </table>
   </div>
-
   <div class="full-card">
     <h2>Recent posts</h2>
     <table>
@@ -130,23 +128,23 @@ tr:hover td { background: #1f1f1f; }
         <th style="width:9%">Date</th>
         <th style="width:8%">Day</th>
         <th style="width:6%">Hour</th>
-        <th style="width:17%">Subreddit</th>
+        <th style="width:16%">Subreddit</th>
         <th style="width:7%">Type</th>
         <th style="width:7%">Upvotes</th>
         <th style="width:6%">Views</th>
-        <th style="width:16%">Caption</th>
-        <th style="width:16%">Title / Description</th>
+        <th style="width:15%">Caption</th>
+        <th style="width:15%">Title / Description</th>
         <th style="width:5%">Link</th>
       </tr></thead>
       <tbody id="recent-body"><tr><td colspan="10" style="text-align:center;color:#444;padding:2rem">Loading...</td></tr></tbody>
     </table>
   </div>
 </div>
-
 <script>
 const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8uQbcMgMda1qjeGCrU7frdIXjjPhumy3coHvalSBj42Pu6FwvAMY00YcWTf3l34FjvyOtnXNFzAp8/pub?gid=1325102424&single=true&output=csv';
-const CAP = 100;
-const STOPWORDS = new Set(['the','a','an','and','or','to','of','in','is','it','i','my','me','you','your','for','on','at','with','this','that','be','as','so','but','if','do','not','are','have','was','he','she','they','we','can','just','its','from','by','has','had','will','more','get','got','like','about','up','out','all','her','his','him','am','no','yes','one','what','when','how']);
+const CAP_UP = 50;
+const CAP_VI = 10000;
+const STOPWORDS = new Set(['the','a','an','and','or','to','of','in','is','it','i','my','me','you','your','for','on','at','with','this','that','be','as','so','but','if','do','not','are','have','was','he','she','they','we','can','just','its','from','by','has','had','will','more','get','got','like','about','up','out','all','her','his','him','am','no','yes','one','what','when','how','dont','im']);
 
 function parseCSV(text) {
   const lines = text.trim().split('\n');
@@ -167,10 +165,27 @@ function parseCSV(text) {
 
 function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
 
-function getWeekStart() {
-  const now = new Date(); const day = now.getDay();
-  now.setDate(now.getDate() - day + (day===0?-6:1));
-  return now.toISOString().split('T')[0];
+function parseDate(d) {
+  if (!d) return null;
+  const parts = d.split('/');
+  if (parts.length === 3) {
+    let [m, day, yr] = parts;
+    if (yr.length === 2) yr = '20' + yr;
+    return new Date(parseInt(yr), parseInt(m)-1, parseInt(day));
+  }
+  return new Date(d);
+}
+
+function getThisWeekRange() {
+  const now = new Date();
+  const day = now.getDay();
+  const mon = new Date(now);
+  mon.setDate(now.getDate() - day + (day===0?-6:1));
+  mon.setHours(0,0,0,0);
+  const sun = new Date(mon);
+  sun.setDate(mon.getDate() + 6);
+  sun.setHours(23,59,59,999);
+  return [mon, sun];
 }
 
 function contentType(r) {
@@ -184,28 +199,28 @@ function titleOrDesc(r) {
 }
 
 function render(rows) {
-  const ws = getWeekStart();
-  const outliers = rows.filter(r => num(r['upvotes']) !== null && num(r['upvotes']) >= CAP);
-  const capped = rows.map(r => ({ ...r, _up: Math.min(num(r['upvotes']) ?? 0, CAP) }));
-  const withUp = capped.filter(r => num(r['upvotes']) !== null);
-  const withVi = rows.filter(r => num(r['views']) !== null);
-  const thisWeek = rows.filter(r => r['date'] >= ws);
+  const [weekStart, weekEnd] = getThisWeekRange();
+  const thisWeek = rows.filter(r => {
+    const d = parseDate(r['date']);
+    return d && d >= weekStart && d <= weekEnd;
+  });
 
-  // Rolling last 5
-  const last5 = [...rows].sort((a,b) => (b['date']||'') > (a['date']||'') ? 1 : -1).slice(0,5);
-  const last5Up = last5.filter(r => num(r['upvotes']) !== null);
-  const last5Vi = last5.filter(r => num(r['views']) !== null);
-  const rollingUp = last5Up.length ? Math.round(last5Up.reduce((a,r) => a + Math.min(num(r['upvotes']), CAP), 0) / last5Up.length) : null;
-  const rollingVi = last5Vi.length ? Math.round(last5Vi.reduce((a,r) => a + num(r['views']), 0) / last5Vi.length) : null;
+  const outliers = rows.filter(r => num(r['upvotes']) !== null && num(r['upvotes']) >= CAP_UP);
+  const withUp = rows.filter(r => num(r['upvotes']) !== null && num(r['upvotes']) < CAP_UP)
+    .map(r => ({ ...r, _up: num(r['upvotes']), _vi: Math.min(num(r['views'])??0, CAP_VI) }));
+
+  const last5Up = [...rows].filter(r => num(r['upvotes']) !== null).sort((a,b) => parseDate(b['date'])-parseDate(a['date'])).slice(0,5).map(r => Math.min(num(r['upvotes']), CAP_UP));
+  const last5Vi = [...rows].filter(r => num(r['views']) !== null).sort((a,b) => parseDate(b['date'])-parseDate(a['date'])).slice(0,5).map(r => Math.min(num(r['views']), CAP_VI));
+  const rollingUp = last5Up.length ? Math.round(last5Up.reduce((a,v)=>a+v,0)/last5Up.length) : null;
+  const rollingVi = last5Vi.length ? Math.round(last5Vi.reduce((a,v)=>a+v,0)/last5Vi.length) : null;
 
   document.getElementById('m-week').textContent = thisWeek.length;
   document.getElementById('m-total').textContent = rows.length;
   document.getElementById('m-upvotes').textContent = rollingUp !== null ? rollingUp : '—';
-  document.getElementById('m-upvotes-sub').textContent = rollingUp !== null ? 'capped at 100' : '';
+  document.getElementById('m-upvotes-sub').textContent = rollingUp !== null ? 'cap 50 · last 5 w/ data' : '';
   document.getElementById('m-views').textContent = rollingVi !== null ? rollingVi.toLocaleString() : '—';
-  document.getElementById('m-views-sub').textContent = rollingVi !== null ? 'last 5 posts' : '';
+  document.getElementById('m-views-sub').textContent = rollingVi !== null ? 'cap 10,000 · last 5 w/ data' : '';
 
-  // This week by sub
   const wSubs = {};
   thisWeek.forEach(r => { wSubs[r['subreddit']] = (wSubs[r['subreddit']]||0)+1; });
   const wEl = document.getElementById('week-subs');
@@ -213,7 +228,6 @@ function render(rows) {
   else { wEl.innerHTML = Object.entries(wSubs).sort((a,b)=>b[1]-a[1]).map(([s,n]) =>
     `<div class="row"><span class="left">${s}</span><span class="right">${n} post${n>1?'s':''}</span></div>`).join(''); }
 
-  // Best time
   const byHour = {};
   withUp.forEach(r => {
     const h = r['hour']; if (!h) return;
@@ -230,7 +244,6 @@ function render(rows) {
     ).join('');
   }
 
-  // Top subs
   const subUp = {};
   withUp.forEach(r => {
     if (!r['subreddit']) return;
@@ -238,31 +251,30 @@ function render(rows) {
     subUp[r['subreddit']].total += r._up; subUp[r['subreddit']].count++;
   });
   const tsEl = document.getElementById('top-subs');
-  const subEntries = Object.entries(subUp).map(([s,v])=>[s,Math.round(v.total/v.count),v.count]).sort((a,b)=>b[1]-a[1]).slice(0,6);
-  if (!subEntries.length) { tsEl.innerHTML = '<div class="empty">Log upvotes to see this.</div>'; }
+  const subEntries = Object.entries(subUp).filter(([,v])=>v.count>=3).map(([s,v])=>[s,Math.round(v.total/v.count),v.count]).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  if (!subEntries.length) { tsEl.innerHTML = '<div class="empty">Need 3+ posts with upvote data per sub.</div>'; }
   else {
     const max = subEntries[0][1];
     tsEl.innerHTML = subEntries.map(([s,avg,ct])=>
-      `<div class="bar-wrap"><span class="bar-label">${s}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round((avg/max)*100)}%"></div></div><span class="bar-val">${avg}</span></div>`
-    ).join('') + `<div style="font-size:11px;color:#444;margin-top:8px">avg upvotes per post · capped at ${CAP}</div>`;
+      `<div class="bar-wrap"><span class="bar-label">${s} <span style="color:#444">(${ct})</span></span><div class="bar-track"><div class="bar-fill" style="width:${Math.round((avg/max)*100)}%"></div></div><span class="bar-val">${avg}</span></div>`
+    ).join('') + `<div style="font-size:11px;color:#444;margin-top:8px">avg upvotes · capped at ${CAP_UP}</div>`;
   }
 
-  // Content type
   const byType = { clip:0, photo:0 };
   rows.forEach(r => { const t = contentType(r); if(t) byType[t]++; });
   const btypeEl = document.getElementById('by-type');
   const total = byType.clip + byType.photo;
-  if (!total) { btypeEl.innerHTML = '<div class="empty">No data yet.</div>'; }
+  if (!total) { btypeEl.innerHTML = '<div class="empty" style="padding:0.5rem 0">No data yet.</div>'; }
   else {
-    btypeEl.innerHTML = [['clip','badge-clip'],['photo','badge-photo']].map(([t,bc])=>{
-      const n = byType[t]; const pct = Math.round(n/total*100);
+    btypeEl.innerHTML = `<div class="type-row">${[['clip','badge-clip'],['photo','badge-photo']].map(([t,bc])=>{
+      const n = byType[t]; if(!n) return '';
+      const pct = Math.round(n/total*100);
       const avgU = withUp.filter(r=>contentType(r)===t);
       const avg = avgU.length ? Math.round(avgU.reduce((a,r)=>a+r._up,0)/avgU.length) : null;
-      return `<div class="row"><span class="left"><span class="badge ${bc}">${t}</span></span><span class="right">${n} <span style="color:#444;font-weight:400">(${pct}%)</span>${avg!==null?` · <span style="color:#666">${avg} avg</span>`:''}</span></div>`;
-    }).join('');
+      return `<span class="type-item"><span class="badge ${bc}">${t}</span> <strong>${n}</strong> (${pct}%)${avg!==null?` · <span style="color:#555">${avg} avg</span>`:''}`;
+    }).filter(Boolean).join('</span>')}</span></div>`;
   }
 
-  // Caption length vs upvotes
   const lenBuckets = { '1-50':{ total:0,count:0 }, '51-100':{ total:0,count:0 }, '101-150':{ total:0,count:0 }, '151-200':{ total:0,count:0 }, '200+':{ total:0,count:0 } };
   withUp.filter(r=>r['caption']).forEach(r => {
     const len = r['caption'].length;
@@ -271,15 +283,14 @@ function render(rows) {
   });
   const clEl = document.getElementById('cap-length');
   const lenEntries = Object.entries(lenBuckets).filter(([,v])=>v.count>0).map(([b,v])=>[b,Math.round(v.total/v.count),v.count]);
-  if (!lenEntries.length) { clEl.innerHTML = '<div class="empty">Log captions and upvotes to see this.</div>'; }
+  if (!lenEntries.length) { clEl.innerHTML = '<div class="empty" style="padding:0.5rem 0">Log captions and upvotes to see this.</div>'; }
   else {
     const max = Math.max(...lenEntries.map(e=>e[1]));
     clEl.innerHTML = lenEntries.map(([b,avg,ct])=>
-      `<div class="bar-wrap"><span class="bar-label">${b} chars <span style="color:#444">(${ct})</span></span><div class="bar-track"><div class="bar-fill" style="width:${Math.round((avg/max)*100)}%"></div></div><span class="bar-val">${avg}</span></div>`
+      `<div class="bar-wrap" style="margin-bottom:6px"><span class="bar-label">${b} chars <span style="color:#444">(${ct})</span></span><div class="bar-track"><div class="bar-fill" style="width:${Math.round((avg/max)*100)}%"></div></div><span class="bar-val">${avg}</span></div>`
     ).join('');
   }
 
-  // Emoji performance
   const emojiRe = /\p{Emoji_Presentation}|\p{Extended_Pictographic}/gu;
   const emojiData = {};
   withUp.filter(r=>r['caption']).forEach(r => {
@@ -297,7 +308,6 @@ function render(rows) {
     emEl.innerHTML = `<div style="font-size:11px;color:#555;margin-bottom:8px">Overall avg: ${overallAvg} upvotes</div><div class="keyword-grid">${emEntries.map(k=>`<span class="kw ${k.avg>overallAvg?'good':'bad'}" title="${k.count} posts · ${k.avg} avg upvotes">${k.e} <span style="opacity:0.6">${k.avg}</span></span>`).join('')}</div>`;
   }
 
-  // Keywords
   const kwData = {};
   withUp.filter(r => r['caption']).forEach(r => {
     const words = r['caption'].toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(w=>w.length>2 && !STOPWORDS.has(w));
@@ -307,17 +317,16 @@ function render(rows) {
     });
   });
   const kwEl = document.getElementById('keywords');
-  const kwEntries = Object.entries(kwData).filter(([,v])=>v.count>=2).map(([w,v])=>({ w, avg:Math.round(v.total/v.count), count:v.count })).sort((a,b)=>b.avg-a.avg);
-  if (!kwEntries.length) { kwEl.innerHTML = '<div class="empty">Log captions and upvotes across multiple posts to see keyword patterns.</div>'; }
+  const kwEntries = Object.entries(kwData).filter(([,v])=>v.count>=3).map(([w,v])=>({ w, avg:Math.round(v.total/v.count), count:v.count })).sort((a,b)=>b.avg-a.avg);
+  if (!kwEntries.length) { kwEl.innerHTML = '<div class="empty">Need a word used in 3+ posts with upvote data.</div>'; }
   else {
     const overallAvg = withUp.length ? Math.round(withUp.reduce((a,r)=>a+r._up,0)/withUp.length) : 0;
     const good = kwEntries.filter(k=>k.avg>overallAvg).slice(0,12);
     const bad = kwEntries.filter(k=>k.avg<=overallAvg).slice(-8);
-    kwEl.innerHTML = `<div style="font-size:11px;color:#555;margin-bottom:8px">Green = above average · Red = below average · Overall avg: ${overallAvg} upvotes</div>
+    kwEl.innerHTML = `<div style="font-size:11px;color:#555;margin-bottom:8px">Green = above average · Red = below average · Overall avg: ${overallAvg}</div>
     <div class="keyword-grid">${good.map(k=>`<span class="kw good" title="${k.count} posts · ${k.avg} avg upvotes">${k.w} <span style="opacity:0.6">${k.avg}</span></span>`).join('')}${bad.map(k=>`<span class="kw bad" title="${k.count} posts · ${k.avg} avg upvotes">${k.w} <span style="opacity:0.6">${k.avg}</span></span>`).join('')}</div>`;
   }
 
-  // Outliers
   if (outliers.length) {
     document.getElementById('outlier-section').style.display = 'block';
     document.getElementById('outlier-body').innerHTML = outliers.sort((a,b)=>num(b['upvotes'])-num(a['upvotes'])).map(r=>`<tr>
@@ -333,8 +342,7 @@ function render(rows) {
     </tr>`).join('');
   }
 
-  // Recent posts
-  const recent = [...rows].sort((a,b)=>(b['date']||'')>(a['date']||'')?1:-1).slice(0,20);
+  const recent = [...rows].sort((a,b)=>parseDate(b['date'])-parseDate(a['date'])).slice(0,20);
   const tb = document.getElementById('recent-body');
   if (!recent.length) { tb.innerHTML = '<tr><td colspan="10" style="text-align:center;color:#444;padding:2rem">No posts logged yet.</td></tr>'; }
   else { tb.innerHTML = recent.map(r=>`<tr>
@@ -359,7 +367,7 @@ async function load() {
     const text = await res.text();
     render(parseCSV(text));
   } catch(e) {
-    document.getElementById('recent-body').innerHTML = '<tr><td colspan="9" style="text-align:center;color:#555;padding:2rem">Could not load data. Check the sheet is published as CSV.</td></tr>';
+    document.getElementById('recent-body').innerHTML = '<tr><td colspan="10" style="text-align:center;color:#555;padding:2rem">Could not load data. Check the sheet is published as CSV.</td></tr>';
     document.getElementById('last-updated').textContent = 'Error loading data';
   }
 }
