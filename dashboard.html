@@ -315,7 +315,7 @@ function render(rows) {
 
 async function load() {
   try {
-    const res = await fetch(CSV_URL);
+    const res = await fetch('https://corsproxy.io/?' + encodeURIComponent(CSV_URL));
     render(parseCSV(await res.text()));
   } catch(e) {
     document.getElementById('last-updated').textContent = 'Error loading data';
