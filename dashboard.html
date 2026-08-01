@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reddit Promo</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e8e8e8; min-height: 100vh; }
+#app { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+header { display: flex; justify-content: space-between; align-items: center; }
+header h1 { font-size: 13px; font-weight: 500; color: #fff; }
+header span { font-size: 11px; color: #aaa; }
+.back-btn { font-size: 11px; padding: 3px 10px; border: 0.5px solid #333; border-radius: 99px; background: transparent; color: #aaa; cursor: pointer; display: none; }
+.back-btn:hover { color: #fff; border-color: #555; }
+.label { font-size: 9px; color: #555; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px; }
+.trends { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.trend-card { background: #1a1a1a; border: 0.5px solid #222; border-radius: 8px; padding: 8px 10px; }
+.trend-inner { position: relative; width: 100%; height: 110px; }
+.trend-inner svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.trend-x-labels { display: flex; justify-content: space-between; margin-top: 3px; padding-left: 32px; }
+.trend-x-labels span { font-size: 8px; color: #444; }
+.main { display: grid; grid-template-columns: 1.4fr 1fr; gap: 8px; }
+.left-col { display: flex; flex-direction: column; gap: 8px; }
+.right-col { display: flex; flex-direction: column; gap: 8px; }
+.matrix-wrap { background: #1a1a1a; border: 0.5px solid #222; border-radius: 8px; padding: 8px 10px; overflow: auto; }
+.matrix-table { border-collapse: collapse; width: 100%; font-size: 10px; }
+.matrix-table th { color: #555; font-weight: 400; padding: 3px 5px; text-align: center; white-space: nowrap; border-bottom: 0.5px solid #222; }
+.matrix-table th.sub-col { text-align: left; }
+.matrix-table td { padding: 3px 5px; text-align: center; }
+.matrix-table td.sub-name { text-align: left; color: #5a9aaa; white-space: nowrap; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.matrix-table td.sub-name:hover { color: #8acada; }
+.cell { width: 28px; height: 18px; border-radius: 3px; display: inline-flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 500; }
+.cell-empty { background: #1f1f1f; color: #333; }
+.cell-low { background: #1f2a1f; color: #4a7a4a; }
+.cell-mid { background: #2a3a1a; color: #7aaa4a; }
+.cell-high { background: #3a5a1a; color: #aacc6a; }
+.cell-star { background: #3a2a0a; color: #cc9933; }
+.side-card { background: #1a1a1a; border: 0.5px solid #222; border-radius: 8px; padding: 8px 10px; }
+.bar-row { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
+.bar-lbl { font-size: 9px; color: #555; width: 22px; flex-shrink: 0; }
+.bar-track { flex: 1; height: 3px; background: #222; border-radius: 2px; }
+.bar-fill { height: 3px; background: #555; border-radius: 2px; }
+.bar-val { font-size: 9px; color: #444; width: 20px; text-align: right; flex-shrink: 0; }
+.day-bars { display: flex; gap: 4px; align-items: flex-end; height: 32px; margin-top: 6px; }
+.day-bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; flex: 1; }
+.day-bar { width: 100%; background: #333; border-radius: 2px; }
+.day-lbl { font-size: 8px; color: #444; }
+.kw-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+.kw { font-size: 9px; padding: 2px 6px; border-radius: 99px; border: 0.5px solid #222; color: #888; }
+.kw.good { border-color: #2a4a2a; color: #5a9a5a; background: #111a11; }
+.kw.bad { border-color: #4a2a2a; color: #9a5a5a; background: #1a1111; }
+.empty { color: #444; font-size: 11px; padding: .75rem 0; text-align: center; }
+.tooltip { position: fixed; background: #2a2a2a; border: 0.5px solid #333; border-radius: 6px; padding: 6px 10px; font-size: 11px; color: #e8e8e8; pointer-events: none; z-index: 999; display: none; line-height: 1.5; max-width: 220px; }
+.sub-filter-badge { display: inline-block; font-size: 11px; padding: 2px 10px; border-radius: 99px; background: #1a2a3a; color: #5a9aaa; border: 0.5px solid #2a4a5a; margin-left: 8px; }
+</style>
+</head>
+<body>
+<div class="tooltip" id="tooltip"></div>
+<div id="app">
+  <header>
+    <div style="display:flex;align-items:center;gap:8px">
+      <h1>Reddit Promo</h1>
+      <span id="sub-badge" class="sub-filter-badge" style="display:none"></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="back-btn" id="back-btn" onclick="clearFilter()">← All subreddits</button>
+      <span id="status">Loading...</span>
+    </div>
+  </header>
+
+  <div class="trends">
+    <div class="trend-card">
+      <div class="label">Posts per week</div>
+      <div class="trend-inner"><svg id="spark-posts"></svg></div>
+      <div class="trend-x-labels" id="spark-posts-x"></div>
+    </div>
+    <div class="trend-card">
+      <div class="label">Total upvotes (3mo · 2wk rolling)</div>
+      <div class="trend-inner"><svg id="spark-up"></svg></div>
+      <div class="trend-x-labels" id="spark-up-x"></div>
+    </div>
+    <div class="trend-card">
+      <div class="label">Total views (3mo · 2wk rolling)</div>
+      <div class="trend-inner"><svg id="spark-vi"></svg></div>
+      <div class="trend-x-labels" id="spark-vi-x"></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="left-col">
+      <div class="matrix-wrap">
+        <div class="label" id="matrix-label">Subreddit activity by month (avg upvotes) — click a sub to drill down</div>
+        <div id="matrix"><div class="empty">No data yet.</div></div>
+      </div>
+    </div>
+    <div class="right-col">
+      <div class="side-card">
+        <div class="label">Hour of day (avg upvotes)</div>
+        <div id="hours"><div class="empty">No data.</div></div>
+        <div class="label" style="margin-top:10px">Day of week (avg upvotes)</div>
+        <div class="day-bars" id="days"></div>
+        <div class="label" style="margin-top:12px">Keywords <span style="color:#333;font-size:8px">3+ uses</span></div>
+        <div id="keywords" style="margin-top:4px"><div class="empty">Not enough data.</div></div>
+        <div class="label" style="margin-top:10px">Emojis <span style="color:#333;font-size:8px">2+ uses</span></div>
+        <div id="emojis" style="margin-top:4px"><div class="empty">Not enough data.</div></div>
+      </div>
+      <div class="side-card">
+        <div class="label" id="top5-label">Top 5 posts all time</div>
+        <div id="standout"><div class="empty">No data yet.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.getElementById('status').textContent = 'JS running...';
+
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8uQbcMgMda1qjeGCrU7frdIXjjPhumy3coHvalSBj42Pu6FwvAMY00YcWTf3l34FjvyOtnXNFzAp8/pub?gid=1325102424&single=true&output=csv';
+const CAP_UP = 50, CAP_VI = 10000;
+const STOPWORDS = new Set(['the','a','an','and','or','to','of','in','is','it','i','my','me','you','your','for','on','at','with','this','that','be','as','so','but','if','do','not','are','have','was','he','she','they','we','can','just','its','from','by','has','had','will','more','get','got','like','about','up','out','all','her','his','him','am','no','yes','one','what','when','how','dont','im','start','now']);
+
+let allRows = [];
+let activeFilter = null;
+
+const tip = document.getElementById('tooltip');
+function showTip(e, html) { tip.innerHTML = html; tip.style.display = 'block'; moveTip(e); }
+function moveTip(e) { const x=e.clientX+12,y=e.clientY+12; tip.style.left=Math.min(x,window.innerWidth-240)+'px'; tip.style.top=Math.min(y,window.innerHeight-80)+'px'; }
+function hideTip() { tip.style.display='none'; }
+document.addEventListener('mousemove', e => { if(tip.style.display==='block') moveTip(e); });
+
+function filterBySub(sub) {
+  activeFilter = sub;
+  document.getElementById('back-btn').style.display = 'block';
+  document.getElementById('sub-badge').style.display = 'inline-block';
+  document.getElementById('sub-badge').textContent = sub;
+  document.getElementById('matrix-label').textContent = 'Subreddit activity by month — click a sub to drill down';
+  document.getElementById('top5-label').textContent = 'Top 5 posts — ' + sub;
+  render(allRows, sub);
+}
+
+function clearFilter() {
+  activeFilter = null;
+  document.getElementById('back-btn').style.display = 'none';
+  document.getElementById('sub-badge').style.display = 'none';
+  document.getElementById('top5-label').textContent = 'Top 5 posts all time';
+  render(allRows, null);
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,'').toLowerCase());
+  return lines.slice(1).map(line => {
+    const vals = []; let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      if (line[i] === '"') { inQ = !inQ; }
+      else if (line[i] === ',' && !inQ) { vals.push(cur.trim()); cur = ''; }
+      else { cur += line[i]; }
+    }
+    vals.push(cur.trim());
+    const obj = {};
+    headers.forEach((h,i) => obj[h] = (vals[i]||'').replace(/^"|"$/g,'').trim());
+    return obj;
+  }).filter(r => r['date'] || r['subreddit']);
+}
+
+function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
+
+function parseDate(d) {
+  if (!d) return null;
+  try {
+    const p = d.trim().split('/');
+    if (p.length === 3) {
+      let [m,day,yr] = p; yr=yr.trim(); m=m.trim(); day=day.trim();
+      if (yr.length===2) yr='20'+yr;
+      const dt = new Date(parseInt(yr),parseInt(m)-1,parseInt(day));
+      return isNaN(dt.getTime()) ? null : dt;
+    }
+    const dt = new Date(d);
+    return isNaN(dt.getTime()) ? null : dt;
+  } catch(e) { return null; }
+}
+
+function getWeekKey(d) {
+  const dt = new Date(d); const day = dt.getDay();
+  dt.setDate(dt.getDate() - day + (day===0?-6:1));
+  return dt.toISOString().split('T')[0];
+}
+
+function fmtWeek(wk) { const d = new Date(wk+'T00:00:00'); return (d.getMonth()+1)+'/'+(d.getDate()); }
+function fmtNum(n) { if (n >= 1000) return (n/1000).toFixed(1)+'k'; return String(Math.round(n)); }
+function fmtMonth(mk) { const [yr,mo]=mk.split('-'); return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(mo)-1]+' '+yr.slice(2); }
+
+function rollingAvg(arr, window) {
+  return arr.map((v,i) => { const s=arr.slice(Math.max(0,i-window+1),i+1); return Math.round(s.reduce((a,b)=>a+b,0)/s.length); });
+}
+
+function sparkline(svgId, xLabelId, values, dates, color) {
+  const svg = document.getElementById(svgId);
+  const xEl = document.getElementById(xLabelId);
+  if (!values.length || values.every(v=>v===0)) { svg.innerHTML='<text x="50%" y="50%" text-anchor="middle" fill="#333" font-size="9">no data</text>'; if(xEl) xEl.innerHTML=''; return; }
+  const W=svg.clientWidth||220, H=110, padL=32, padR=6, padT=8, padB=6;
+  const min=Math.min(...values), max=Math.max(...values);
+  const range=max-min||1; const mid=(max+min)/2;
+  const pts=values.map((v,i)=>{
+    const x=padL+(i/(values.length-1||1))*(W-padL-padR);
+    const y=padT+((max-v)/range)*(H-padT-padB);
+    return [Math.round(x),Math.round(y)];
+  });
+  const trend=values[values.length-1]>=values[0];
+  const lc=color||(trend?'#5a9a5a':'#9a5a5a');
+  const yLabels=[[max,padT],[mid,padT+(H-padT-padB)/2],[min,H-padB]].map(([v,y])=>
+    `<text x="${padL-4}" y="${y+3}" text-anchor="end" fill="#444" font-size="8">${fmtNum(v)}</text>`).join('');
+  const yAxis=`<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${H-padB}" stroke="#222" stroke-width="0.5"/>`;
+  const grid=[0,0.5,1].map(p=>{const y=padT+p*(H-padT-padB); return `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="#1f1f1f" stroke-width="0.5"/>`;}).join('');
+  const dots=values.map((v,i)=>`<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="5" fill="transparent" stroke="none" style="cursor:pointer" onmouseenter="showTip(event,'${dates&&dates[i]?'<b>Week of '+fmtWeek(dates[i])+'</b><br>':''}'+'Value: ${fmtNum(v)}')" onmouseleave="hideTip()"/>`).join('');
+  svg.innerHTML=grid+yAxis+yLabels+`<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="${lc}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="2.5" fill="${lc}"/>`+dots;
+  if (xEl&&dates&&dates.length) {
+    const step=Math.max(1,Math.ceil(dates.length/6));
+    xEl.innerHTML=dates.map((d,i)=>(i%step===0||i===dates.length-1)?`<span>${fmtWeek(d)}</span>`:'<span></span>').join('');
+  }
+}
+
+function render(rows, filterSub) {
+  const filtered = filterSub ? rows.filter(r=>r['subreddit']===filterSub) : rows;
+  document.getElementById('status').textContent = filtered.length + ' posts' + (filterSub?' · '+filterSub:'');
+
+  const now = new Date();
+  const threeMonthsAgo = new Date(now); threeMonthsAgo.setMonth(now.getMonth()-3);
+
+  // Sparklines
+  const weekMapAll={}, weekMap3mo={};
+  filtered.forEach(r => {
+    const d=parseDate(r['date']); if(!d) return;
+    const wk=getWeekKey(d);
+    if(!weekMapAll[wk]) weekMapAll[wk]={posts:0};
+    weekMapAll[wk].posts++;
+    if(d>=threeMonthsAgo) {
+      if(!weekMap3mo[wk]) weekMap3mo[wk]={upTotal:0,upCount:0,viTotal:0,viCount:0};
+      const u=num(r['upvotes']); if(u!==null){weekMap3mo[wk].upTotal+=Math.min(u,CAP_UP);weekMap3mo[wk].upCount++;}
+      const v=num(r['views']); if(v!==null){weekMap3mo[wk].viTotal+=Math.min(v,CAP_VI);weekMap3mo[wk].viCount++;}
+    }
+  });
+  const allWeeks=Object.keys(weekMapAll).sort();
+  const weeks3mo=Object.keys(weekMap3mo).sort();
+  setTimeout(()=>{
+    sparkline('spark-posts','spark-posts-x',allWeeks.map(w=>weekMapAll[w].posts),allWeeks);
+    sparkline('spark-up','spark-up-x',rollingAvg(weeks3mo.map(w=>weekMap3mo[w].upTotal),2),weeks3mo);
+    sparkline('spark-vi','spark-vi-x',rollingAvg(weeks3mo.map(w=>weekMap3mo[w].viTotal),2),weeks3mo);
+  },50);
+
+  // Matrix — always uses all rows for context, highlights selected
+  const allSubsRaw=[...new Set(rows.map(r=>r['subreddit']).filter(Boolean))];
+  const subAvg={};
+  allSubsRaw.forEach(s=>{
+    const subRows=rows.filter(r=>r['subreddit']===s&&num(r['upvotes'])!==null&&num(r['upvotes'])<CAP_UP);
+    subAvg[s]=subRows.length?subRows.reduce((a,r)=>a+num(r['upvotes']),0)/subRows.length:0;
+  });
+  const allSubs=allSubsRaw.sort((a,b)=>subAvg[b]-subAvg[a]);
+  const monthKeys=[...new Set(rows.map(r=>{const d=parseDate(r['date']);return d?d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'):null;}).filter(Boolean))].sort();
+  const matEl=document.getElementById('matrix');
+  if(!allSubs.length||!monthKeys.length){matEl.innerHTML='<div class="empty">Post data needed.</div>';}
+  else {
+    const perf={};
+    rows.forEach(r=>{
+      const d=parseDate(r['date']); if(!d) return;
+      const mk=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+      const k=r['subreddit']+'|||'+mk;
+      if(!perf[k]) perf[k]={total:0,upcount:0,posts:0};
+      perf[k].posts++;
+      const u=num(r['upvotes']); if(u!==null){perf[k].total+=Math.min(u,CAP_UP);perf[k].upcount++;}
+    });
+    const cellClass=(sub,mk)=>{
+      const k=sub+'|||'+mk; if(!perf[k]) return null;
+      if(!perf[k].upcount) return ['cell-low',perf[k].posts+'p'];
+      const avg=perf[k].total/perf[k].upcount;
+      if(avg>=40) return ['cell-star',Math.round(avg)];
+      if(avg>=20) return ['cell-high',Math.round(avg)];
+      if(avg>=10) return ['cell-mid',Math.round(avg)];
+      return ['cell-low',Math.round(avg)];
+    };
+    matEl.innerHTML='<table class="matrix-table"><thead><tr><th class="sub-col">Sub</th>'+monthKeys.map(mk=>'<th>'+fmtMonth(mk)+'</th>').join('')+'</tr></thead><tbody>'+
+      allSubs.map(s=>{
+        const isActive = filterSub===s;
+        const rowStyle = isActive ? 'background:#1f2a1f;' : '';
+        return '<tr style="'+rowStyle+'"><td class="sub-name" onclick="filterBySub(\''+s+'\')" onmouseenter="showTip(event,\'Click to drill down into <b>'+s+'</b>\')" onmouseleave="hideTip()">'+s+'</td>'+
+          monthKeys.map(mk=>{
+            const r=cellClass(s,mk);
+            const pk=s+'|||'+mk; const pd=perf[pk];
+            const tipStr=pd?'<b>'+s+'</b><br>'+fmtMonth(mk)+'<br>Posts: '+pd.posts+(pd.upcount?'<br>Avg upvotes: '+Math.round(pd.total/pd.upcount):''):'';
+            return r?'<td><span class="cell '+r[0]+'" onmouseenter="showTip(event,\''+tipStr+'\')" onmouseleave="hideTip()">'+r[1]+'</span></td>':
+              '<td><span class="cell cell-empty" onmouseenter="showTip(event,\''+s+' · '+fmtMonth(mk)+'<br>No posts\')" onmouseleave="hideTip()">—</span></td>';
+          }).join('')+'</tr>';
+      }).join('')+'</tbody></table>';
+  }
+
+  // Hours
+  const withUp=filtered.filter(r=>num(r['upvotes'])!==null&&num(r['upvotes'])<CAP_UP);
+  const byHour={};
+  withUp.filter(r=>r['hour']).forEach(r=>{const h=r['hour']; if(!byHour[h]) byHour[h]={total:0,count:0}; byHour[h].total+=num(r['upvotes']); byHour[h].count++;});
+  const hourEntries=Object.entries(byHour).map(([h,v])=>[h,Math.round(v.total/v.count)]).sort((a,b)=>parseInt(a[0])-parseInt(b[0]));
+  const hEl=document.getElementById('hours');
+  if(!hourEntries.length){hEl.innerHTML='<div class="empty" style="padding:.5rem 0">No data.</div>';}
+  else {
+    const max=Math.max(...hourEntries.map(e=>e[1]));
+    hEl.innerHTML=hourEntries.map(([h,avg])=>'<div class="bar-row" onmouseenter="showTip(event,\'<b>'+h+':00</b><br>Avg upvotes: '+avg+'<br>Posts: '+byHour[h].count+'\')" onmouseleave="hideTip()"><span class="bar-lbl">'+h+':00</span><div class="bar-track"><div class="bar-fill" style="width:'+Math.round((avg/max)*100)+'%"></div></div><span class="bar-val">'+avg+'</span></div>').join('');
+  }
+
+  // Days
+  const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const byDay={};
+  withUp.filter(r=>r['day of week']).forEach(r=>{const d=r['day of week'].slice(0,3); if(!byDay[d]) byDay[d]={total:0,count:0}; byDay[d].total+=num(r['upvotes']); byDay[d].count++;});
+  const dayVals=DAYS.map(d=>byDay[d]?Math.round(byDay[d].total/byDay[d].count):0);
+  const maxDay=Math.max(...dayVals,1);
+  document.getElementById('days').innerHTML=DAYS.map((d,i)=>'<div class="day-bar-wrap" onmouseenter="showTip(event,\'<b>'+d+'</b><br>Avg upvotes: '+dayVals[i]+'<br>Posts: '+(byDay[d]?byDay[d].count:0)+'\')" onmouseleave="hideTip()"><div class="day-bar" style="height:'+Math.max(2,Math.round((dayVals[i]/maxDay)*28))+'px"></div><span class="day-lbl">'+d[0]+'</span></div>').join('');
+
+  // Keywords
+  const overallAvg=withUp.length?withUp.reduce((a,r)=>a+num(r['upvotes']),0)/withUp.length:0;
+  const kwData={};
+  withUp.filter(r=>r['caption']).forEach(r=>{
+    r['caption'].toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(w=>w.length>2&&!STOPWORDS.has(w)).forEach(w=>{
+      if(!kwData[w]) kwData[w]={total:0,count:0}; kwData[w].total+=num(r['upvotes']); kwData[w].count++;
+    });
+  });
+  const kwEntries=Object.entries(kwData).filter(([,v])=>v.count>=3).map(([w,v])=>({w,avg:Math.round(v.total/v.count),count:v.count})).sort((a,b)=>b.avg-a.avg);
+  const kwEl=document.getElementById('keywords');
+  if(!kwEntries.length){kwEl.innerHTML='<div class="empty">3+ uses needed.</div>';}
+  else {
+    const good=kwEntries.filter(k=>k.avg>overallAvg).slice(0,8);
+    const bad=kwEntries.filter(k=>k.avg<=overallAvg).slice(-5);
+    kwEl.innerHTML='<div class="kw-grid">'+good.map(k=>'<span class="kw good" title="'+k.count+' posts · '+k.avg+' avg">'+k.w+' <span style="opacity:.6">'+k.avg+'</span></span>').join('')+bad.map(k=>'<span class="kw bad" title="'+k.count+' posts · '+k.avg+' avg">'+k.w+' <span style="opacity:.6">'+k.avg+'</span></span>').join('')+'</div>';
+  }
+
+  // Emojis
+  const emojiRe=/\p{Emoji_Presentation}|\p{Extended_Pictographic}/gu;
+  const emData={};
+  withUp.filter(r=>r['caption']).forEach(r=>{
+    [...new Set(r['caption'].match(emojiRe)||[])].forEach(e=>{if(!emData[e]) emData[e]={total:0,count:0}; emData[e].total+=num(r['upvotes']); emData[e].count++;});
+  });
+  const emEntries=Object.entries(emData).filter(([,v])=>v.count>=2).map(([e,v])=>({e,avg:Math.round(v.total/v.count),count:v.count})).sort((a,b)=>b.avg-a.avg);
+  const emEl=document.getElementById('emojis');
+  if(!emEntries.length){emEl.innerHTML='<div class="empty">2+ uses needed.</div>';}
+  else{emEl.innerHTML='<div class="kw-grid">'+emEntries.map(k=>'<span class="kw '+(k.avg>overallAvg?'good':'bad')+'" title="'+k.count+' posts · '+k.avg+' avg">'+k.e+' <span style="opacity:.6">'+k.avg+'</span></span>').join('')+'</div>';}
+
+  // Top 5
+  const top5=[...filtered].filter(r=>num(r['upvotes'])!==null).sort((a,b)=>num(b['upvotes'])-num(a['upvotes'])).slice(0,5);
+  const stEl=document.getElementById('standout');
+  if(!top5.length){stEl.innerHTML='<div class="empty">No data yet.</div>';}
+  else {
+    stEl.innerHTML=top5.map((r,i)=>{
+      const u=num(r['upvotes']);
+      const color=u>=40?'#cc9933':u>=20?'#aacc6a':'#7aaa4a';
+      const link=r['post link']?'<a href="'+r['post link']+'" target="_blank" style="color:#5a7aaa;font-size:10px;text-decoration:none">↗</a>':'';
+      return '<div style="padding:5px 0;border-bottom:0.5px solid #1f1f1f'+(i===top5.length-1?';border-bottom:none':'')+'">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center">'
+        +'<span style="font-size:11px;color:#888;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:70%">'+r['subreddit']+'</span>'
+        +'<span style="font-size:12px;font-weight:500;color:'+color+';flex-shrink:0">'+u+' '+link+'</span>'
+        +'</div>'
+        +'<div style="display:flex;justify-content:space-between">'
+        +'<div style="font-size:10px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:75%" title="'+(r['clip title']||r['caption']||'')+'">'+(r['clip title']||r['caption']||'—')+'</div>'
+        +'<div style="font-size:10px;color:#444;flex-shrink:0;margin-left:6px">'+r['date']+'</div>'
+        +'</div></div>';
+    }).join('');
+  }
+}
+
+async function load() {
+  try {
+    const res = await fetch(CSV_URL);
+    if (!res.ok) { document.getElementById('status').textContent = 'HTTP ' + res.status; return; }
+    const text = await res.text();
+    allRows = parseCSV(text);
+    if (!allRows.length) { document.getElementById('status').textContent = 'No rows found'; return; }
+    render(allRows, activeFilter);
+  } catch(e) {
+    document.getElementById('status').textContent = 'Error: ' + e.message;
+  }
+}
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>
