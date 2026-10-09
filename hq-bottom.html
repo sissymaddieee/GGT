@@ -555,7 +555,7 @@
                         <span id="bmCount">0</span> total | <span id="bmMonths">0</span> months
                     </div>
                     <div style="display: flex; gap: 0.5rem; margin-bottom: 0.6rem;">
-                        <input type="text" id="bmSearch" placeholder="Search a name or #month #year (#october #2026)" style="flex: 1; min-width: 0; padding: 0.5rem; border: 2px solid #FF69B4; border-radius: 8px; font-family: 'Quicksand'; font-size: 0.9rem;">
+                        <input type="text" id="bmSearch" placeholder="Search a name, month or year (oct, 2026)" style="flex: 1; min-width: 0; padding: 0.5rem; border: 2px solid #FF69B4; border-radius: 8px; font-family: 'Quicksand'; font-size: 0.9rem;">
                     </div>
                     <div id="blackmailList" class="coverflow-wrap"></div>
                 </div>
@@ -569,11 +569,9 @@
                     </div>
                     
                     <div style="display: flex; gap: 0.5rem; margin-bottom: 0.6rem; flex-wrap: wrap;">
-                        <input type="text" id="clipSearch" placeholder="Search a name or #hashtag (#sissy #fav #incomplete)" style="flex: 1; min-width: 200px; padding: 0.5rem; border: 2px solid #FF69B4; border-radius: 8px; font-family: 'Quicksand'; font-size: 0.9rem;">
-                        <select id="sortBy" style="padding: 0.5rem; border: 2px solid #FF69B4; border-radius: 8px; font-family: 'Quicksand'; font-size: 0.9rem;">
-                            <option value="title">Sort: A-Z</option>
-                            <option value="clicks">Sort: Most Clicked</option>
-                        </select>
+                        <input type="text" id="clipSearch" placeholder="Search a name or #hashtag (#sissy #fav #incomplete)" style="flex: 1; min-width: 140px; padding: 0.5rem; border: 2px solid #FF69B4; border-radius: 8px; font-family: 'Quicksand'; font-size: 0.9rem;">
+                        <input type="text" id="clipJump" list="clipJumpList" placeholder="🎬 Go to clip ▾" autocomplete="off" style="flex: 1; min-width: 140px; padding: 0.5rem; border: 2px solid #FF69B4; border-radius: 8px; font-family: 'Quicksand'; font-size: 0.9rem;">
+                        <datalist id="clipJumpList"></datalist>
                     </div>
 
                     
@@ -641,7 +639,25 @@
                 document.getElementById('categoryCount').textContent = categories.size;
                 
                 document.getElementById('clipSearch').addEventListener('input', filterAndRenderLibrary);
-                document.getElementById('sortBy').addEventListener('change', filterAndRenderLibrary);
+                const jump = document.getElementById('clipJump');
+                document.getElementById('clipJumpList').innerHTML = [...clips]
+                    .sort((a, b) => a.title.localeCompare(b.title))
+                    .map(c => `<option value="${escapeHTML(c.title)}" label="${escapeHTML(c.tags.map(t => (TAG_DOTS[getTagClass(t)] || '⚪') + ' ' + t).join('   '))}"></option>`).join('');
+                const tryJump = () => {
+                    const clip = clips.find(c => c.title.toLowerCase() === jump.value.trim().toLowerCase());
+                    if (!clip) return;
+                    jumpToClip(clip.title);
+                    jump.value = '';
+                    jump.blur();
+                };
+                jump.addEventListener('input', tryJump);
+                jump.addEventListener('change', tryJump);
+                jump.addEventListener('keydown', e => {
+                    if (e.key !== 'Enter') return;
+                    const q = jump.value.trim().toLowerCase();
+                    const match = clips.find(c => c.title.toLowerCase().startsWith(q)) || clips.find(c => c.title.toLowerCase().includes(q));
+                    if (match) { jump.value = match.title; tryJump(); }
+                });
                 
                 document.querySelectorAll('.tag-filter-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
@@ -689,7 +705,6 @@
 
         function filterAndRenderLibrary() {
             const query = document.getElementById('clipSearch').value.toLowerCase().trim();
-            const sortBy = document.getElementById('sortBy').value;
             const words = query.split(/\s+/).filter(Boolean);
             const hashtags = words.filter(w => w.startsWith('#') && w.length > 1).map(w => w.slice(1).replace(/[^a-z0-9]/g, ''));
             const text = words.filter(w => !w.startsWith('#')).join(' ');
@@ -708,11 +723,7 @@
                 return matchesText && matchesTags;
             });
 
-            if (sortBy === 'clicks') {
-                filtered.sort((a, b) => (clipStats[b.title]?.clicks || 0) - (clipStats[a.title]?.clicks || 0));
-            } else {
-                filtered.sort((a, b) => a.title.localeCompare(b.title));
-            }
+            filtered.sort((a, b) => a.title.localeCompare(b.title));
 
             renderLibrary(filtered);
         }
@@ -723,6 +734,11 @@
             if (!box.value.toLowerCase().split(/\s+/).includes(h)) box.value = (box.value.trim() + ' ' + h).trim();
             filterAndRenderLibrary();
         }
+
+        const TAG_DOTS = {
+            encouragedbi: '🔴', sissy: '🩷', gooning: '🟣', cei: '🟠',
+            throat: '🟥', chastity: '🟢', anal: '🟧', obedience: '🔵', other: '⚪'
+        };
 
         const TAG_COLORS = {
             encouragedbi: '#FF1744', sissy: '#FF69B4', gooning: '#9C27B0', cei: '#FF6F00',
@@ -834,6 +850,16 @@
             layoutCoverflow();
         }
 
+        // Spins the cover flow to a clip; clears the search first if it's hidden by it
+        function jumpToClip(title) {
+            if (!cfClips.some(c => c.title === title)) {
+                document.getElementById('clipSearch').value = '';
+                filterAndRenderLibrary();
+            }
+            const i = cfClips.findIndex(c => c.title === title);
+            if (i >= 0) { setCoverIndex(i); document.getElementById('coverflow').focus(); }
+        }
+
         function setCoverIndex(i) {
             const n = Math.max(0, Math.min(cfClips.length - 1, i));
             if (n === cfIndex) return;
@@ -935,11 +961,11 @@
                     }
                 });
 
-                // Newest first
+                // Oldest on the left, newest on the right
                 bmItems.sort((a, b) =>
-                    (parseInt(b.year) - parseInt(a.year)) ||
-                    (MONTHS.indexOf(b.month) - MONTHS.indexOf(a.month)) ||
-                    (b.order - a.order));
+                    (parseInt(a.year) - parseInt(b.year)) ||
+                    (MONTHS.indexOf(a.month) - MONTHS.indexOf(b.month)) ||
+                    (a.order - b.order));
 
                 document.getElementById('bmCount').textContent = bmItems.length;
                 document.getElementById('bmMonths').textContent = months.size;
@@ -959,7 +985,8 @@
             const text = words.filter(w => !w.startsWith('#')).join(' ');
             const shown = bmItems.filter(item => {
                 const m = item.month.toLowerCase();
-                const matchesText = !text || item.title.toLowerCase().includes(text);
+                const matchesText = !text || text.split(' ').every(w =>
+                    item.title.toLowerCase().includes(w) || m.startsWith(w) || item.year.startsWith(w));
                 const matchesTags = hashtags.every(h => m.startsWith(h) || item.year.startsWith(h));
                 return matchesText && matchesTags;
             });
@@ -968,8 +995,7 @@
 
         function addBmHashtag(tag) {
             const box = document.getElementById('bmSearch');
-            const h = '#' + tag;
-            if (!box.value.toLowerCase().split(/\s+/).includes(h)) box.value = (box.value.trim() + ' ' + h).trim();
+            if (!box.value.toLowerCase().split(/\s+/).includes(tag)) box.value = (box.value.trim() + ' ' + tag).trim();
             filterBlackmail();
         }
 
@@ -1055,7 +1081,7 @@
             const prev = bmShown[bmIndex];
             bmShown = items;
             const keep = items.indexOf(prev);
-            bmIndex = keep >= 0 ? keep : 0;
+            bmIndex = keep >= 0 ? keep : items.length - 1; // start on the most recent
 
             if (!items.length) {
                 list.innerHTML = '<div class="cf-empty">Nothing matches.</div>';
@@ -1135,7 +1161,7 @@
             const tags = [item.month.toLowerCase(), item.year];
             document.getElementById('bmInfo').innerHTML = `
                 <p class="cf-title">${escapeHTML(item.title)}</p>
-                <div class="cf-meta">${tags.map(t => `<span class="tag-badge hashtag sissy" data-tag="${escapeHTML(t)}">#${escapeHTML(t)}</span>`).join('')}</div>
+                <div class="cf-meta">${tags.map(t => `<span class="tag-badge hashtag sissy" data-tag="${escapeHTML(t)}">${escapeHTML(t)}</span>`).join('')}</div>
                 <a href="${item.link}" class="clip-link" target="_blank" rel="noopener" id="bmView">View</a>
                 <div class="cf-count">${bmIndex + 1} / ${bmShown.length}</div>
             `;
