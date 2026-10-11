@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Girl Training HQ - Wardrobe 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --hot-pink: #FF69B4;
+            --soft-pink: #FFB6D9;
+            --baby-pink: #FFC9E3;
+        }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #FFE5F0 0%, #FFB6D9 50%, #FF94C8 100%);
+            padding: 1rem;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '✨';
+            position: fixed;
+            top: 10%;
+            left: 5%;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: '💖';
+            position: fixed;
+            top: 20%;
+            right: 8%;
+            font-size: 2.5rem;
+            opacity: 0.3;
+            animation: float 7s ease-in-out infinite 1s;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .section {
+            background: white;
+            border: 3px solid var(--hot-pink);
+            border-radius: 15px;
+            padding: 0.8rem;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+            margin-bottom: 0.6rem;
+        }
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.3rem;
+            color: var(--hot-pink);
+            margin-bottom: 0.4rem;
+            text-align: center;
+        }
+        .row-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
+        }
+        .clothing-item {
+            width: 100%;
+            aspect-ratio: 1;
+            border: 2px solid var(--hot-pink);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-size: cover;
+            background-position: center;
+        }
+        .clothing-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        }
+        .clothing-item.selected {
+            border: 3px solid var(--hot-pink);
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+        }
+        .outfit-display {
+            background: rgba(255, 182, 217, 0.1);
+            border: 2px solid var(--hot-pink);
+            border-radius: 10px;
+            padding: 0.6rem;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #333;
+        }
+        .outfit-display div {
+            margin-bottom: 0.3rem;
+            word-break: break-word;
+        }
+        .divider {
+            height: 3px;
+            background: white;
+            margin: 1rem 0;
+            border-radius: 10px;
+        }
+        .bow {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 1rem;
+            opacity: 0.5;
+        }
+        .folders { display: flex; gap: 0.35rem; flex-wrap: wrap; justify-content: center; margin-bottom: 0.4rem; }
+        .folder {
+            border: 2px solid var(--hot-pink); background: white; color: var(--hot-pink);
+            border-radius: 10px 10px 4px 4px; padding: 0.35rem 0.7rem;
+            font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.2s;
+        }
+        .folder:hover { background: var(--baby-pink); }
+        .folder.active { background: var(--hot-pink); color: white; }
+        .folder .n { opacity: 0.7; font-weight: 600; margin-left: 0.2rem; }
+        .coverflow {
+            position: relative; height: 300px; perspective: 900px; overflow: hidden;
+            outline: none; user-select: none; touch-action: pan-y;
+        }
+        .cf-item {
+            position: absolute; top: 24px; left: 50%;
+            width: 220px; height: 220px; margin-left: -110px;
+            border-radius: 10px; cursor: pointer;
+            background-color: white;
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+            border: 2px solid var(--soft-pink);
+            transition: transform 0.45s cubic-bezier(.2,.8,.2,1), opacity 0.45s, filter 0.45s;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+            -webkit-box-reflect: below 4px linear-gradient(transparent 65%, rgba(255,255,255,0.3));
+        }
+        .cf-item.center { border-color: var(--hot-pink); box-shadow: 0 14px 30px rgba(255,105,180,0.5); }
+        .cf-arrow {
+            position: absolute; top: 118px; z-index: 500;
+            width: 34px; height: 34px; border-radius: 50%; border: none;
+            background: rgba(255,255,255,0.95); color: var(--hot-pink);
+            font-size: 1.2rem; font-weight: 700; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .cf-arrow.left { left: 4px; } .cf-arrow.right { right: 4px; }
+        .cf-slider { width: 100%; accent-color: var(--hot-pink); margin-top: 0.3rem; }
+        .cf-info { text-align: center; margin-top: 0.3rem; font-weight: 700; color: var(--hot-pink); font-size: 0.9rem; }
+        .cf-empty { text-align: center; color: var(--hot-pink); padding: 4rem 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- CLOSET -->
+        <div class="section">
+            <div class="section-title">👗 Closet</div>
+            <div class="folders" id="folders"></div>
+            <div class="coverflow" id="closetFlow" tabindex="0">
+                <button class="cf-arrow left" id="cPrev" aria-label="Previous">‹</button>
+                <button class="cf-arrow right" id="cNext" aria-label="Next">›</button>
+            </div>
+            <input type="range" class="cf-slider" id="cSlider" min="0" max="0" value="0">
+            <div class="cf-info" id="cInfo">Loading closet...</div>
+        </div>
+
+    </div>
+
+    <script>
+        const BASE = 'https://sissymaddieee.github.io/GGT/wardrobe';
+        const FOLDERS = [
+            { key: 'dresses', label: '👗 Outfits' },
+            { key: 'tops', label: '👚 Tops' },
+            { key: 'skirts', label: '👖 Bottoms' },
+            { key: 'heels', label: '👠 Shoes' },
+            { key: 'accessories', label: '🎀 Accessories' }
+        ];
+        const MAX_PER_FOLDER = 30;
+        const closet = {};
+        let currentFolder = 'dresses';
+        let cIndex = 0;
+
+        // Finds every image that exists in a folder (category_1.png, category_2.png, ...)
+        function loadFolder(key) {
+            const prefix = key.replace('-', '_');
+            const checks = [];
+            for (let i = 1; i <= MAX_PER_FOLDER; i++) {
+                const url = `${BASE}/${key}/${prefix}_${i}.png`;
+                checks.push(new Promise(resolve => {
+                    const img = new Image();
+                    img.onload = () => resolve(url);
+                    img.onerror = () => resolve(null);
+                    img.src = url;
+                }));
+            }
+            return Promise.all(checks).then(urls => { closet[key] = urls.filter(Boolean); });
+        }
+
+        function renderFolders() {
+            document.getElementById('folders').innerHTML = FOLDERS.map(f => `
+                <button class="folder ${f.key === currentFolder ? 'active' : ''}" data-key="${f.key}">
+                    ${f.label}<span class="n">${closet[f.key] ? closet[f.key].length : ''}</span>
+                </button>`).join('');
+            document.querySelectorAll('.folder').forEach(btn => btn.onclick = () => openFolder(btn.dataset.key));
+        }
+
+        function openFolder(key) {
+            currentFolder = key;
+            cIndex = 0;
+            renderFolders();
+            renderCloset();
+        }
+
+        function renderCloset() {
+            const flow = document.getElementById('closetFlow');
+            flow.querySelectorAll('.cf-item, .cf-empty').forEach(el => el.remove());
+            const items = closet[currentFolder] || [];
+            const slider = document.getElementById('cSlider');
+            slider.max = Math.max(0, items.length - 1);
+            slider.style.visibility = items.length > 1 ? 'visible' : 'hidden';
+
+            if (!items.length) {
+                flow.insertAdjacentHTML('beforeend', '<div class="cf-empty">Nothing in this folder yet.</div>');
+                document.getElementById('cInfo').textContent = '';
+                return;
+            }
+
+            items.forEach((url, i) => {
+                const el = document.createElement('div');
+                el.className = 'cf-item';
+                el.style.backgroundImage = `url('${url}')`;
+                el.onclick = () => {
+                    if (i === cIndex) window.open(url, '_blank', 'noopener');
+                    else setClosetIndex(i);
+                };
+                flow.appendChild(el);
+            });
+            layoutCloset();
+        }
+
+        function setClosetIndex(i) {
+            const items = closet[currentFolder] || [];
+            const n = Math.max(0, Math.min(items.length - 1, i));
+            if (n === cIndex) return;
+            cIndex = n;
+            layoutCloset();
+        }
+
+        function layoutCloset() {
+            const items = document.querySelectorAll('#closetFlow .cf-item');
+            items.forEach((item, i) => {
+                const off = i - cIndex;
+                const abs = Math.abs(off);
+                item.classList.toggle('center', off === 0);
+                item.style.opacity = abs > 6 ? 0 : 1;
+                item.style.pointerEvents = abs > 6 ? 'none' : 'auto';
+                const x = off === 0 ? 0 : Math.sign(off) * (130 + (abs - 1) * 50);
+                const rot = off === 0 ? 0 : -Math.sign(off) * 55;
+                const z = off === 0 ? 60 : -40 - abs * 10;
+                item.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rot}deg)`;
+                item.style.zIndex = 100 - abs;
+                item.style.filter = off === 0 ? 'none' : `brightness(${Math.max(0.55, 0.9 - abs * 0.08)})`;
+            });
+            document.getElementById('cSlider').value = cIndex;
+            const label = FOLDERS.find(f => f.key === currentFolder).label.replace(/^\S+\s/, '');
+            document.getElementById('cInfo').textContent = `${label} · ${cIndex + 1} / ${items.length}`;
+        }
+
+        function setupControls() {
+            const flow = document.getElementById('closetFlow');
+            document.getElementById('cPrev').onclick = () => setClosetIndex(cIndex - 1);
+            document.getElementById('cNext').onclick = () => setClosetIndex(cIndex + 1);
+            document.getElementById('cSlider').oninput = e => setClosetIndex(+e.target.value);
+            flow.addEventListener('keydown', e => {
+                if (e.key === 'ArrowLeft') { setClosetIndex(cIndex - 1); e.preventDefault(); }
+                if (e.key === 'ArrowRight') { setClosetIndex(cIndex + 1); e.preventDefault(); }
+            });
+            let wheelLock = false;
+            flow.addEventListener('wheel', e => {
+                const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+                if (Math.abs(d) < 4) return;
+                e.preventDefault();
+                if (wheelLock) return;
+                wheelLock = true;
+                setClosetIndex(cIndex + (d > 0 ? 1 : -1));
+                setTimeout(() => wheelLock = false, 140);
+            }, { passive: false });
+            let startX = null;
+            flow.addEventListener('pointerdown', e => { startX = e.clientX; });
+            flow.addEventListener('pointerup', e => {
+                if (startX === null) return;
+                const dx = e.clientX - startX;
+                if (Math.abs(dx) > 30) setClosetIndex(cIndex - Math.round(dx / 60));
+                startX = null;
+            });
+        }
+
+        window.addEventListener('load', async () => {
+            setupControls();
+            renderFolders();
+            await loadFolder(currentFolder);
+            renderFolders();
+            renderCloset();
+            await Promise.all(FOLDERS.filter(f => f.key !== currentFolder).map(f => loadFolder(f.key)));
+            renderFolders();
+        });
+    </script>
+</body>
+</html>
