@@ -177,17 +177,17 @@
     <script>
         const BASE = 'https://sissymaddieee.github.io/GGT/wardrobe';
         const FOLDERS = [
+            { key: 'accessories', label: '🎀 Accessories' },
             { key: 'dresses', label: '👗 Outfits' },
             { key: 'tops', label: '👚 Tops' },
             { key: 'skirts', label: '👖 Bottoms' },
             { key: 'heels', label: '👠 Shoes' },
-            { key: 'accessories', label: '🎀 Accessories' }
         ];
         const MAX_PER_FOLDER = 30;
         const closet = {};
         let currentFolder = 'accessories';
         // Item shown first in a folder (folder key → item number)
-        const FIRST_ITEM = { accessories: 4 };
+        const FIRST_ITEM = { accessories: 1 };
         let cIndex = 0;
 
         // Finds every image that exists in a folder (category_1.png, category_2.png, ...)
