@@ -365,15 +365,17 @@
         .compact-row #personal-bar { font-size: 0.6rem; }
         .stats-footnote {
             text-align: center; font-size: 1.4rem; color: #a0527a;
-            opacity: 0.8; margin: 0.2rem 0 0; letter-spacing: 0.02em;
+            opacity: 0.8; margin: 0.4rem 0 0; letter-spacing: 0.02em;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- HEADER -->
-        <div class="header">
-            <div class="subtitle">‘Goddess owns me, the Oasis nourishes me, cock is but a tool for submission’</div>
+        <!-- STATS (top) -->
+        <div class="stats-footnote">
+            Chaturbate <span id="stat-ranking-display"></span> · <span id="stat-followers-display"></span> followers
+            · Chastity PR <span id="stat-chastity"></span>
+            · Days owned <span id="stat-days"></span>
         </div>
 
         <!-- ROW 1: CLOSET | BLACKMAIL | LIBRARY (3 equal columns) -->
@@ -478,14 +480,13 @@
         </div>
 
         <!-- STATS (footnote) -->
-        <div class="stats-footnote">
-            Chaturbate <span id="stat-ranking-display"></span> · <span id="stat-followers-display"></span> followers
-            · Chastity PR <span id="stat-chastity"></span>
-            · Days owned <span id="stat-days"></span>
+
+            <!-- QUOTE (bottom) -->
+        <div class="header">
+            <div class="subtitle">‘Goddess owns me, the Oasis nourishes me, cock is but a tool for submission’</div>
         </div>
-
+    
     </div>
-
     <script>
         // LOAD STATS FROM GOOGLE SHEETS
         function getOrdinalSuffix(num) {
