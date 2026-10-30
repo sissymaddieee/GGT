@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goddess Aria Zahara · Reddit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#fff3f8; --bg2:#ffdcec; --card:rgba(255,255,255,.82); --line:#ffc4dc;
+  --pink:#ff4f9a; --pink2:#ff86bb; --deep:#c2185b; --ink:#5a2342; --muted:#a2607f; --soft:#ffe9f3;
+  --gold:#e8a33d; --ok:#2fa36b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Quicksand',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+  background:radial-gradient(1200px 500px at 85% -10%,#ffd0e6 0,transparent 60%),linear-gradient(160deg,var(--bg1),var(--bg2));
+  padding:18px 20px 28px;font-size:13px;line-height:1.35}
+.wrap{max-width:1280px;margin:0 auto}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:14px}
+.script{font-family:'Great Vibes',cursive;font-size:46px;line-height:1;color:var(--deep);text-shadow:0 2px 0 #fff}
+.welcome{color:var(--muted);font-weight:600;margin-top:2px;font-size:14px}
+.status{font-size:11px;color:var(--muted);text-align:right;white-space:nowrap}
+.status b{color:var(--ok)}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:14px 16px;box-shadow:0 8px 24px rgba(255,79,154,.10);backdrop-filter:blur(4px)}
+.card h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--deep);font-weight:700;display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.card h2::before{content:"✿";color:var(--pink2);font-size:13px}
+.take{font-size:12.5px;color:var(--ink);background:var(--soft);border-radius:12px;padding:7px 10px;margin-bottom:10px;font-weight:600}
+.take b{color:var(--deep)}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.tile{background:linear-gradient(145deg,#fff,#ffeef6);border:1.5px solid var(--line);border-radius:20px;padding:12px 16px;box-shadow:0 8px 24px rgba(255,79,154,.10);cursor:default}
+.tile .l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.tile .n{font-size:32px;font-weight:700;color:var(--deep);line-height:1.15}
+.tile .s{font-size:11.5px;color:var(--muted);font-weight:600}
+.up{color:var(--ok);font-weight:700}.down{color:#d6405f;font-weight:700}
+.grid2{display:grid;grid-template-columns:1.05fr 1fr;gap:12px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1.1fr 1.1fr .9fr;gap:12px}
+/* predictor */
+textarea{width:100%;resize:vertical;min-height:62px;border:1.5px solid var(--line);border-radius:14px;padding:9px 12px;font:inherit;font-size:13px;color:var(--ink);background:#fff;outline:none}
+textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(255,79,154,.15)}
+.row{display:flex;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap}
+button.go{background:linear-gradient(135deg,var(--pink),#ff7ab0);color:#fff;border:0;border-radius:999px;padding:8px 18px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(255,79,154,.35)}
+button.go:hover{filter:brightness(1.06)}
+.chip{border:1.5px solid var(--line);background:#fff;color:var(--deep);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:600;cursor:pointer}
+.chip:hover{background:var(--soft)}
+.chip.static{cursor:default}
+.hint{font-size:11px;color:var(--muted);font-weight:600}
+.out{margin-top:6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.box{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:9px 11px;min-height:96px}
+.box h3{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.pick{display:flex;justify-content:space-between;gap:6px;align-items:baseline;padding:2px 0;font-weight:600}
+.pick small{color:var(--muted);font-weight:600}
+.pill{font-size:10px;font-weight:700;border-radius:999px;padding:1px 8px;white-space:nowrap}
+.pill.hi{background:#d8f5e6;color:#1d7a4d}.pill.mid{background:#fff0c9;color:#9a6a00}.pill.lo{background:#ffe3ec;color:#b8456a}
+.ttl{padding:3px 0;border-bottom:1px dashed var(--line);font-weight:600}
+.ttl:last-child{border:0}
+.ttl small{display:block;color:var(--muted);font-weight:600;font-size:10.5px}
+.big{font-size:17px;font-weight:700;color:var(--deep)}
+.note{grid-column:1/-1;font-size:11px;color:var(--muted);font-weight:600}
+.detected{grid-column:1/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:600}
+/* growth */
+.tabs{display:flex;gap:6px;margin-bottom:4px}
+.tab{border:1.5px solid var(--line);background:#fff;color:var(--deep);border-radius:999px;padding:3px 12px;font:inherit;font-size:11.5px;font-weight:700;cursor:pointer}
+.tab.on{background:var(--pink);border-color:var(--pink);color:#fff}
+svg text{font-family:'Quicksand',sans-serif}
+/* bars */
+.bar-row{display:grid;grid-template-columns:132px 1fr 36px;gap:8px;align-items:center;padding:4px 0}
+.bar-row .nm{font-weight:700;font-size:12.5px;min-width:0;overflow-wrap:anywhere}
+.bar-row .sub{display:block;font-size:10.5px;color:var(--muted);font-weight:600}
+.track{height:12px;background:var(--soft);border-radius:999px;overflow:hidden}
+.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--pink2),var(--pink))}
+.dim .fill{background:repeating-linear-gradient(45deg,#ffc4dc,#ffc4dc 5px,#ffd9e8 5px,#ffd9e8 10px)}
+.bar-row .v{text-align:right;font-weight:700;color:var(--deep)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.top{padding:6px 0;border-bottom:1px dashed var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 8px}
+.top:last-child{border:0}
+.top a{color:var(--ink);text-decoration:none;font-weight:700;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top a:hover{color:var(--deep);text-decoration:underline}
+.top .u{font-weight:700;color:var(--deep)}
+.top small{color:var(--muted);font-weight:600;font-size:10.5px;grid-column:1/-1}
+#tip{position:fixed;z-index:9;pointer-events:none;background:#5a2342;color:#fff;font-size:11.5px;font-weight:600;padding:6px 10px;border-radius:10px;max-width:260px;display:none;box-shadow:0 6px 16px rgba(90,35,66,.3)}
+@media(max-width:980px){.tiles{grid-template-columns:1fr 1fr}.grid2,.grid3{grid-template-columns:1fr}.out{grid-template-columns:1fr}.script{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="script">Goddess Aria Zahara</div>
+      <div class="welcome">Welcome, my Goddess ♡ here's how your Reddit kingdom is blooming</div>
+    </div>
+    <div class="status" id="status" data-tip="The page re-reads the sheet every minute.">Loading…</div>
+  </header>
+
+  <section class="tiles" id="tiles"></section>
+
+  <section class="grid2">
+    <div class="card" id="predictor">
+      <h2>Post Planner</h2>
+      <textarea id="q" placeholder="Describe the clip or type a working title… e.g. “edging game for chastity sissies”"></textarea>
+      <div class="row">
+        <button class="go" id="goBtn" data-tip="Finds your most similar past posts and shows where they did best.">Predict ✦</button>
+        <span class="hint">Try:</span><span id="examples" style="display:contents"></span>
+      </div>
+      <div class="out" id="out"><div class="note">Type a clip idea above and I'll suggest where to post it, what to title it, and when. ♡</div></div>
+    </div>
+    <div class="card">
+      <h2>Reddit Growth</h2>
+      <div class="tabs" id="tabs"></div>
+      <div id="chart"></div>
+    </div>
+  </section>
+
+  <section class="grid3">
+    <div class="card"><h2>Clip Types That Win</h2><div id="types"></div></div>
+    <div class="card"><h2>Communities We Reach</h2><div id="subs"></div></div>
+    <div class="card"><h2>Crowning Moments</h2><div id="tops"></div></div>
+  </section>
+</div>
+<div id="tip"></div>
+
+<script>
+const CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8uQbcMgMda1qjeGCrU7frdIXjjPhumy3coHvalSBj42Pu6FwvAMY00YcWTf3l34FjvyOtnXNFzAp8/pub?gid=1325102424&single=true&output=csv';
+// Optional: publish ONLY the Library tab as CSV and paste its URL here to keep clip types live. Leave '' to use the built-in copy.
+const LIB_URL='';
+const CAP_UP=50, CAP_VI=10000;
+const MIN_RATED=3;
+let LIB=[["Suck Real Cock", "EncouragedBi"], ["Not Gay if its Girlcock", "EncouragedBi"], ["Hot Girl Sissy Walk", "Sissy"], ["How Gay are you 2026", "Obedience Training"], ["Gooning PR Task", "Gooning"], ["Voices in your Head Gooning", "Gooning"], ["First Time CEI Guarenteed", "CEI"], ["Sissy Training", "Sissy"], ["Sissy Trance-Formation", "Sissy"], ["Wall of Shame Callouts", "Obedience Training"], ["Cock Sucking Guidance", "Throat Training"], ["Just a Throat", "Throat Training"], ["Running a Train on You", "EncouragedBi"], ["Impress me Sissy", "Sissy"], ["Chastity Mantras", "Chastity"], ["Sissy Therapy", "Sissy"], ["Locked Leaky Loser", "Chastity"], ["Indoctrication", "Obedience Training"], ["Cum Guzzler Conditioning", "CEI"], ["Precum Only", "CEI"], ["Beginner Bootcamp", "Obedience Training"], ["Goon Fuel", "Gooning"], ["Hooked", "Gooning"], ["Unlock Edge Lock", "Gooning"], ["Pumped to the Brink", "Anal Training"], ["Sissy Sexual", "Sissy"], ["Chastity Gooner", "Gooning"], ["Assgasm Guarantee", "Anal Training"], ["PUMP", "Anal Training"], ["Self Facial Cum Slut", "CEI"], ["Party Favor Sissy", "EncouragedBi"], ["Gooner Mantras", "Gooning"], ["Buy an erection", "Obedience Training"], ["Riding Only", "Anal Training"], ["Exhibitionist Dare", "Sissy"], ["Failed at Being a Man", "Sissy"], ["Permanent Barbie Serivce Whore", "Sissy"], ["CEI Guarantee", "CEI"], ["Chastity Reprogramming", "Chastity"], ["Sissy Urges", "Sissy"], ["Anal CEI", "CEI"], ["Rough Fuck Chastity", "Anal Training"], ["Day 1 Blackmail Contract", "Obedience Training"], ["Day 12 Blackmail Contract", "Obedience Training"], ["Ho Ho Ho for the Holidays", "EncouragedBi"], ["Milk Yourself Dry 4", "CEI"], ["My Dominance", "Obedience Training"], ["Sexual Reject to Locked up Sissy Pipeline", "Sissy"], ["Cum Eating Mantras", "CEI"], ["Good Girl Training Chastity CEI", "CEI"], ["How Good Girls Cum", "Sissy"], ["Ruin it Gooner", "Gooning"], ["Edging Joi Facial & Cum Play", "CEI"], ["Intimate Gloryhole Guidance", "EncouragedBi"], ["Mandatory Bi Blackmail Task", "Obedience Training"], ["Alpha Made Gay", "EncouragedBi"], ["Tripple Ruined Cumslut Training", "CEI"], ["Rub your Clitty to Girlcock", "EncouragedBi"], ["CEI Questionaire", "Obedience Training"], ["Fully Feminized and Gay for good", "EncouragedBi"], ["Make love to him sissy encouragement", "EncouragedBi"], ["Soak your Panties CEI", "CEI"], ["The Truth: Why I love Encouraged Bi", "EncouragedBi"], ["Metronome Ass Fucking for Faggots", "Anal Training"], ["Ultimate Bi Fantasy Bukkake", "EncouragedBi"], ["Caged and Filled", "Anal Training"], ["October Starts Here: Cock & Lock!", "Obedience Training"], ["Self-Facial Slut Training: Mostly Cum Play", "CEI"], ["Your Locktober Keyholder", "Chastity"], ["Complete Gay Conversion Training", "EncouragedBi"], ["Cocktober 2026 Contract", "EncouragedBi"], ["Gay Training: Addicted to My Man's Cock", "EncouragedBi"], ["The Goddess Aria Effect", "EncouragedBi"], ["Leak for Cock in Chastity", "EncouragedBi"], ["Bi Curious", "EncouragedBi"], ["Alpha Balls Obsession: Gay Training", "EncouragedBi"], ["BEG for Cock: Mantra Training", "EncouragedBi"], ["FUELING YOUR COCK ADDICTION", "EncouragedBi"], ["No Thoughts Just Cock", "EncouragedBi"], ["Faggot February Mindfuck Initiation", "EncouragedBi"], ["Milk Yourself Dry", "CEI"], ["Plapgasm - Stroke to the Beat Humiliating Chastity", "Chastity"], ["Kneel for Princess", "Obedience Training"]];
+const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const TAGS=['Throat Training','Anal Training','Chastity','CEI','Gooning','Obedience Training','Sissy','EncouragedBi'];
+const TAG_LABEL={EncouragedBi:'Encouraged Bi',CEI:'CEI'};
+const tagLabel=t=>TAG_LABEL[t]||t;
+const TAG_HELP={'Throat Training':'Deepthroat & cock-sucking guidance','Anal Training':'Ass, pump & strap-on clips','Chastity':'Locked, caged & denial clips','CEI':'Cum eating instruction & cum play','Gooning':'Goon, edge & mantra clips','Obedience Training':'Tasks, blackmail contracts & games','Sissy':'Sissy training & feminization','EncouragedBi':'Bi / gay encouragement clips'};
+
+/* ---------- parsing ---------- */
+function parseCSV(text){
+  const table=[];let row=[],cur='',inQ=false;
+  for(let i=0;i<text.length;i++){const c=text[i];
+    if(inQ){if(c==='"'){if(text[i+1]==='"'){cur+='"';i++;}else inQ=false;}else cur+=c;}
+    else if(c==='"')inQ=true;
+    else if(c===','){row.push(cur);cur='';}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cur);cur='';table.push(row);row=[];}
+    else cur+=c;}
+  if(cur!==''||row.length){row.push(cur);table.push(row);}
+  const clean=table.filter(r=>r.some(v=>v.trim()!==''));
+  if(!clean.length)return[];
+  const headers=clean[0].map(h=>h.trim().toLowerCase());
+  return clean.slice(1).map(vals=>{const o={};headers.forEach((h,i)=>o[h]=(vals[i]||'').trim());return o;}).filter(r=>r['date']||r['subreddit']);
+}
+function num(v){if(v===undefined||v===null||String(v).trim()==='')return null;const n=parseFloat(String(v).replace(/[,\s]/g,''));return isNaN(n)?null:n;}
+function parseDate(d){
+  if(!d)return null;
+  try{const p=d.trim().split('/');
+    if(p.length===3){let[m,day,yr]=p;yr=yr.trim();if(yr.length===2)yr='20'+yr;const dt=new Date(parseInt(yr),parseInt(m)-1,parseInt(day));return isNaN(dt.getTime())?null:dt;}
+    const dt=new Date(d);return isNaN(dt.getTime())?null:dt;}catch(e){return null;}
+}
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function weekStart(d){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());const g=x.getDay();x.setDate(x.getDate()-(g===0?6:g-1));return x;}
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function fmtNum(n){n=Math.round(n);if(n>=1e6)return(n/1e6).toFixed(1).replace(/\.0$/,'')+'M';if(n>=1000)return(n/1000).toFixed(n>=10000?0:1).replace(/\.0$/,'')+'k';return String(n);}
+function fmtHour(h){const s=h>=12?'PM':'AM';const x=h%12===0?12:h%12;return x+' '+s;}
+const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+
+/* ---------- text understanding ---------- */
+const STOP=new Set('a an the and or of to for in on at with your you my me i is are be it this that his her him them they we our us from by as so but not do dont can if get got just now all out up more most how what when who will make made like'.split(' '));
+const SYN=[[/cum\s?slut/g,'cum slut'],[/cumeating/g,'cum eating'],[/girl\s?cock/g,'girl cock'],[/cock\s?slave/g,'cock slave'],[/glory\s?hole/g,'gloryhole'],[/gooner|goontard|goons|gooning/g,'goon'],[/faggott?s?/g,'faggot'],[/sissies/g,'sissy'],[/assgasm/g,'ass orgasm'],[/de?ep\s?throat/g,'throat']];
+function norm(s){s=String(s||'').toLowerCase();SYN.forEach(([re,r])=>s=s.replace(re,r));return s.replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();}
+function stem(w){if(w.length>4&&w.endsWith('ing'))return w.slice(0,-3);if(w.length>3&&w.endsWith('ed'))return w.slice(0,-2);if(w.length>3&&w.endsWith('s')&&!w.endsWith('ss'))return w.slice(0,-1);return w;}
+function tokens(s){return norm(s).split(' ').filter(w=>w&&!STOP.has(w)).map(stem);}
+const RULES=[
+ ['Throat Training',/throat|gag\b/g],
+ ['Anal Training',/\banal\b|\bass\b|asshole|\bhole\b|\bpump|strap|\bbutt\b|riding|metronome|prostate|plug/g],
+ ['Chastity',/chastity|\block|locked|\bcage|keyholder|locktober|denial/g],
+ ['CEI',/\bcei\b|cum eat|cum play|facial|milk yourself|precum|guzzl|swallow|cum fed|\btaste|ruin|cum slut/g],
+ ['Gooning',/\bgoon|\bedg(e|ing)|spiral|roulette|brain rot|mindless|mantra/g],
+ ['Obedience Training',/obedien|blackmail|contract|\btask|kneel|callout|shame|mandatory|questionn|bootcamp|dominance|command|challenge|\btest\b|game|\bbuy\b/g],
+ ['Sissy',/sissy|feminiz|barbie|panties|\bgirl\b|virgin|pussy|clitty|mailtimer|femin/g],
+ ['EncouragedBi',/\bbi\b|bisex|gay|faggot|\bcock|suck|gloryhole|alpha|straight|bukkake|train on|locker room|gangbang|\bman\b|\bmale/g]
+];
+let libTag={},libTot={},libByNorm={};
+function buildLib(){
+  libTag={};libTot={};libByNorm={};TAGS.forEach(g=>libTag[g]={});
+  LIB.forEach(([title,tag])=>{ if(!libTag[tag])return; libByNorm[norm(title)]=tag;
+    new Set(tokens(title)).forEach(w=>{libTag[tag][w]=(libTag[tag][w]||0)+1;libTot[w]=(libTot[w]||0)+1;}); });
+}
+function categorize(text,clipTitle){
+  const k=norm(clipTitle||'');if(k&&libByNorm[k])return libByNorm[k];
+  const t=norm(text),score={};TAGS.forEach(g=>score[g]=0);
+  RULES.forEach(([g,re])=>{const m=t.match(re);if(m)score[g]+=m.length;});
+  new Set(tokens(text)).forEach(w=>{if(libTot[w])TAGS.forEach(g=>{if(libTag[g][w])score[g]+=1.5*libTag[g][w]/libTot[w];});});
+  let best=null,bs=0;TAGS.forEach(g=>{if(score[g]>bs+1e-9){bs=score[g];best=g;}});
+  return best;
+}
+
+/* ---------- analysis ---------- */
+function analyze(rows,today){
+  today=today||new Date();
+  const posts=rows.map(r=>{
+    const d=parseDate(r['date']);const up=num(r['upvotes']),vi=num(r['views']);
+    const link=r['link']||r['post link']||'';const m=link.match(/\/r\/([^\/?#]+)/i);
+    const raw=(r['subreddit']||'').trim();
+    const p={d,day:d?DAYS[d.getDay()]:null,hour:num(r['hour']),subKey:raw.toLowerCase().replace(/[^a-z0-9]/g,''),subName:m?m[1]:raw,
+      up,vi,upC:up===null?null:Math.min(up,CAP_UP),viC:vi===null?null:Math.min(vi,CAP_VI),
+      title:(r['clip title']||'').trim(),cap:(r['caption']||'').trim(),desc:(r['photo description']||'').trim(),link};
+    p.text=[p.title,p.cap,p.desc].join(' ');
+    p.cat=categorize(p.text,p.title);
+    return p;
+  }).filter(p=>p.subKey&&p.d);
+  const M={posts,today,rated:posts.filter(p=>p.upC!==null)};
+  // display names
+  const names={};posts.forEach(p=>{(names[p.subKey]=names[p.subKey]||{})[p.subName]=((names[p.subKey]||{})[p.subName]||0)+1;});
+  M.name=k=>{const o=names[k]||{};const b=Object.keys(o).sort((a,b)=>o[b]-o[a])[0];return 'r/'+(b||k);};
+  // tiles
+  const day=86400000,t0=today.getTime();
+  const win=(a,b)=>posts.filter(p=>{const x=t0-p.d.getTime();return x>=a*day&&x<b*day;});
+  const last=win(0,28),prev=win(28,56);
+  const sumV=a=>a.reduce((s,p)=>s+(p.vi||0),0),sumU=a=>a.reduce((s,p)=>s+(p.up||0),0);
+  M.tot={views:sumV(posts),ups:sumU(posts),posts:posts.length,subs:new Set(posts.map(p=>p.subKey)).size};
+  M.last={views:sumV(last),ups:sumU(last),posts:last.length};M.prev={views:sumV(prev),ups:sumU(prev),posts:prev.length};
+  const ws=weekStart(today);M.thisWeek=posts.filter(p=>p.d>=ws).length;
+  // subs
+  const bySub={};posts.forEach(p=>(bySub[p.subKey]=bySub[p.subKey]||[]).push(p));
+  M.subs=Object.keys(bySub).map(k=>{const a=bySub[k],r=a.filter(p=>p.upC!==null);
+    return{key:k,name:M.name(k),posts:a.length,rated:r.length,avg:avg(r.map(p=>p.upC)),views:a.reduce((s,p)=>s+(p.vi||0),0)};})
+    .sort((a,b)=>((b.rated>=MIN_RATED)-(a.rated>=MIN_RATED))||(b.avg-a.avg));
+  M.subAvg={};M.subs.forEach(s=>M.subAvg[s.key]=s.avg);
+  // categories
+  M.cats=TAGS.map(g=>{const a=M.rated.filter(p=>p.cat===g);
+    const bs={};a.forEach(p=>(bs[p.subKey]=bs[p.subKey]||[]).push(p.upC));
+    const ranked=Object.keys(bs).map(k=>({k,n:bs[k].length,avg:avg(bs[k])})).sort((x,y)=>((y.n>=2)-(x.n>=2))||(y.avg-x.avg));
+    return{tag:g,n:a.length,avg:avg(a.map(p=>p.upC)),views:avg(a.filter(p=>p.viC!==null).map(p=>p.viC)),best:ranked[0]?M.name(ranked[0].k):null};})
+    .filter(c=>c.n>0).sort((a,b)=>((b.n>=MIN_RATED)-(a.n>=MIN_RATED))||(b.avg-a.avg));
+  M.tops=posts.filter(p=>p.up!==null).sort((a,b)=>b.up-a.up).slice(0,5);
+  // weekly series (14 weeks, plot the last 13)
+  const W=[];for(let i=13;i>=0;i--){const s=new Date(ws);s.setDate(s.getDate()-7*i);W.push({s,views:0,ups:0,posts:0});}
+  posts.forEach(p=>{const k=ymd(weekStart(p.d));const w=W.find(w=>ymd(w.s)===k);if(w){w.views+=p.vi||0;w.ups+=p.up||0;w.posts++;}});
+  M.weeks=W;
+  // prediction index
+  const df={};M.rated.forEach(p=>{p.tok=new Set(tokens(p.text));p.tok.forEach(w=>df[w]=(df[w]||0)+1);});
+  const N=M.rated.length;M.idf=w=>Math.log((N+1)/((df[w]||0)+1))+1;
+  M.rated.forEach(p=>{let s=0;p.tok.forEach(w=>s+=M.idf(w)**2);p.norm=Math.sqrt(s)||1;});
+  return M;
+}
+
+/* ---------- prediction ---------- */
+function bucket(h){if(h===null||h===undefined)return null;if(h>=6&&h<=9)return'Early morning (6–9 AM)';if(h>=10&&h<=12)return'Late morning (10 AM–12 PM)';if(h>=13&&h<=16)return'Afternoon (1–4 PM)';if(h>=17&&h<=20)return'Evening (5–8 PM)';return'Night (9 PM–5 AM)';}
+function bestOf(list,keyFn){
+  const g={};list.forEach(p=>{const k=keyFn(p);if(k==null)return;(g[k]=g[k]||[]).push(p.upC);});
+  const rows=Object.keys(g).map(k=>({k,n:g[k].length,avg:avg(g[k])}));
+  const cand=rows.filter(r=>r.n>=2).sort((a,b)=>b.avg-a.avg);if(!cand.length)return null;
+  const best=cand[0],others=rows.filter(r=>r!==best);
+  const om=others.length?avg(others.map(r=>r.avg)):null;
+  const conf=(best.n>=3&&om!==null&&best.avg>=1.2*om)?'hi':'mid';
+  return{...best,conf,tested:rows.length};
+}
+function predict(M,text){
+  const q=new Set(tokens(text));if(!q.size)return null;
+  const cat=categorize(text,'');
+  let qn=0;q.forEach(w=>qn+=M.idf(w)**2);qn=Math.sqrt(qn)||1;
+  const scored=M.rated.map(p=>{let dot=0;q.forEach(w=>{if(p.tok.has(w))dot+=M.idf(w)**2;});
+    return{p,s:dot/(qn*p.norm)+(cat&&p.cat===cat?0.12:0),strong:true};}).sort((a,b)=>b.s-a.s);
+  let nb=scored.filter(x=>x.s>=0.14).slice(0,30);
+  if(nb.length<4&&cat){scored.filter(x=>x.p.cat===cat&&!nb.includes(x)).slice(0,20).forEach(x=>nb.push({p:x.p,s:0.12,strong:false}));}
+  if(!nb.length)return{cat,empty:true};
+  // where
+  const g={};nb.forEach(x=>(g[x.p.subKey]=g[x.p.subKey]||[]).push(x));
+  const where=Object.keys(g).map(k=>{const a=g[k],sw=a.reduce((s,x)=>s+x.s,0),su=a.reduce((s,x)=>s+x.s*x.p.upC,0);
+    const prior=M.subAvg[k]||0;return{key:k,name:M.name(k),n:a.length,nStrong:a.filter(x=>x.strong).length,score:(su+0.3*prior)/(sw+0.3)};})
+    .sort((a,b)=>b.score-a.score).slice(0,3)
+    .map(w=>({...w,conf:w.nStrong>=3?'hi':w.n>=2?'mid':'lo'}));
+  // titles
+  const seen=new Set(),titles=[];
+  nb.slice().sort((a,b)=>b.p.upC-a.p.upC).forEach(x=>{const c=x.p.cap;if(!c||seen.has(c.toLowerCase())||titles.length>=3)return;seen.add(c.toLowerCase());titles.push({t:c,sub:M.name(x.p.subKey),up:x.p.up});});
+  // when
+  const pool=nb.map(x=>x.p).filter(p=>p.hour!==null);
+  const all=M.rated.filter(p=>p.hour!==null);
+  let scope='similar clips',d=bestOf(pool,p=>p.day),h=bestOf(pool,p=>bucket(p.hour));
+  if(!d){d=bestOf(all,p=>p.day);scope='all clips';}
+  const h2=h||bestOf(all,p=>bucket(p.hour));
+  const dayCount={};M.posts.forEach(p=>dayCount[p.day]=(dayCount[p.day]||0)+1);
+  const topDay=Object.keys(dayCount).sort((a,b)=>dayCount[b]-dayCount[a])[0];
+  const share=dayCount[topDay]/M.posts.length;
+  let bestHour=null;if(h2){const hs={};(h?pool:all).filter(p=>bucket(p.hour)===h2.k).forEach(p=>(hs[p.hour]=hs[p.hour]||[]).push(p.upC));
+    const o=Object.keys(hs).map(k=>({k:+k,avg:avg(hs[k])})).sort((a,b)=>b.avg-a.avg)[0];bestHour=o?o.k:null;}
+  return{cat,where,titles,day:d,hour:h2,bestHour,scope,hourScope:h?'similar clips':'all clips',n:nb.length,domDay:share>0.4?topDay:null,domShare:share,fallback:nb.some(x=>!x.strong)};
+}
+
+/* ---------- html builders ---------- */
+const tip=t=>' data-tip="'+esc(t)+'"';
+function delta(a,b){if(!b)return'';const pc=Math.round((a-b)/b*100);if(pc===0)return'';return'<span class="'+(pc>0?'up':'down')+'">'+(pc>0?'▲ ':'▼ ')+Math.abs(pc)+'%</span> ';}
+function tilesHTML(M){
+  const t=(l,n,s,tp)=>'<div class="tile"'+tip(tp)+'><div class="l">'+l+'</div><div class="n">'+n+'</div><div class="s">'+s+'</div></div>';
+  const q3=M.subs.filter(s=>s.rated>=MIN_RATED).length;
+  return t('Views reached',fmtNum(M.tot.views),delta(M.last.views,M.prev.views)+fmtNum(M.last.views)+' in the last 4 weeks','Total views across every post that has views recorded. The % compares the last 4 weeks with the 4 weeks before.')
+   +t('Upvotes',fmtNum(M.tot.ups),delta(M.last.ups,M.prev.ups)+fmtNum(M.last.ups)+' in the last 4 weeks','Total upvotes across all posts. The % compares the last 4 weeks with the 4 weeks before.')
+   +t('Posts',M.tot.posts,delta(M.last.posts,M.prev.posts)+M.thisWeek+' this week','Every post logged. “This week” counts posts since Monday.')
+   +t('Communities',M.tot.subs,q3+' with 3+ rated posts','Different subreddits Goddess has been posted in.');
+}
+function lineChart(vals,labels,fmt,what){
+  const W=560,H=300,L=46,R=14,T=14,B=28,iw=W-L-R,ih=H-T-B;
+  const m=Math.max(...vals,1),mag=Math.pow(10,Math.floor(Math.log10(m)));
+  const max=[1,1.5,2,2.5,3,4,5,6,8,10].map(s=>s*mag).find(v=>v>=m)||m;
+  const x=i=>L+(vals.length===1?iw/2:i*iw/(vals.length-1)),y=v=>T+ih-(v/max)*ih;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="display:block"><defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff4f9a" stop-opacity=".35"/><stop offset="1" stop-color="#ff4f9a" stop-opacity="0"/></linearGradient></defs>';
+  [0,.5,1].forEach(f=>{const v=max*f,yy=y(v);s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+yy+'" y2="'+yy+'" stroke="#ffd3e5" stroke-dasharray="3 4"/><text x="'+(L-6)+'" y="'+(yy+3)+'" text-anchor="end" font-size="10" fill="#a2607f">'+fmtNum(v)+'</text>';});
+  const pts=vals.map((v,i)=>x(i)+','+y(v));
+  s+='<polygon points="'+x(0)+','+y(0)+' '+pts.join(' ')+' '+x(vals.length-1)+','+y(0)+'" fill="url(#ag)"/>';
+  s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="#ff4f9a" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>';
+  vals.forEach((v,i)=>{s+='<circle cx="'+x(i)+'" cy="'+y(v)+'" r="3.4" fill="#fff" stroke="#ff4f9a" stroke-width="2"/><circle cx="'+x(i)+'" cy="'+y(v)+'" r="11" fill="transparent"'+tip(labels[i].tip(v))+'/>';
+    if(i%2===(vals.length-1)%2)s+='<text x="'+x(i)+'" y="'+(H-8)+'" text-anchor="middle" font-size="10" fill="#a2607f">'+labels[i].l+'</text>';});
+  return s+'</svg>';
+}
+let metric='views';
+const METRICS={views:['Views','views','views'],ups:['Upvotes','ups','upvotes'],posts:['Posts','posts','posts']};
+function chartHTML(M){
+  const wk=M.weeks,raw=wk.map(w=>w[metric]);
+  const roll=raw.map((v,i)=>i===0?v:(v+raw[i-1])/2).slice(1);
+  const labels=wk.slice(1).map((w,i)=>({l:(w.s.getMonth()+1)+'/'+w.s.getDate(),
+    tip:v=>'Week of '+(w.s.getMonth()+1)+'/'+w.s.getDate()+': '+fmtNum(raw[i+1])+' '+METRICS[metric][2]+' that week · '+fmtNum(v)+' on a 2-week rolling average'}));
+  const first=avg(roll.slice(0,4)),lastA=avg(roll.slice(-4));
+  const note=first>0?(lastA>=first?'Trending up ♡ ':'Quieter lately · '):'';
+  return '<div class="hint" style="margin-bottom:2px">'+note+'2-week rolling average, last 13 weeks</div>'+lineChart(roll,labels);
+}
+function tabsHTML(){return Object.keys(METRICS).map(k=>'<button class="tab'+(k===metric?' on':'')+'" data-m="'+k+'"'+tip('Show '+METRICS[k][2]+' per week')+'>'+METRICS[k][0]+'</button>').join('');}
+function typesHTML(M){
+  if(!M.cats.length)return'<div class="hint">No clip data yet.</div>';
+  const q=M.cats.filter(c=>c.n>=MIN_RATED),top=q[0],max=Math.max(...M.cats.map(c=>c.avg),1);
+  let s=top?'<div class="take"><b>'+esc(tagLabel(top.tag))+'</b> clips earn the most upvotes — about '+Math.round(top.avg)+' per post'+(top.best?', best in <b>'+esc(top.best)+'</b>':'')+'. ♡</div>':'';
+  M.cats.forEach(c=>{const ok=c.n>=MIN_RATED;
+    s+='<div class="bar-row'+(ok?'':' dim')+'"'+tip(tagLabel(c.tag)+' — '+TAG_HELP[c.tag]+'. Average '+c.avg.toFixed(1)+' upvotes (each post capped at '+CAP_UP+') and '+fmtNum(c.views)+' views (capped at '+fmtNum(CAP_VI)+') over '+c.n+' posts.'+(ok?'':' Fewer than '+MIN_RATED+' posts, so treat as an early read.'))+'>'
+     +'<div class="nm">'+esc(tagLabel(c.tag))+'<span class="sub">'+c.n+' posts'+(c.best?' · '+esc(c.best):'')+'</span></div>'
+     +'<div class="track"><div class="fill" style="width:'+Math.max(4,c.avg/max*100)+'%"></div></div><div class="v">'+Math.round(c.avg)+'</div></div>';});
+  return s+'<div class="hint" style="margin-top:6px">Average upvotes per post · striped = under '+MIN_RATED+' posts</div>';
+}
+function subsHTML(M){
+  const q=M.subs.filter(s=>s.rated>=MIN_RATED),rest=M.subs.filter(s=>s.rated<MIN_RATED);
+  const max=Math.max(...q.map(s=>s.avg),1);
+  let s=q[0]?'<div class="take">Top community: <b>'+esc(q[0].name)+'</b> · '+Math.round(q[0].avg)+' avg upvotes ♡</div>':'';
+  q.slice(0,7).forEach((c,i)=>{s+='<div class="bar-row"'+tip(c.name+': '+c.posts+' posts, '+Math.round(c.avg)+' average upvotes (capped at '+CAP_UP+'), '+fmtNum(c.views)+' total views.')+'><div class="nm">'+(i+1)+'. '+esc(c.name.replace(/^r\//,''))+'<span class="sub">'+c.posts+' posts · '+fmtNum(c.views)+' views</span></div><div class="track"><div class="fill" style="width:'+Math.max(4,c.avg/max*100)+'%"></div></div><div class="v">'+Math.round(c.avg)+'</div></div>';});
+  const more=q.slice(7).concat(rest);
+  if(more.length){s+='<div class="hint" style="margin-top:6px">Also reaching</div><div class="chips">'+more.slice(0,14).map(c=>'<span class="chip static"'+tip(c.name+' · '+c.posts+' posts · '+fmtNum(c.views)+' views')+'>'+esc(c.name)+'</span>').join('')+(more.length>14?'<span class="chip static">+'+(more.length-14)+' more</span>':'')+'</div>';}
+  return s;
+}
+function topsHTML(M){
+  return M.tops.map(p=>'<div class="top"><a href="'+esc(p.link)+'" target="_blank" rel="noopener"'+tip(p.cap||p.title)+'>'+esc(p.cap||p.title||'(untitled)')+'</a><span class="u">'+p.up+' ♡</span><small>'+esc(M.name(p.subKey))+' · '+(p.d.getMonth()+1)+'/'+p.d.getDate()+'/'+String(p.d.getFullYear()).slice(2)+(p.vi?' · '+fmtNum(p.vi)+' views':'')+'</small></div>').join('')||'<div class="hint">Nothing yet.</div>';
+}
+function pill(c,t){return'<span class="pill '+c+'">'+t+'</span>';}
+const CONF={hi:['hi','Strong'],mid:['mid','Good'],lo:['lo','Test it']};
+function predHTML(M,r){
+  if(!r)return'<div class="note">Type a clip idea above and I\'ll suggest where to post it, what to title it, and when. ♡</div>';
+  if(r.empty)return'<div class="note">I don\'t have similar posts for that yet — try words like <b>goon</b>, <b>chastity</b>, <b>CEI</b>, <b>sissy</b> or <b>blackmail</b>.</div>';
+  let s='<div class="detected">Looks like a <span class="chip static">'+esc(r.cat?tagLabel(r.cat):'new kind of')+'</span> clip · based on '+r.n+' similar post'+(r.n===1?'':'s')+(r.fallback?' '+pill('lo','broad match'):'')+'</div>';
+  s+='<div class="box"><h3>Where to post</h3>'+r.where.map(w=>'<div class="pick"'+tip('Expected ≈'+Math.round(w.score)+' upvotes, from '+w.n+' similar post'+(w.n===1?'':'s')+' there (capped at '+CAP_UP+').')+'><span>'+esc(w.name)+'<small> ~'+Math.round(w.score)+'♡</small></span>'+pill(CONF[w.conf][0],CONF[w.conf][1])+'</div>').join('')+'</div>';
+  s+='<div class="box"><h3>Title ideas (past winners)</h3>'+(r.titles.map(t=>'<div class="ttl">'+esc(t.t)+'<small>'+esc(t.sub)+' · '+t.up+' upvotes</small></div>').join('')||'<div class="hint">No captions to borrow yet.</div>')+'</div>';
+  let w='';
+  if(r.day){w+='<div class="big">'+r.day.k+'s</div>'+pill(r.day.conf,r.day.conf==='hi'?'Confident':'Early signal')+'<div class="hint">avg '+Math.round(r.day.avg)+'♡ over '+r.day.n+' posts ('+r.scope+')</div>';}
+  else w+='<div class="hint">Not enough data to pick a day yet.</div>';
+  if(r.hour){w+='<div style="margin-top:6px;font-size:14px" class="big">'+esc(r.hour.k.split(' (')[0])+'</div>'+pill(r.hour.conf,r.hour.conf==='hi'?'Confident':'Early signal')+'<div class="hint">'+(r.bestHour!==null?'best hour ≈ '+fmtHour(r.bestHour)+' · ':'')+r.hour.n+' posts ('+r.hourScope+')</div>';}
+  else w+='<div class="hint" style="margin-top:6px">Not enough data to pick a time yet.</div>';
+  s+='<div class="box"><h3>When</h3>'+w+'</div>';
+  if(r.domDay)s+='<div class="note">Heads up: '+Math.round(r.domShare*100)+'% of posts so far were on '+r.domDay+'s, so other days haven\'t had a fair test. Try a few on different days to learn more.</div>';
+  return s;
+}
+
+/* ---------- app ---------- */
+let rows=[],M=null;
+const $=id=>document.getElementById(id);
+function runPredict(){const t=$('q').value.trim();$('out').innerHTML=predHTML(M,t&&M?predict(M,t):null);}
+function paint(){
+  M=analyze(rows);
+  $('tiles').innerHTML=tilesHTML(M);$('tabs').innerHTML=tabsHTML();$('chart').innerHTML=chartHTML(M);
+  $('types').innerHTML=typesHTML(M);$('subs').innerHTML=subsHTML(M);$('tops').innerHTML=topsHTML(M);runPredict();
+  const n=new Date();$('status').innerHTML='<b>●</b> Live · updated '+n.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+}
+async function load(){
+  try{
+    if(LIB_URL&&!load.libDone){try{const t=await (await fetch(LIB_URL)).text();const L=parseCSV(t).map(r=>[r['title'],r['tag']]).filter(x=>x[0]&&x[1]);if(L.length){LIB=L;}}catch(e){}load.libDone=true;}
+    buildLib();
+    const res=await fetch(CSV_URL);
+    if(!res.ok){$('status').textContent='Could not load (HTTP '+res.status+')';return;}
+    rows=parseCSV(await res.text());
+    if(!rows.length){$('status').textContent='No rows found';return;}
+    paint();
+  }catch(e){$('status').textContent='Error: '+e.message;}
+}
+if(typeof document!=='undefined'&&document.getElementById&&typeof window!=='undefined'){
+  $('examples').innerHTML=['goon edging challenge','chastity key denial','blackmail contract task','sissy feminization training'].map(t=>'<button class="chip" data-ex="'+esc(t)+'">'+esc(t)+'</button>').join(' ');
+  document.addEventListener('click',e=>{
+    const ex=e.target.closest('[data-ex]');if(ex){$('q').value=ex.dataset.ex;if(M)runPredict();}
+    const tb=e.target.closest('[data-m]');if(tb){metric=tb.dataset.m;if(M){$('tabs').innerHTML=tabsHTML();$('chart').innerHTML=chartHTML(M);}}
+    if(e.target.closest('#goBtn')&&M)runPredict();
+  });
+  $('q').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();if(M)runPredict();}});
+  const T=$('tip');
+  document.addEventListener('mouseover',e=>{const t=e.target.closest('[data-tip]');if(t){T.textContent=t.dataset.tip;T.style.display='block';}else T.style.display='none';});
+  document.addEventListener('mousemove',e=>{if(T.style.display==='block'){T.style.left=Math.min(e.clientX+14,window.innerWidth-270)+'px';T.style.top=(e.clientY+16)+'px';}});
+  document.addEventListener('mouseout',e=>{if(!e.relatedTarget)T.style.display='none';});
+  buildLib();load();setInterval(load,60000);
+}
+if(typeof module!=='undefined')module.exports={parseCSV,analyze,predict,categorize,buildLib,tilesHTML,chartHTML,typesHTML,subsHTML,topsHTML,predHTML,setLib:l=>{LIB=l;buildLib();}};
+</script>
+</body>
+</html>
