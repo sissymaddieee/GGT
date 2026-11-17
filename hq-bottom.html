@@ -510,6 +510,10 @@
         }
         .cf-arrow.left { left: 4px; } .cf-arrow.right { right: 4px; }
         .cf-info { text-align: center; margin-top: 0.5rem; }
+        /* blackmail embedded alone: cover size set by fitBlackmail() to fill the panel */
+        body.only-blackmail #bmFlow { height: calc(var(--bm-size, 190px) + 70px); }
+        body.only-blackmail #bmFlow .cf-item { width: var(--bm-size, 190px); height: var(--bm-size, 190px); margin-left: calc(var(--bm-size, 190px) / -2); }
+        body.only-blackmail #bmFlow .cf-arrow { top: calc(var(--bm-size, 190px) / 2); }
         .desc-tip {
             position: fixed; z-index: 10000; max-width: 260px; pointer-events: none;
             background: white; color: #333; border: 2px solid var(--hot-pink); border-radius: 10px;
@@ -1184,14 +1188,14 @@
             layoutCoverflow();
         }
 
-        function positionFlowItems(items, center) {
+        function positionFlowItems(items, center, scale = 1) {
             items.forEach((item, i) => {
                 const off = i - center;
                 const abs = Math.abs(off);
                 item.classList.toggle('center', off === 0);
                 item.style.opacity = abs > 6 ? 0 : 1;
                 item.style.pointerEvents = abs > 6 ? 'none' : 'auto';
-                const x = off === 0 ? 0 : Math.sign(off) * (110 + (abs - 1) * 45);
+                const x = off === 0 ? 0 : Math.sign(off) * (110 + (abs - 1) * 45) * scale;
                 const rot = off === 0 ? 0 : -Math.sign(off) * 55;
                 const z = off === 0 ? 60 : -40 - abs * 10;
                 item.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${rot}deg)`;
@@ -1458,6 +1462,7 @@
         (function singlePanel() {
             const only = location.hash.replace('#', '').toLowerCase();
             if (only !== 'blackmail' && only !== 'library') return;
+            document.body.classList.add('only-' + only);
             document.getElementById(only === 'blackmail' ? 'libraryPanel' : 'blackmailPanel').style.display = 'none';
             document.querySelector('.row-2col').style.gridTemplateColumns = '1fr';
             document.querySelectorAll('.divider, .bow').forEach(el => el.style.display = 'none');
@@ -1507,6 +1512,7 @@
 
                 document.getElementById('blackmailLoading').style.display = 'none';
                 document.getElementById('blackmailSection').style.display = 'block';
+                requestAnimationFrame(fitBlackmail);
             } catch (e) {
                 console.log('Blackmail error:', e);
             }
@@ -1683,6 +1689,22 @@
             layoutBlackmail();
         }
 
+        // grow the blackmail cover to use the free space in the panel
+        let bmScale = 1;
+        function fitBlackmail() {
+            if (!document.body.classList.contains('only-blackmail')) return;
+            const flow = document.getElementById('bmFlow');
+            const info = document.getElementById('bmInfo');
+            if (!flow || !info) return;
+            const cur = parseFloat(getComputedStyle(document.body).getPropertyValue('--bm-size')) || 190;
+            const spare = window.innerHeight - info.getBoundingClientRect().bottom - 28;
+            const size = Math.round(Math.max(190, Math.min(cur + spare, flow.clientWidth * 0.7)));
+            document.body.style.setProperty('--bm-size', size + 'px');
+            bmScale = size / 190;
+            positionFlowItems(document.querySelectorAll('#bmFlow .cf-item'), bmIndex, bmScale);
+        }
+        window.addEventListener('resize', () => { clearTimeout(window._bmFit); window._bmFit = setTimeout(fitBlackmail, 120); });
+
         function setBmIndex(i) {
             const n = Math.max(0, Math.min(bmShown.length - 1, i));
             if (n === bmIndex) return;
@@ -1691,7 +1713,7 @@
         }
 
         function layoutBlackmail() {
-            positionFlowItems(document.querySelectorAll('#bmFlow .cf-item'), bmIndex);
+            positionFlowItems(document.querySelectorAll('#bmFlow .cf-item'), bmIndex, bmScale);
             document.getElementById('bmSlider').value = bmIndex;
 
             const item = bmShown[bmIndex];
