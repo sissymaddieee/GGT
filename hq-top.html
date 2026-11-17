@@ -175,7 +175,8 @@
         .roses-chart-wrap { flex: 1; min-height: 0; position: relative; }
         /* charts sit inside a fixed-size box so they can never push the layout bigger (fixes huge charts after switching layouts) */
         .roses-chart-wrap > canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
-        .weight-box { position: relative; min-height: 140px; }
+        .weight-panel { flex: 1; min-height: 0; margin: 0; padding: 0.3rem; display: flex; }
+        .weight-box { position: relative; flex: 1; min-height: 0; }
         .weight-box > canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
         /* column 2: blackmail (fills) + budget (compact) */
         .col-stack > .panel.blackmail { flex: 1 1 auto; display: flex; min-height: 0; }
@@ -206,29 +207,18 @@
                     </div>
                     <div class="roses-chart-wrap"><canvas id="rosesChart"></canvas></div>
                 </div>
+                <div class="section weight-panel" data-section="weight">
+                    <div class="weight-box"><canvas id="weightChart"></canvas></div>
+                </div>
             </div>
             <div class="col-stack">
                 <div class="panel blackmail" data-section="blackmail"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#blackmail"></iframe></div>
-                <!-- BUDGET -->
-                <div class="section budget-panel" data-section="budget">
-                    <div class="section-title">💰 Budget</div>
-                    <div style="font-size: 0.65rem; color: var(--hot-pink); font-weight: 600; margin-bottom: 0.2rem;">Cam Girl - Earnings</div>
-                    <div style="padding: 0.3rem 0.4rem; background: rgba(255, 255, 255, 0.5); border-radius: 8px;">
-                        <div style="margin-bottom: 0.2rem; text-align: center; font-weight: 600; color: var(--hot-pink); font-size: 0.75rem;">
-                            <span id="personal-spend">$0</span> / $1000
-                        </div>
-                        <div style="width: 100%; height: 12px; background: #f0f0f0; border-radius: 6px; overflow: hidden; position: relative;">
-                            <div id="personal-bar" style="height: 100%; background: linear-gradient(90deg, #00ff00, #ffff00, #ff6600, #ff0000); width: 0%; transition: all 0.3s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.5rem; color: white; font-weight: 600; font-size: 0.7rem;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="panel" data-section="library"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#library"></iframe></div>
         </div>
 
-        <!-- ROW 2: Budget | Protocols | Weight (compact) -->
-        <div class="row compact-row" style="grid-template-columns: 3fr 1fr; gap: 0.6rem;">
+        <!-- ROW 2: Protocols (compact) -->
+        <div class="row compact-row" style="grid-template-columns: 1fr; gap: 0.6rem;">
                 <!-- Protocols (COMPACT) -->
                 <div class="section" data-section="protocols" style="padding: 0.3rem;">
                     <div class="section-title" style="font-size: 1.2rem; margin-bottom: 0.2rem;">📋 Protocols</div>
@@ -300,10 +290,6 @@
                     </div>
                 </div>
 
-                <!-- WEIGHT -->
-                <div class="section" data-section="weight" style="padding: 0.3rem; display: flex;">
-                    <div class="weight-box" style="flex: 1;"><canvas id="weightChart"></canvas></div>
-                </div>
         </div>
 
         <!-- QUOTE (bottom) -->
@@ -709,7 +695,6 @@
 
         loadStats();
         loadBudget();
-        loadPersonalBudget();
         loadWeightChart();
     </script>
 </body>
