@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <script src="mobile.js?v=9" defer></script>
-    <meta charset="UTF-9">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Girl Training HQ 💕</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -191,8 +191,8 @@
         <!-- ROW 1: CLOSET | BLACKMAIL | LIBRARY -->
         <div class="top-row">
             <div class="col-stack">
-                <div class="panel closet"><iframe id="closetFrame" scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-wardrobe.html"></iframe></div>
-                <div class="section roses-panel">
+                <div class="panel closet" data-section="closet"><iframe id="closetFrame" scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-wardrobe.html"></iframe></div>
+                <div class="section roses-panel" data-section="roses">
                     <div class="section-title">🌹 Roses for Goddess</div>
                     <div class="roses-stats">
                         <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="roses-total">–</div></div>
@@ -204,9 +204,9 @@
                 </div>
             </div>
             <div class="col-stack">
-                <div class="panel blackmail"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#blackmail"></iframe></div>
+                <div class="panel blackmail" data-section="blackmail"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#blackmail"></iframe></div>
                 <!-- BUDGET -->
-                <div class="section budget-panel">
+                <div class="section budget-panel" data-section="budget">
                     <div class="section-title">💰 Budget</div>
                     <div style="font-size: 0.65rem; color: var(--hot-pink); font-weight: 600; margin-bottom: 0.2rem;">Cam Girl - Earnings</div>
                     <div style="padding: 0.3rem 0.4rem; background: rgba(255, 255, 255, 0.5); border-radius: 8px;">
@@ -220,13 +220,13 @@
                     </div>
                 </div>
             </div>
-            <div class="panel"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#library"></iframe></div>
+            <div class="panel" data-section="library"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#library"></iframe></div>
         </div>
 
         <!-- ROW 2: Budget | Protocols | Weight (compact) -->
         <div class="row compact-row" style="grid-template-columns: 3fr 1fr; gap: 0.6rem;">
                 <!-- Protocols (COMPACT) -->
-                <div class="section" style="padding: 0.3rem;">
+                <div class="section" data-section="protocols" style="padding: 0.3rem;">
                     <div class="section-title" style="font-size: 1.2rem; margin-bottom: 0.2rem;">📋 Protocols</div>
                     <div class="Protocols-cols">
                         <ul style="list-style: none; margin: 0; padding: 0; font-size: 0.9rem; line-height: 1.4;">
@@ -297,7 +297,7 @@
                 </div>
 
                 <!-- WEIGHT -->
-                <div class="section" style="padding: 0.3rem; display: grid; place-items: stretch;">
+                <div class="section" data-section="weight" style="padding: 0.3rem; display: grid; place-items: stretch;">
                     <canvas id="weightChart" style="width: 100%; height: 150px; display: block;"></canvas>
                 </div>
         </div>
@@ -317,39 +317,26 @@
             });
         }
 
-        // Closet: size the iframe to its own content so the roses panel gets the rest
-        function autoHeightPanel(f) {
-            try {
-                const d = f.contentDocument;
-                if (!d || !d.body) return;
-                if (!d.getElementById('hq-fit-style')) {
-                    const s = d.createElement('style');
-                    s.id = 'hq-fit-style';
-                    s.textContent = 'html,body{margin:0!important;padding:0!important;height:auto!important;min-height:0!important;overflow:hidden!important;background:transparent!important}';
-                    d.head.appendChild(s);
-                }
-                const card = findCard(d);
-                const h = card ? Math.ceil(card.getBoundingClientRect().bottom) + 2 : d.body.scrollHeight;
-                if (h > 50) f.style.height = h + 'px';
-            } catch (e) {}
-        }
-
-        // Blackmail + Library: stretch the card to full height, shrinking content to fit if needed
+        // Stretch each panel's card to full height, shrinking content to fit if needed (desktop and phone)
         function fitPanel(f) {
             try {
                 const d = f.contentDocument;
                 if (!d || !d.body) return;
-                if (!d.getElementById('hq-fit-style')) {
-                    const s = d.createElement('style');
-                    s.id = 'hq-fit-style';
-                    s.textContent = 'html,body{margin:0!important;padding:0!important;height:100%!important;overflow:hidden!important;background:transparent!important}';
-                    d.head.appendChild(s);
-                }
+                let s = d.getElementById('hq-fit-style');
+                if (!s) { s = d.createElement('style'); s.id = 'hq-fit-style'; d.head.appendChild(s); }
+                s.textContent = 'html,body{margin:0!important;padding:0!important;height:100%!important;overflow:hidden!important;background:transparent!important}';
+                d.documentElement.style.zoom = 1;
+                d.querySelectorAll('[data-hq-fit]').forEach(el => {
+                    ['height', 'margin-top', 'margin-bottom', 'box-sizing', 'overflow'].forEach(p => el.style.removeProperty(p));
+                    el.removeAttribute('data-hq-fit');
+                });
                 const card = findCard(d);
+                f.style.height = '';
                 if (!card) return;
                 // Stretch the card and every wrapper above it to 100% height
                 let el = card;
                 while (el && el !== d.documentElement) {
+                    el.setAttribute('data-hq-fit', '');
                     el.style.setProperty('height', '100%', 'important');
                     el.style.setProperty('margin-top', '0', 'important');
                     el.style.setProperty('margin-bottom', '0', 'important');
