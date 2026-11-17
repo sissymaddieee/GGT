@@ -172,10 +172,10 @@
         .roses-stats .stat-card { margin: 0; padding: 0.3rem 0.2rem; }
         .roses-stats .stat-label { font-size: 0.6rem; }
         .roses-stats .stat-value { font-size: 0.95rem; }
-        .roses-chart-wrap { flex: 1; min-height: 0; position: relative; }
+        .roses-chart-wrap { flex: 1; min-height: 120px; position: relative; }
         /* charts sit inside a fixed-size box so they can never push the layout bigger (fixes huge charts after switching layouts) */
         .roses-chart-wrap > canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
-        .weight-panel { margin: 0; padding: 0.3rem; display: flex; }
+        .weight-panel { flex: 1; min-height: 0; margin: 0; padding: 0.3rem; display: flex; }
         .weight-box { position: relative; flex: 1; min-height: 140px; }
         .weight-box > canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
         /* column 2: blackmail (fills) + budget (compact) */
@@ -197,15 +197,8 @@
         <div class="top-row">
             <div class="col-stack">
                 <div class="panel closet" data-section="closet"><iframe id="closetFrame" scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-wardrobe.html"></iframe></div>
-                <div class="section roses-panel" data-section="roses">
-                    <div class="section-title">🌹 Roses for Goddess</div>
-                    <div class="roses-stats">
-                        <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="roses-total">–</div></div>
-                        <div class="stat-card"><div class="stat-label">This month</div><div class="stat-value" id="roses-month">–</div></div>
-                        <div class="stat-card"><div class="stat-label">Avg / month</div><div class="stat-value" id="roses-avg">–</div></div>
-                        <div class="stat-card"><div class="stat-label">Best month</div><div class="stat-value" id="roses-best">–</div></div>
-                    </div>
-                    <div class="roses-chart-wrap"><canvas id="rosesChart"></canvas></div>
+                <div class="section weight-panel" data-section="weight">
+                    <div class="weight-box"><canvas id="weightChart"></canvas></div>
                 </div>
             </div>
             <div class="col-stack">
@@ -216,9 +209,16 @@
 
         <!-- ROW 2: Weight | Budget | Protocols (equal thirds) -->
         <div class="row compact-row" style="grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
-                <!-- WEIGHT -->
-                <div class="section weight-panel" data-section="weight">
-                    <div class="weight-box"><canvas id="weightChart"></canvas></div>
+                <!-- ROSES -->
+                <div class="section roses-panel" data-section="roses">
+                    <div class="section-title">🌹 Roses for Goddess</div>
+                    <div class="roses-stats">
+                        <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="roses-total">–</div></div>
+                        <div class="stat-card"><div class="stat-label">This month</div><div class="stat-value" id="roses-month">–</div></div>
+                        <div class="stat-card"><div class="stat-label">Avg / month</div><div class="stat-value" id="roses-avg">–</div></div>
+                        <div class="stat-card"><div class="stat-label">Best month</div><div class="stat-value" id="roses-best">–</div></div>
+                    </div>
+                    <div class="roses-chart-wrap"><canvas id="rosesChart"></canvas></div>
                 </div>
                 <!-- BUDGET -->
                 <div class="section budget-panel" data-section="budget">
