@@ -210,6 +210,19 @@
             </div>
             <div class="col-stack">
                 <div class="panel blackmail" data-section="blackmail"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#blackmail"></iframe></div>
+                <!-- BUDGET -->
+                <div class="section budget-panel" data-section="budget">
+                    <div class="section-title">💰 Budget</div>
+                    <div style="padding: 0.3rem 0.4rem; background: rgba(255, 255, 255, 0.5); border-radius: 8px;">
+                        <div style="margin-bottom: 0.2rem; text-align: center; font-weight: 600; color: var(--hot-pink); font-size: 0.75rem;">
+                            <span id="personal-spend">$0</span> / $1000
+                        </div>
+                        <div style="width: 100%; height: 12px; background: #f0f0f0; border-radius: 6px; overflow: hidden; position: relative;">
+                            <div id="personal-bar" style="height: 100%; background: linear-gradient(90deg, #00ff00, #ffff00, #ff6600, #ff0000); width: 0%; transition: all 0.3s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 0.5rem; color: white; font-weight: 600; font-size: 0.7rem;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- WEIGHT (under blackmail) -->
                 <div class="section weight-panel" data-section="weight">
                     <div class="weight-box"><canvas id="weightChart"></canvas></div>
@@ -696,6 +709,7 @@
 
         loadStats();
         loadBudget();
+        loadPersonalBudget();
         loadWeightChart();
     </script>
 </body>
