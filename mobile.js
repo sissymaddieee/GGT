@@ -57,8 +57,7 @@
     'html.phone .budget-panel [style*="height: 12px"]{height:22px!important;border-radius:11px!important}',
 
     /* weight: chart fills the screen */
-    'html.phone [data-section="weight"]{display:grid!important}',
-    'html.phone #weightChart{height:100%!important;width:100%!important}',
+    'html.phone [data-section="weight"]{display:flex!important}',
 
     /* protocols: one readable column, scrolls only if longer than the screen */
     'html.phone [data-section="protocols"]{overflow-y:auto!important;padding:.6rem!important}',
