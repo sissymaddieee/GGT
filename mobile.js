@@ -16,7 +16,6 @@
     ['closet', '👗 Closet'],
     ['roses', '🌹 Roses'],
     ['blackmail', '🖼️ Blackmail'],
-    ['budget', '💰 Budget'],
     ['library', '📚 Library'],
     ['weight', '⚖️ Weight'],
     ['protocols', '📋 Protocols']
@@ -48,13 +47,6 @@
     'html.phone .roses-panel{display:flex!important;flex-direction:column!important}',
     'html.phone .roses-stats{grid-template-columns:repeat(2,1fr)!important}',
     'html.phone .roses-chart-wrap{flex:1 1 auto!important;min-height:0!important}',
-
-    /* budget: centred and bigger */
-    'html.phone .budget-panel{display:flex!important;flex-direction:column!important;justify-content:center!important;padding:1rem!important}',
-    'html.phone .budget-panel .section-title{font-size:1.8rem!important;margin-bottom:.6rem!important}',
-    'html.phone .budget-panel > div{font-size:1rem!important}',
-    'html.phone .budget-panel #personal-spend{font-size:1.4rem}',
-    'html.phone .budget-panel [style*="height: 12px"]{height:22px!important;border-radius:11px!important}',
 
     /* weight: chart fills the screen */
     'html.phone [data-section="weight"]{display:flex!important}',
