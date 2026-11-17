@@ -175,7 +175,8 @@
         .roses-chart-wrap { flex: 1; min-height: 0; position: relative; }
         /* charts sit inside a fixed-size box so they can never push the layout bigger (fixes huge charts after switching layouts) */
         .roses-chart-wrap > canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
-        .weight-box { position: relative; min-height: 140px; }
+        .weight-panel { flex: 0 0 30%; min-height: 0; margin: 0; padding: 0.3rem; display: flex; }  /* weight size: change 30% to taste */
+        .weight-box { position: relative; flex: 1; min-height: 0; }
         .weight-box > canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
         /* column 2: blackmail (fills) + budget (compact) */
         .col-stack > .panel.blackmail { flex: 1 1 auto; display: flex; min-height: 0; }
@@ -209,17 +210,16 @@
             </div>
             <div class="col-stack">
                 <div class="panel blackmail" data-section="blackmail"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#blackmail"></iframe></div>
+                <!-- WEIGHT (under blackmail) -->
+                <div class="section weight-panel" data-section="weight">
+                    <div class="weight-box"><canvas id="weightChart"></canvas></div>
+                </div>
             </div>
             <div class="panel" data-section="library"><iframe scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-bottom.html#library"></iframe></div>
         </div>
 
-        <!-- ROW 2: Weight | Protocols (compact) -->
-        <div class="row compact-row" style="grid-template-columns: 1fr 3fr; gap: 0.6rem;">
-                <!-- WEIGHT -->
-                <div class="section" data-section="weight" style="padding: 0.3rem; display: flex;">
-                    <div class="weight-box" style="flex: 1;"><canvas id="weightChart"></canvas></div>
-                </div>
-
+        <!-- ROW 2: Protocols (compact) -->
+        <div class="row compact-row" style="grid-template-columns: 1fr; gap: 0.6rem;">
                 <!-- Protocols (COMPACT) -->
                 <div class="section" data-section="protocols" style="padding: 0.3rem;">
                     <div class="section-title" style="font-size: 1.2rem; margin-bottom: 0.2rem;">📋 Protocols</div>
