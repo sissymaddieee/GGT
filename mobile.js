@@ -24,7 +24,8 @@
   var DEFAULT_SECTION = 'closet';
 
   var css = [
-    '.ggt-hidden,html.phone [data-section].ggt-hidden,html.phone .panel.ggt-hidden{display:none!important}',
+    /* hidden sections are parked off-screen at full size (not display:none), so panels and charts keep their layout */
+    'html.phone [data-section].ggt-hidden,html.phone .panel.ggt-hidden{position:fixed!important;left:-200vw!important;top:3.3rem!important;width:calc(100vw - .8rem)!important;height:calc(100vh - 3.7rem)!important;visibility:hidden!important;pointer-events:none!important}',
     '#ggt-bar{position:fixed;top:8px;left:8px;z-index:9999;display:flex;gap:6px;align-items:center}',
     '#ggt-bar button{width:38px;height:38px;flex:none;border-radius:50%;border:2px solid #fff;background:linear-gradient(135deg,#FF69B4,#FF1493);color:#fff;font-size:1.1rem;cursor:pointer;box-shadow:0 2px 8px rgba(255,20,147,.35)}',
     '#ggt-bar select{display:none;height:38px;border-radius:19px;border:2px solid #FF69B4;background:#fff;color:#FF1493;font:600 .95rem Quicksand,sans-serif;padding:0 .8rem}',
@@ -80,9 +81,17 @@
   }
 
   function refit() {
-    // tell hq-top (panels) and Chart.js to re-measure
-    setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 50);
-    setTimeout(function () { window.dispatchEvent(new Event('resize')); }, 700);
+    // tell hq-top (panels), the panels' own carousels and Chart.js to re-measure
+    function kick() {
+      window.dispatchEvent(new Event('resize'));
+      var fs = document.querySelectorAll('iframe');
+      for (var i = 0; i < fs.length; i++) {
+        try { fs[i].contentWindow.dispatchEvent(new Event('resize')); } catch (e) {}
+      }
+    }
+    setTimeout(kick, 50);
+    setTimeout(kick, 400);
+    setTimeout(kick, 1200);
   }
 
   var btn, sel;
