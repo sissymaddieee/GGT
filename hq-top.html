@@ -172,6 +172,10 @@
         .roses-stats .stat-card { margin: 0; padding: 0.3rem 0.2rem; }
         .roses-stats .stat-label { font-size: 0.6rem; }
         .roses-stats .stat-value { font-size: 0.95rem; }
+        .roses-head { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; }
+        .roses-toggle { display: inline-flex; gap: 2px; background: #fde4ef; border-radius: 999px; padding: 2px; font-family: inherit; }
+        .roses-toggle button { border: none; background: transparent; color: var(--hot-pink); font: 600 0.65rem system-ui, sans-serif; padding: 2px 8px; border-radius: 999px; cursor: pointer; }
+        .roses-toggle button.on { background: var(--hot-pink); color: #fff; }
         .roses-chart-wrap { flex: 1; min-height: 110px; position: relative; }
         .roses-budget { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.3rem; }
         .roses-budget-label { font-size: 0.75rem; font-weight: 600; color: var(--hot-pink); white-space: nowrap; }
@@ -201,7 +205,9 @@
             <div class="col-stack">
                 <div class="panel closet" data-section="closet"><iframe id="closetFrame" scrolling="no" src="https://sissymaddieee.github.io/GGT/hq-wardrobe.html"></iframe></div>
                 <div class="section roses-panel" data-section="roses">
-                    <div class="section-title">🌹 Roses for Goddess</div>
+                    <div class="section-title roses-head">🌹 Roses for Goddess
+                        <span class="roses-toggle" style="display:none"><button data-view="roses" onclick="renderRoses('roses')">🌹</button><button data-view="hours" onclick="renderRoses('hours')">⏳</button><button data-view="both" onclick="renderRoses('both')">Both</button></span>
+                    </div>
                     <div class="roses-stats">
                         <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="roses-total">–</div></div>
                         <div class="stat-card"><div class="stat-label">This month</div><div class="stat-value" id="roses-month">–</div></div>
@@ -525,69 +531,143 @@
                 const avg = monthly.length ? run / monthly.length : 0;
                 let bestIdx = monthly.indexOf(Math.max(...monthly));
 
-                document.getElementById('roses-total').textContent = money(total);
-                document.getElementById('roses-month').textContent = money(thisMonth);
-                document.getElementById('roses-avg').textContent = money(avg);
-                document.getElementById('roses-best').textContent = bestIdx >= 0 ? labels[bestIdx] : '–';
-
-                const ctx = document.getElementById('rosesChart');
-                if (ctx && labels.length) {
-                    new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels,
-                            datasets: [
-                                {
-                                    type: 'bar',
-                                    label: 'Per month',
-                                    data: monthly,
-                                    backgroundColor: 'rgba(255, 105, 180, 0.55)',
-                                    borderColor: '#FF69B4',
-                                    borderWidth: 1,
-                                    borderRadius: 6,
-                                    yAxisID: 'y'
-                                },
-                                {
-                                    type: 'line',
-                                    label: 'Running total',
-                                    data: cumulative,
-                                    borderColor: '#C2185B',
-                                    backgroundColor: '#C2185B',
-                                    borderWidth: 2,
-                                    tension: 0.35,
-                                    pointRadius: 2,
-                                    yAxisID: 'y1'
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { labels: { color: '#FF69B4', font: { size: 11 }, usePointStyle: true } },
-                                tooltip: { callbacks: { label: c => c.dataset.label + ': ' + money(c.parsed.y) } }
-                            },
-                            scales: {
-                                x: { ticks: { color: '#FF69B4', font: { size: 10 } }, grid: { display: false } },
-                                y: {
-                                    position: 'left',
-                                    ticks: { color: '#FF69B4', font: { size: 10 }, callback: v => money(v) },
-                                    grid: { color: 'rgba(255, 105, 180, 0.1)' }
-                                },
-                                y1: {
-                                    position: 'right',
-                                    ticks: { color: '#C2185B', font: { size: 10 }, callback: v => money(v) },
-                                    grid: { display: false }
-                                }
-                            }
-                        }
-                    });
-                }
+                ROSES_DATA = {
+                    labels, monthly, cumulative, total, thisMonth, avg,
+                    best: bestIdx >= 0 ? labels[bestIdx] : '–',
+                    sorts: entries.map(([, v]) => v.sort)
+                };
+                HOURS_DATA = await loadCamHours();
+                let saved = null; try { saved = localStorage.getItem('rosesView'); } catch (e) {}
+                renderRoses(saved || 'both');
             } catch (e) {
                 console.log('Budget error:', e);
                 const wrap = document.querySelector('.roses-chart-wrap');
                 if (wrap) wrap.innerHTML = '<div style="color:#FF1744;font-size:0.75rem;text-align:center;padding:0.5rem;">Couldn\'t load roses sheet: ' + (e.message || e) + '</div>';
             }
+        }
+
+        // HOURS STREAMED — "Cam Hours" tab of GGT Stats (A = month like "Nov 2026", B = hours)
+        let ROSES_DATA = null, HOURS_DATA = null, rosesChart = null;
+        const MONTHS = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+        const hrs = n => (Math.round(n * 10) / 10) + 'h';
+
+        async function loadCamHours() {
+            try {
+                const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT_U4ZElEgkBkgv6jP20hJICA3lCqlWli4EezWccqE7F3JksP5F0qg9_OClPU6MaW1fawjHX5Gr7ZXs/pub?gid=5101&single=true&output=csv';
+                const response = await fetch(csvUrl);
+                if (!response.ok) throw new Error('sheet returned ' + response.status);
+                const csv = await response.text();
+                if (csv.trim().startsWith('<')) throw new Error('Cam Hours tab is not published as CSV');
+                const out = new Map();   // sort key -> { label, hours }
+                csv.split(/\r?\n/).slice(1).forEach(line => {
+                    const p = parseCSVLine(line);
+                    const m = String(p[0] || '').trim().match(/^([A-Za-z]{3})[a-z]*\.?\s+(\d{2,4})$/);
+                    if (!m) return;
+                    const mi = MONTHS.indexOf(m[1].toLowerCase());
+                    let yr = parseInt(m[2], 10); if (yr < 100) yr += 2000;
+                    if (mi < 0) return;
+                    const d = new Date(yr, mi, 1);
+                    out.set(yr * 12 + mi, { label: d.toLocaleString('en-US', { month: 'short', year: '2-digit' }), hours: toNum(p[1]) });
+                });
+                return out;
+            } catch (e) {
+                console.log('Cam hours error:', e);
+                return null;
+            }
+        }
+
+        function setRosesStats(view) {
+            const R = ROSES_DATA, H = HOURS_DATA;
+            const labelEls = document.querySelectorAll('.roses-stats .stat-label');
+            const showHours = view === 'hours' && H && H.size;
+            const names = showHours ? ['Total hours', 'This month', 'Avg / month', 'Best month'] : ['Total', 'This month', 'Avg / month', 'Best month'];
+            labelEls.forEach((el, i) => { el.textContent = names[i]; });
+            if (showHours) {
+                const vals = [...H.entries()].sort((a, b) => a[0] - b[0]).map(([, v]) => v);
+                const total = vals.reduce((a, v) => a + v.hours, 0);
+                const now = new Date(); const cur = H.get(now.getFullYear() * 12 + now.getMonth());
+                const active = vals.filter(v => v.hours > 0);
+                const best = vals.reduce((b, v) => (!b || v.hours > b.hours ? v : b), null);
+                document.getElementById('roses-total').textContent = hrs(total);
+                document.getElementById('roses-month').textContent = hrs(cur ? cur.hours : 0);
+                document.getElementById('roses-avg').textContent = hrs(active.length ? total / active.length : 0);
+                document.getElementById('roses-best').textContent = best ? best.label : '–';
+            } else {
+                document.getElementById('roses-total').textContent = money(R.total);
+                document.getElementById('roses-month').textContent = money(R.thisMonth);
+                document.getElementById('roses-avg').textContent = money(R.avg);
+                document.getElementById('roses-best').textContent = R.best;
+            }
+        }
+
+        function renderRoses(view) {
+            const R = ROSES_DATA, H = HOURS_DATA;
+            if (!R) return;
+            if (!H || !H.size) view = 'roses';   // no hours data: fall back to the original chart
+            try { localStorage.setItem('rosesView', view); } catch (e) {}
+            document.querySelectorAll('.roses-toggle button').forEach(b => b.classList.toggle('on', b.dataset.view === view));
+            const toggle = document.querySelector('.roses-toggle');
+            if (toggle) toggle.style.display = (H && H.size) ? '' : 'none';
+            setRosesStats(view);
+
+            // Month axis: roses months, plus hours months when hours are shown (both sorted by date)
+            let labels = R.labels.slice(), keys = R.sorts.slice();
+            const datable = keys.every(k => k !== null);
+            if (view !== 'roses' && datable) {
+                const all = new Map(keys.map((k, i) => [k, labels[i]]));
+                if (view === 'hours') all.clear();
+                H.forEach((v, k) => { if (!all.has(k)) all.set(k, v.label); });
+                keys = [...all.keys()].sort((a, b) => a - b);
+                labels = keys.map(k => all.get(k));
+            }
+            const rosesBy = new Map(R.sorts.map((k, i) => [k, R.monthly[i]]));
+            const hoursBy = new Map(); if (H) H.forEach((v, k) => hoursBy.set(k, v.hours));
+            const hoursByLabel = new Map(); if (H) H.forEach(v => hoursByLabel.set(v.label, v.hours));
+            const rosesSeries = datable ? keys.map(k => rosesBy.get(k) ?? 0) : R.monthly;
+            const hoursSeries = datable ? keys.map(k => hoursBy.get(k) ?? 0) : labels.map(l => hoursByLabel.get(l) ?? 0);
+
+            const rosesBar = {
+                type: 'bar', label: 'Roses / month', data: rosesSeries,
+                backgroundColor: 'rgba(255, 105, 180, 0.55)', borderColor: '#FF69B4',
+                borderWidth: 1, borderRadius: 6, yAxisID: 'y'
+            };
+            const hoursColor = '#7E57C2';
+            let datasets, scales;
+            const x = { ticks: { color: '#FF69B4', font: { size: 10 } }, grid: { display: false } };
+            const yMoney = { position: 'left', ticks: { color: '#FF69B4', font: { size: 10 }, callback: v => money(v) }, grid: { color: 'rgba(255, 105, 180, 0.1)' } };
+            if (view === 'roses') {
+                datasets = [
+                    { ...rosesBar, label: 'Per month' },
+                    { type: 'line', label: 'Running total', data: R.cumulative, borderColor: '#C2185B', backgroundColor: '#C2185B', borderWidth: 2, tension: 0.35, pointRadius: 2, yAxisID: 'y1' }
+                ];
+                scales = { x, y: yMoney, y1: { position: 'right', ticks: { color: '#C2185B', font: { size: 10 }, callback: v => money(v) }, grid: { display: false } } };
+            } else if (view === 'hours') {
+                datasets = [{ type: 'bar', label: 'Hours streamed', data: hoursSeries, backgroundColor: 'rgba(126, 87, 194, 0.55)', borderColor: hoursColor, borderWidth: 1, borderRadius: 6, yAxisID: 'y' }];
+                scales = { x, y: { position: 'left', beginAtZero: true, ticks: { color: hoursColor, font: { size: 10 }, callback: v => v + 'h' }, grid: { color: 'rgba(126, 87, 194, 0.1)' } } };
+            } else {
+                datasets = [
+                    rosesBar,
+                    { type: 'line', label: 'Hours streamed', data: hoursSeries, borderColor: hoursColor, backgroundColor: hoursColor, borderWidth: 2, tension: 0.35, pointRadius: 2, yAxisID: 'y1' }
+                ];
+                scales = { x, y: yMoney, y1: { position: 'right', beginAtZero: true, ticks: { color: hoursColor, font: { size: 10 }, callback: v => v + 'h' }, grid: { display: false } } };
+            }
+
+            const ctx = document.getElementById('rosesChart');
+            if (!ctx || !labels.length) return;
+            if (rosesChart) rosesChart.destroy();
+            rosesChart = new Chart(ctx, {
+                type: 'bar',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#FF69B4', font: { size: 11 }, usePointStyle: true } },
+                        tooltip: { callbacks: { label: c => c.dataset.label + ': ' + (c.dataset.label === 'Hours streamed' ? hrs(c.parsed.y) : money(c.parsed.y)) } }
+                    },
+                    scales
+                }
+            });
         }
 
         async function loadWeightChart() {
