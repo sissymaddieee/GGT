@@ -341,7 +341,7 @@
                 }
                 card.style.setProperty('overflow', 'hidden', 'important');
                 // Shrink content if it doesn't fit, keeping the section title at full size
-                const title = d.querySelector('.section-title');
+                const title = card.querySelector('.section-title') || d.querySelector('.section-title');
                 if (title) title.style.zoom = 1;
                 d.documentElement.style.zoom = 1;
                 for (let i = 0; i < 4; i++) {
