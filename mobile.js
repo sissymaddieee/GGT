@@ -14,10 +14,9 @@
 
   var SECTIONS = [
     ['closet', '👗 Closet'],
-    ['roses', '🌹 Roses'],
+    ['roses', '📊 Whore Stats'],
     ['blackmail', '🖼️ Blackmail'],
     ['library', '📚 Library'],
-    ['weight', '⚖️ Weight'],
     ['protocols', '📋 Protocols']
   ];
   var DEFAULT_SECTION = 'closet';
@@ -47,9 +46,6 @@
     'html.phone .roses-panel{display:flex!important;flex-direction:column!important}',
     'html.phone .roses-stats{grid-template-columns:repeat(2,1fr)!important}',
     'html.phone .roses-chart-wrap{flex:1 1 auto!important;min-height:0!important}',
-
-    /* weight: chart fills the screen */
-    'html.phone [data-section="weight"]{display:flex!important}',
 
     /* protocols: one readable column, scrolls only if longer than the screen */
     'html.phone [data-section="protocols"]{overflow-y:auto!important;padding:.6rem!important}',
