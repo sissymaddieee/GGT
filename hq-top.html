@@ -627,7 +627,7 @@
             const hoursSeries = datable ? keys.map(k => hoursBy.get(k) ?? 0) : labels.map(l => hoursByLabel.get(l) ?? 0);
 
             const rosesBar = {
-                type: 'bar', label: 'Roses / month', data: rosesSeries,
+                type: 'bar', label: 'Roses', data: rosesSeries,
                 backgroundColor: 'rgba(255, 105, 180, 0.55)', borderColor: '#FF69B4',
                 borderWidth: 1, borderRadius: 6, yAxisID: 'y'
             };
@@ -636,7 +636,7 @@
             const x = { ticks: { color: '#FF69B4', font: { size: 10 } }, grid: { display: false } };
             const yMoney = { position: 'left', ticks: { color: '#FF69B4', font: { size: 10 }, callback: v => money(v) }, grid: { color: 'rgba(255, 105, 180, 0.1)' } };
             if (view === 'roses') {
-                datasets = [{ ...rosesBar, label: 'Per month' }];
+                datasets = [rosesBar];
                 scales = { x, y: yMoney };
             } else if (view === 'hours') {
                 datasets = [{ type: 'bar', label: 'Hours streamed', data: hoursSeries, backgroundColor: 'rgba(126, 87, 194, 0.55)', borderColor: hoursColor, borderWidth: 1, borderRadius: 6, yAxisID: 'y' }];
