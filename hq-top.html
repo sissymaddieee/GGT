@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="mobile.js?v=13" defer></script>
+    <script src="mobile.js?v=14" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Girl Training HQ 💕</title>
@@ -135,7 +135,7 @@
         .compact-row .stat-card { padding: 0.2rem 0.4rem; margin-bottom: 0.2rem; }
         .compact-row .stat-label { font-size: 0.6rem; }
         .compact-row .stat-value { font-size: 0.85rem; }
-        .Protocols-cols { columns: 4; column-gap: 1.2rem; }
+        .Protocols-cols { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, auto); grid-auto-flow: column; column-gap: 1.2rem; }
         .Protocols-cols > ul { display: contents; }
         .Protocols-cols li { break-inside: avoid; }
         .compact-row .Protocols-cols, .compact-row .Protocols-cols * { font-size: 0.92rem !important; line-height: 1.3 !important; }
@@ -152,7 +152,7 @@
         html, body { height: 100%; }
         body { padding: 0.4rem; overflow: hidden; }
         .container { max-width: none; height: 100%; display: flex; flex-direction: column; }
-        .stats-footnote { margin: 0 0 0.3rem; font-size: 1.1rem; }
+        .stats-footnote { margin: 0 0 0.3rem; font-size: 1.6rem; }
         .top-row {
             display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;
             flex: 1; min-height: 0; margin-bottom: 0.4rem;
@@ -302,9 +302,6 @@
         </div>
 
         <!-- QUOTE (bottom) -->
-        <div class="header">
-            <div class="subtitle">‘Goddess owns me, the Oasis nourishes me, cock is but a tool for submission’</div>
-        </div>
     </div>
     <script>
         // Find the visible card inside an embedded panel: first element with a real border spanning most of the width
@@ -343,10 +340,18 @@
                     el = el.parentElement;
                 }
                 card.style.setProperty('overflow', 'hidden', 'important');
-                // Shrink content if it doesn't fit
+                // Shrink content if it doesn't fit, keeping the section title at full size
+                const title = d.querySelector('.section-title');
+                if (title) title.style.zoom = 1;
                 d.documentElement.style.zoom = 1;
-                const need = card.scrollHeight, have = card.clientHeight;
-                if (need > have + 2) d.documentElement.style.zoom = (have / need).toFixed(3);
+                for (let i = 0; i < 4; i++) {
+                    const z = parseFloat(d.documentElement.style.zoom) || 1;
+                    const need = card.scrollHeight, have = card.clientHeight;
+                    if (need <= have + 2) break;
+                    const nz = z * have / need;
+                    d.documentElement.style.zoom = nz.toFixed(3);
+                    if (title) title.style.zoom = (1 / nz).toFixed(3);
+                }
             } catch (e) {}
         }
         const panels = [...document.querySelectorAll('.top-row iframe')];

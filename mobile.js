@@ -49,7 +49,7 @@
 
     /* protocols: one readable column, scrolls only if longer than the screen */
     'html.phone [data-section="protocols"]{overflow-y:auto!important;padding:.6rem!important}',
-    'html.phone .Protocols-cols{columns:1!important}',
+    'html.phone .Protocols-cols{columns:1!important;display:block!important}',
     'html.phone .compact-row .Protocols-cols,html.phone .compact-row .Protocols-cols *{font-size:1rem!important;line-height:1.45!important}',
     'html.phone .compact-row [data-section="protocols"] .section-title{font-size:1.5rem!important}'
   ].join('\n');
